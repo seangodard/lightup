@@ -8,13 +8,13 @@
 		<h1>LightUp</h1>
 		<div class="sidebar">
 			<h2>Login</h2>
-			<input type="text" value="Username" id="login_name">
-			<input type="text" value="Password" id="login_pass">
+			<input type="text" placeholder="Username" id="login_name">
+			<input type="password" placeholder="Password" id="login_pass">
 			<input type="button" value="Login" id="login">
 			<h2>Register</h2>
-			<input type="text" value="Username" id="register_name">
-			<input type="text" value="Password" id="register_pass">
-			<input type="text" value="Confirm Password" id="register_cpass">
+			<input type="text" placeholder="Username" id="register_name">
+			<input type="password" placeholder="Password" id="register_pass">
+			<input type="password" placeholder="Confirm Password" id="register_cpass">
 			<input type="button" value="Register" id="register">
 		</div>
 		<div class="main_body">
@@ -27,4 +27,7 @@
 			</p>
 		</div>
 	</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="views/lib.js"></script>
+	<script src="views/home.js"></script>
 </html>
