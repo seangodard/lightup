@@ -2,6 +2,8 @@
 
 require_once('models/db_connection.php');
 
+// TODO : Best hashing algorithm to use? : Mon 11 Apr 2016 11:52:44 AM EDT 
+// TODO : Tweak hashing method? : Mon 11 Apr 2016 11:52:44 AM EDT 
 /**
  * A file to hold library functions for working with the database.
  */

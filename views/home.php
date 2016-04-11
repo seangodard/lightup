@@ -8,14 +8,28 @@
 		<h1>LightUp</h1>
 		<div class="sidebar">
 			<h2>Login</h2>
-			<input type="text" placeholder="Username" id="login_name">
-			<input type="password" placeholder="Password" id="login_pass">
-			<input type="button" value="Login" id="login">
+			<form action="login.php" method="post" id="login_form">
+				<div id="login_name" class="from_group">
+					<input type="text" placeholder="Username" name="login_name">
+				</div>
+				<div id="login_pass" class="from_group">
+					<input type="password" placeholder="Password" name="login_pass">
+				</div>
+				<input type="submit" value="Login" id="login">
+			</form>
 			<h2>Register</h2>
-			<input type="text" placeholder="Username" id="register_name">
-			<input type="password" placeholder="Password" id="register_pass">
-			<input type="password" placeholder="Confirm Password" id="register_cpass">
-			<input type="button" value="Register" id="register">
+			<form action="register.php" method="post" id="register_form">
+				<div id="register_name" class="from_group">
+					<input type="text" placeholder="Username" name="register_name">
+				</div>
+				<div id="register_pass" class="from_group">
+					<input type="password" placeholder="Password" name="register_pass">
+				</div>
+				<div id="register_cpass" class="from_group">
+					<input type="password" placeholder="Confirm Password" name="register_cpass">
+				</div>
+				<input type="submit" value="Register" id="register">
+			</form>
 		</div>
 		<div class="main_body">
 			<h1></h1>
