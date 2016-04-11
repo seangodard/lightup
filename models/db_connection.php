@@ -4,9 +4,9 @@
 // Return a PDO connection
 // ----------------------------------------------------------------------------------------------------
 function databaseConnection() {
-    
     // connection parameters
-    require_once('../mysql.php');
+	// TODO : Change back for submission? : Fri 08 Apr 2016 10:00:21 PM EDT 
+    require_once('../lightup_mysql.php');
 
     // Attempt connection
     try {
@@ -15,11 +15,9 @@ function databaseConnection() {
         $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         return $db;
     }
-    
-    // If it doesn't work
+	// TODO : What to do if it could not connect to the database? : Fri 08 Apr 2016 08:43:44 PM EDT 
     catch (PDOException $e) {
-		header('Location: view/no_connection.html');
-		exit();
+		return null;
     }
 }
 // ----------------------------------------------------------------------------------------------------
