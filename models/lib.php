@@ -2,6 +2,8 @@
 
 require_once('models/db_connection.php');
 
+// TODO : Best hashing algorithm to use? : Mon 11 Apr 2016 11:52:44 AM EDT 
+// TODO : Tweak hashing method? : Mon 11 Apr 2016 11:52:44 AM EDT 
 /**
  * A file to hold library functions for working with the database.
  */
@@ -50,7 +52,6 @@ function getSalt($length) {
 	return $salt;
 }
 
-// TODO : Debug again : Sun 10 Apr 2016 10:23:47 PM EDT 
 // ------------------------------------------------------------------
 // Attempt to validate the user login credentials.
 // @param db a valid database connection
@@ -85,7 +86,6 @@ function validateCredentials($username, $pass, $db) {
 	else { return false; }
 }
 
-// TODO : Debug : Sun 10 Apr 2016 10:02:57 PM EDT 
 // --------------------------------------------------------------
 // Determine if the given username has been registered.
 // @param db a valid database connection
