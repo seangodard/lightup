@@ -11,9 +11,11 @@
 			<form action="login.php" method="post" id="login_form">
 				<div id="login_name" class="from_group">
 					<input type="text" placeholder="Username" name="login_name">
+					<?php if (hasMessage('login_name')) {echo getFeedbackMessage('login_name');} ?>
 				</div>
 				<div id="login_pass" class="from_group">
 					<input type="password" placeholder="Password" name="login_pass">
+					<?php if (hasMessage('login_pass')) {echo getFeedbackMessage('login_pass');} ?>
 				</div>
 				<input type="submit" value="Login" id="login">
 			</form>

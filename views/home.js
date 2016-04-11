@@ -1,6 +1,3 @@
-// TODO : Check for security flaws : Fri 08 Apr 2016 08:21:26 PM EDT 
-// TODO : How to remove old errors? : Mon 11 Apr 2016 11:23:40 AM EDT 
-// TODO : Add error message for redirection back if anything fails : Mon 11 Apr 2016 11:37:03 AM EDT 
 //----------------------------------------------------------------------
 // A javascript file for handling login and registration AJAX requests
 //----------------------------------------------------------------------
@@ -8,7 +5,7 @@
 // TODO : Fix to use AJAX and php correctly : Sun 10 Apr 2016 09:08:36 PM EDT 
 // TODO : Add some sort of preventing from submitting if there are blanks : Sun 10 Apr 2016 03:23:21 PM EDT 
 // TODO : Add email and first/last name fields : Fri 08 Apr 2016 07:54:52 PM EDT 
-// TODO : Add a limit to the maximum size of a username? : Sun 10 Apr 2016 10:02:49 AM EDT 
+// TODO : Add a limit to the maximum size of a username here and in php? : Sun 10 Apr 2016 10:02:49 AM EDT 
 // TODO : This : Sun 10 Apr 2016 09:46:00 PM EDT 
 //----------------------------------------------------------------------
 // An AJAX function for registration handling
@@ -39,8 +36,6 @@ function validateRegister() {
 	return true;
 }
 
-// TODO : Here : Sun 10 Apr 2016 09:59:02 PM EDT 
-// TODO : This : Sun 10 Apr 2016 03:23:33 PM EDT 
 //----------------------------------------------------------------------
 // An AJAX function for login validation and form submission handling
 //----------------------------------------------------------------------
@@ -74,7 +69,6 @@ function validateLogin(button) {
 	}
 }
 
-// TODO : Fix bug of it not preventing default when not valid : Mon 11 Apr 2016 09:04:13 AM EDT 
 //----------------------------------------------------------------------
 // Setup for AJAX after the page loads
 //----------------------------------------------------------------------
@@ -85,7 +79,7 @@ $(document).ready(function() {
 	$('#login').on('click', function(event) {
 		// Delay the php event until AJAX finishes validation
 		event.preventDefault();
-		validateLogin($(this));
+		validateLogin();
 	});
 	
 	//----------------------------------------------------------------------

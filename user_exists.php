@@ -2,7 +2,6 @@
 
 require_once('models/lib.php');
 
-// TODO : Debug : Mon 11 Apr 2016 08:43:36 AM EDT 
 // --------------------------------------------------------------
 // Determine if the given username has been registered.
 // --------------------------------------------------------------

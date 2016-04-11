@@ -5,24 +5,20 @@ session_start();
 
 require_once('constants.php');
 require_once('models/lib.php');
+require_once('views/lib.php');
 
-// TODO : Perform better field validation here : Sun 10 Apr 2016 10:24:16 PM EDT 
-
-// TODO : Here : Sun 10 Apr 2016 10:34:26 PM EDT 
-
-// TODO : This : Sun 10 Apr 2016 10:28:53 PM EDT 
-// TODO : Debug again : Sun 10 Apr 2016 10:28:57 PM EDT 
-// TODO : Set up session once logged in/registered : Fri 08 Apr 2016 08:19:57 PM EDT 
 // TODO : Make an optional button to keep the user logged in with cookies : Fri 08 Apr 2016 08:19:57 PM EDT 
 // ------------------------------------------------------------------
 // Attempt to login the user with the given username and password
-// 	returns a JSON object of the form {stat : boolean, message : message}
+// If there is an error then set the appropriate session data
 // ------------------------------------------------------------------
 if (isset($_POST['login_name']) && isset($_POST['login_pass'])) {
 	// Connect to the database and make sure the connection works before continuing
 	$db = databaseConnection();
 	if ($db === null) {
 		// TODO : Error since can't connect to database : Sun 10 Apr 2016 10:17:03 PM EDT 
+		header('Location: index.php');
+		exit();
    	}
 
 	$valid = validateCredentials($_POST['login_name'], $_POST['login_pass'], $db);
@@ -34,10 +30,20 @@ if (isset($_POST['login_name']) && isset($_POST['login_pass'])) {
 		exit();
 	}
 	else {
-		// TODO : Error since the credentials were invalid : Sun 10 Apr 2016 10:17:03 PM EDT 
-
+		// TODO : Refactor so second query isn't needed : Mon 11 Apr 2016 02:36:00 PM EDT 
+		// Set the error according to if it was an incorrect username or password
+		if (userExists($_POST['username'], $db)) {
+			setSessionMessage('login_name', 'Username has not yet been registered.');
+		}
+		else {
+			setSessionMessage('login_pass', 'Incorrect password.');
+		}
+		header('Location: index.php');
+		exit();
 	}
 }
+// Send them back to the homepage if fields were not set for an odd reason
 else {
-	// TODO : Error since a field was not filled : Sun 10 Apr 2016 10:17:03 PM EDT 
+	header('Location: index.php');
+	exit();
 }
