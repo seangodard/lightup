@@ -9,25 +9,29 @@
 		<div class="sidebar">
 			<h2>Login</h2>
 			<form action="login.php" method="post" id="login_form">
-				<div id="login_name" class="from_group">
-					<input type="text" placeholder="Username" name="login_name">
+				<div id="login_name" class="form_group">
+					<input type="text" placeholder="Username" name="login_name"
+						class="<?php if (hasMessage('login_name')) {echo 'has_error';} ?>">
 					<?php if (hasMessage('login_name')) {echo getFeedbackMessage('login_name');} ?>
 				</div>
-				<div id="login_pass" class="from_group">
-					<input type="password" placeholder="Password" name="login_pass">
+				<div id="login_pass" class="form_group">
+					<input type="password" placeholder="Password" name="login_pass"
+						class="<?php if (hasMessage('login_pass')) {echo 'has_error';} ?>">
 					<?php if (hasMessage('login_pass')) {echo getFeedbackMessage('login_pass');} ?>
 				</div>
 				<input type="submit" value="Login" id="login">
 			</form>
 			<h2>Register</h2>
 			<form action="register.php" method="post" id="register_form">
-				<div id="register_name" class="from_group">
-					<input type="text" placeholder="Username" name="register_name">
+				<div id="register_name" class="form_group">
+					<input type="text" placeholder="Username" name="register_name"
+						class="<?php if (hasMessage('register_name')) {echo 'has_error';} ?>">
+					<?php if (hasMessage('register_name')) {echo getFeedbackMessage('register_name');} ?>
 				</div>
-				<div id="register_pass" class="from_group">
+				<div id="register_pass" class="form_group">
 					<input type="password" placeholder="Password" name="register_pass">
 				</div>
-				<div id="register_cpass" class="from_group">
+				<div id="register_cpass" class="form_group">
 					<input type="password" placeholder="Confirm Password" name="register_cpass">
 				</div>
 				<input type="submit" value="Register" id="register">
@@ -35,7 +39,7 @@
 		</div>
 		<div class="main_body">
 			<h1></h1>
-			<img src="https://placehold.it/350x150" alt="tree"/>
+			<img src="views/images/lightup.svg" alt="tree"/>
 			<p>
 				Welcome to LightUp! Have you ever had an idea but never believed that anyone would be interested 
 				in it or wondered if maybe someone was already working on it and you just want to join in? Before
