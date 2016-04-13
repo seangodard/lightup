@@ -1,5 +1,32 @@
 <?php
 
+// TODO : Debug : Mon 11 Apr 2016 10:01:45 PM EDT 
+// -----------------------------------------------------------------
+// @return whether or not a user is currently logged in
+// -----------------------------------------------------------------
+function isLoggedIn() {
+	return isset($_SESSION['username']);
+}
+
+// -----------------------------------------------------------------
+// Set the session information for user.
+// Requires that the user has first been validated!
+// -----------------------------------------------------------------
+function login($username) {
+	$_SESSION['username'] = $_POST['login_name'];
+}
+
+// TODO : Debug : Mon 11 Apr 2016 09:57:40 PM EDT 
+// -----------------------------------------------------------------
+// Removes the session username (if one is set) so we know the user
+// is no longer logged in.
+// -----------------------------------------------------------------
+function logout() {
+	if (isset($_SESSION['username']) {
+		unset($_SESSION['username']);
+	}
+}
+
 // -----------------------------------------------------------------
 // Sets a message in the session for the particular html id
 // @param tag_id the html id that the message pertains to

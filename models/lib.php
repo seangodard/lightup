@@ -8,7 +8,6 @@ require_once('models/db_connection.php');
  * A file to hold library functions for working with the database.
  */
 
-// TODO : Debug again : Sun 10 Apr 2016 10:19:44 PM EDT 
 // ------------------------------------------------------------------
 // Attempt to add the given user to the database with the hashed password and a salt.
 // @param db a valid database connection
@@ -20,10 +19,10 @@ function registerUser($username, $password, $db) {
 	$salt_length = 10;
 	
 	// Check to make sure the username is not already taken 
-	if (userExists()) { return false; }
+	if (userExists($username, $db)) { return false; }
 
 	// Bind the parameters to add the user
-	$add_user = $db->prepare('INSERT INTO users(username, salt, password) VALUES(:username, :salt, (SELECT SHA2(:saltedpass, 512)))');
+	$add_user = $db->prepare('INSERT INTO users(username, salt, hashed_pass) VALUES(:username, :salt, (SELECT SHA2(:saltedpass, 512)))');
 	$add_user->bindParam(':username', $username);
 	$salt = getSalt($salt_length);
 	$add_user->bindParam(':salt', $salt);
