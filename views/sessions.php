@@ -1,5 +1,7 @@
 <?php
 
+// TODO : Change to use user_id instead of username : Wed 13 Apr 2016 04:51:05 PM EDT 
+
 // TODO : Debug : Mon 11 Apr 2016 10:01:45 PM EDT 
 // -----------------------------------------------------------------
 // @return whether or not a user is currently logged in
@@ -8,12 +10,24 @@ function isLoggedIn() {
 	return isset($_SESSION['username']);
 }
 
+// TODO : Debug : Wed 13 Apr 2016 12:27:59 PM EDT 
+// -----------------------------------------------------------------
+// @return whether or not a user is currently logged in
+// -----------------------------------------------------------------
+function getLoggedInUser() {
+	if (isset($_SESSION['username'])) {
+		return $_SESSION['username'];
+	}
+	return null;
+}
+
 // -----------------------------------------------------------------
 // Set the session information for user.
 // Requires that the user has first been validated!
 // -----------------------------------------------------------------
 function login($username) {
-	$_SESSION['username'] = $_POST['login_name'];
+	session_regenerate_id(true); // Create a new session for login
+	$_SESSION['username'] = $username;
 }
 
 // TODO : Debug : Mon 11 Apr 2016 09:57:40 PM EDT 
@@ -22,7 +36,7 @@ function login($username) {
 // is no longer logged in.
 // -----------------------------------------------------------------
 function logout() {
-	if (isset($_SESSION['username']) {
+	if (isset($_SESSION['username'])) {
 		unset($_SESSION['username']);
 	}
 }
