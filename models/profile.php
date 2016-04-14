@@ -47,3 +47,23 @@ function selectProjects($username, $db) {
 	// Return list of project names
 	return $projects->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// ------------------------------------------------------------------
+// Select the username's profile information
+// @param db a valid database connection
+// @param username the registered and logged-in user (retrieved from session)
+// -------------------------------------------------------------------
+function selecProfileInfo($username, $db) {
+	// Prepare the query to get the user's profile
+	$profile = $db->prepare('SELECT * FROM profiles WHERE user_id=:user_id');
+
+	// Call function to retrieve user_id based on username
+	$user_id = findUserID($username, $db);
+
+	// Bind the parameters to retrieve projects
+	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+	$profile->execute();
+
+	$profile = $profile->fetchAll(PDO::FETCH_ASSOC);
+	return $profile[0];
+}
