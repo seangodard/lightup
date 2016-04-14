@@ -22,7 +22,9 @@ function findUserID($username, $db) {
 
 	// Retrieve the user_id
 	$user_id = $user_id->fetchAll(PDO::FETCH_ASSOC);
-	return $user_id[0]['user_id'];
+	if (isset($user_id[0]))
+		return $user_id[0]['user_id'];
+	return null;
 }
 
 // ------------------------------------------------------------------
@@ -31,14 +33,17 @@ function findUserID($username, $db) {
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
 function selectProjects($username, $db) {
+	// Call function to retrieve user_id based on username
+	$user_id = findUserID($username, $db);
+
+	if (!(isset($user_id))) {
+		return null;
+	}
 
 	// Prepare the query to get the projects
 	$projects = $db->prepare('SELECT project_id,project_name 
 								FROM users NATURAL JOIN projects_member NATURAL JOIN projects
 								WHERE user_id=:user_id');
-
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
 
 	// Bind the parameters to retrieve projects
 	$projects->bindParam(':user_id', $user_id, PDO::PARAM_STR);
@@ -54,16 +59,22 @@ function selectProjects($username, $db) {
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
 function selecProfileInfo($username, $db) {
-	// Prepare the query to get the user's profile
-	$profile = $db->prepare('SELECT * FROM profiles WHERE user_id=:user_id');
-
 	// Call function to retrieve user_id based on username
 	$user_id = findUserID($username, $db);
+
+	if ((!(isset($user_id))) || $user_id == '') {
+		return null;
+	}
+	
+	// Prepare the query to get the user's profile
+	$profile = $db->prepare('SELECT * FROM profiles WHERE user_id=:user_id');
 
 	// Bind the parameters to retrieve projects
 	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
 	$profile->execute();
-
 	$profile = $profile->fetchAll(PDO::FETCH_ASSOC);
-	return $profile[0];
+	if (isset($profile[0])) {
+		return $profile[0];
+	}
+	return null;
 }
