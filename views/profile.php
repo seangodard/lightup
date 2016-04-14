@@ -21,6 +21,46 @@
 			</ul>
 		</div>
 
+		<div>
+			<h2>About Me</h2>
+			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['blurb'], ENT_QUOTES, 'utf-8'); ?></p>
+		</div>
+
+		<div>
+			<h2>Contact Info</h2>
+			<ul>
+				<li>
+					City: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['city'], ENT_QUOTES, 'utf-8'); ?>
+				</li>
+				<li>
+					State: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['state'], ENT_QUOTES, 'utf-8'); ?>
+					</li>
+				<li>
+					Country: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['country'], ENT_QUOTES, 'utf-8'); ?>
+				</li>
+				<li>
+					Phone: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['phone'], ENT_QUOTES, 'utf-8'); ?>
+				</li>
+				<li>
+					Email: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['email'], ENT_QUOTES, 'utf-8'); ?>
+				</li>
+			</ul>
+		</div>
+
+		<div>
+			<h2>Experiences</h2>
+			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['experience'], ENT_QUOTES, 'utf-8'); ?></p>
+		</div>
+
+		<div>
+			<h2>Skills</h2>
+			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['skills'], ENT_QUOTES, 'utf-8'); ?></p>
+		</div>
+
+		<div>
+			<h2>Hobbies</h2>
+			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['hobbies'], ENT_QUOTES, 'utf-8'); ?></p>
+		</div>
 
 	</body>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
