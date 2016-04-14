@@ -1,5 +1,6 @@
 use lightup;
 
+drop table if exists projects_member;
 drop table if exists profiles;
 drop table if exists projects;
 drop table if exists users;
@@ -58,3 +59,14 @@ INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experie
 	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com", "Over 9000!!!", "Awesomeness", "Being Awesome");
 INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experience, skills, hobbies) 
 	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com", "*&!^%*^&%(&^", "Keeping it fresh", "Art");
+
+create table projects_member (
+	user_id INT NOT NULL,
+	project_id INT NOT NULL,
+	PRIMARY KEY(user_id,project_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id),
+	FOREIGN KEY(project_id) REFERENCES projects(project_id)
+);
+
+INSERT INTO projects_member(user_id,project_id) VALUES (1, 1);
+INSERT INTO projects_member(user_id,project_id) VALUES (1, 2);
