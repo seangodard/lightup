@@ -50,14 +50,14 @@ create table profiles (
 	country VARCHAR(40),
 	phone VARCHAR(10),
 	email VARCHAR(40),
-	experience VARCHAR(40),
+	experiences VARCHAR(40),
 	skills VARCHAR(40),
 	hobbies VARCHAR(40),
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experience, skills, hobbies) 
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experiences, skills, hobbies) 
 	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com", "Over 9000!!!", "Awesomeness", "Being Awesome");
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experience, skills, hobbies) 
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experiences, skills, hobbies) 
 	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com", "*&!^%*^&%(&^", "Keeping it fresh", "Art");
 
 create table projects_member (
@@ -70,3 +70,6 @@ create table projects_member (
 
 INSERT INTO projects_member(user_id,project_id) VALUES (1, 1);
 INSERT INTO projects_member(user_id,project_id) VALUES (1, 2);
+INSERT INTO projects_member(user_id,project_id) VALUES (2, 3);
+INSERT INTO projects_member(user_id,project_id) VALUES (3, 1);
+INSERT INTO projects_member(user_id,project_id) VALUES (3, 3);
