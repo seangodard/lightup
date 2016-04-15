@@ -3,9 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>LightUp: Login/Register</title>
+		<link rel="stylesheet" href="views/home.css">
+		<meta name="viewport" content="width=device-width, height=device-height">
 	</head>
 	<body>
-		<h1>LightUp</h1>
+		<div class="main_body">
+			<img src="views/images/lightup.svg" alt="tree" id="central_image"/>
+			<h1>LightUp</h1>
+			<p>
+				Welcome to LightUp! Have you ever had an idea but never believed that anyone would be interested 
+				in it or wondered if maybe someone was already working on it and you just want to join in? Before
+				LightUp, we were suffering from the same problem......  
+			</p>
+		</div>
 		<div class="sidebar">
 			<h2>Login</h2>
 			<form action="login.php" method="post" id="login_form">
@@ -37,15 +47,7 @@
 				<input type="submit" value="Register" id="register">
 			</form>
 		</div>
-		<div class="main_body">
-			<h1></h1>
-			<img src="views/images/lightup.svg" alt="tree"/>
-			<p>
-				Welcome to LightUp! Have you ever had an idea but never believed that anyone would be interested 
-				in it or wondered if maybe someone was already working on it and you just want to join in? Before
-				LightUp, we were suffering from the same problem......  
-			</p>
-		</div>
+		
 	</body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="views/lib.js"></script>
