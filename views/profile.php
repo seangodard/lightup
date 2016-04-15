@@ -22,48 +22,39 @@
 		</div>
 
 		<div>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['blurb']) && (selecProfileInfo($_SESSION['username'], $db)['blurb']) !== ''): ?>
+<?php if (notBlank('blurb', $db)): ?>
 			<h2>About Me</h2>
-			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['blurb'], ENT_QUOTES, 'utf-8'); ?></p>
+			<p><?php echo htmlentities(get('blurb', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
 		</div>
 
 		<div>
-<?php if ((isset(selecProfileInfo($_SESSION['username'], $db)['city'])) && 
-			((selecProfileInfo($_SESSION['username'], $db)['city']) !== '') ||
-			(isset(selecProfileInfo($_SESSION['username'], $db)['state'])) && 
-			((selecProfileInfo($_SESSION['username'], $db)['state']) !== '')||
-			(isset(selecProfileInfo($_SESSION['username'], $db)['country'])) && 
-			((selecProfileInfo($_SESSION['username'], $db)['country']) !== '')||
-			(isset(selecProfileInfo($_SESSION['username'], $db)['phone'])) && 
-			((selecProfileInfo($_SESSION['username'], $db)['phone']) !== '') ||
-			(isset(selecProfileInfo($_SESSION['username'], $db)['email'])) && 
-			((selecProfileInfo($_SESSION['username'], $db)['email']) !== '')): ?>
+<?php if ((notBlank('city', $db)) || (notBlank('state', $db))|| (notBlank('country', $db))|| (notBlank('phone', $db)) || (notBlank('email', $db))): ?>
 			<h2>Contact Info</h2>
 			<ul>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['city']) && (selecProfileInfo($_SESSION['username'], $db)['city']) !== ''): ?>
+<?php if (notBlank('city', $db)): ?>
 				<li>
-					City: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['city'], ENT_QUOTES, 'utf-8'); ?>
+					City: <?php echo htmlentities(get('city', $db), ENT_QUOTES, 'utf-8'); ?>
 				</li>
 <?php endif; ?>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['state']) && (selecProfileInfo($_SESSION['username'], $db)['state']) !== ''): ?>
+<?php if (notBlank('state', $db)): ?>
 				<li>
-					State: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['state'], ENT_QUOTES, 'utf-8'); ?>
+					State: <?php echo htmlentities(get('state', $db), ENT_QUOTES, 'utf-8'); ?>
 				</li>
 <?php endif; ?>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['country']) && (selecProfileInfo($_SESSION['username'], $db)['country']) !== ''): ?>
+<?php if (notBlank('country', $db)): ?>
 				<li>
-					Country: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['country'], ENT_QUOTES, 'utf-8'); ?>
+					Country: <?php echo htmlentities(get('country', $db), ENT_QUOTES, 'utf-8'); ?>
 				</li>
 <?php endif; ?>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['phone']) && (selecProfileInfo($_SESSION['username'], $db)['phone']) !== ''): ?>
+<?php if (notBlank('phone', $db)): ?>
 				<li>
-					Phone: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['phone'], ENT_QUOTES, 'utf-8'); ?>
+					Phone: <?php echo htmlentities(get('phone', $db), ENT_QUOTES, 'utf-8'); ?>
 				</li>
 <?php endif; ?>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['email']) && (selecProfileInfo($_SESSION['username'], $db)['email']) !== ''): ?>
+<?php if (notBlank('email', $db)): ?>
 				<li>
-					Email: <?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['email'], ENT_QUOTES, 'utf-8'); ?>
+					Email: <?php echo htmlentities(get('email', $db), ENT_QUOTES, 'utf-8'); ?>
 				</li>
 <?php endif; ?>
 			</ul>
@@ -71,23 +62,23 @@
 		</div>
 
 		<div>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['experiences']) && (selecProfileInfo($_SESSION['username'], $db)['experiences']) !== ''): ?>
+<?php if (notBlank('experiences', $db)): ?>
 			<h2>Experiences</h2>
-			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['experiences'], ENT_QUOTES, 'utf-8'); ?></p>
+			<p><?php echo htmlentities(get('experiences', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
 		</div>
 
 		<div>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['skills']) && (selecProfileInfo($_SESSION['username'], $db)['skills']) !== ''): ?>
+<?php if (notBlank('skills', $db)): ?>
 			<h2>Skills</h2>
-			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['skills'], ENT_QUOTES, 'utf-8'); ?></p>
+			<p><?php echo htmlentities(get('skills', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
 		</div>
 
 		<div>
-<?php if (isset(selecProfileInfo($_SESSION['username'], $db)['hobbies']) && (selecProfileInfo($_SESSION['username'], $db)['hobbies']) !== ''): ?>
+<?php if (notBlank('hobbies', $db)): ?>
 			<h2>Hobbies</h2>
-			<p><?php echo htmlentities(selecProfileInfo($_SESSION['username'], $db)['hobbies'], ENT_QUOTES, 'utf-8'); ?></p>
+			<p><?php echo htmlentities(get('hobbies', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
 		</div>
 

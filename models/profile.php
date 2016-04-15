@@ -58,7 +58,7 @@ function selectProjects($username, $db) {
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selecProfileInfo($username, $db) {
+function selectProfileInfo($username, $db) {
 	// Call function to retrieve user_id based on username
 	$user_id = findUserID($username, $db);
 
@@ -77,4 +77,19 @@ function selecProfileInfo($username, $db) {
 		return $profile[0];
 	}
 	return null;
+}
+
+// ------------------------------------------------------------------
+// Check that a certain column is not blank for a user's profile
+// @param db a valid database connection
+// @param section the column to check
+// -------------------------------------------------------------------
+function notBlank($section, $db) {
+	if (isset(selectProfileInfo($_SESSION['username'], $db)[$section]) && (selectProfileInfo($_SESSION['username'], $db)[$section]) !== '')
+		return true;
+	return false;
+}
+
+function get($section, $db) {
+	return selectProfileInfo($_SESSION['username'], $db)[$section];
 }

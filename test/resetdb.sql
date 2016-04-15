@@ -71,5 +71,5 @@ create table projects_member (
 INSERT INTO projects_member(user_id,project_id) VALUES (1, 1);
 INSERT INTO projects_member(user_id,project_id) VALUES (1, 2);
 INSERT INTO projects_member(user_id,project_id) VALUES (2, 3);
-INSERT INTO projects_member(user_id,project_id) VALUES (3, 1);
+INSERT INTO projects_member(user_id,project_id) VALUES (2, 1);
 INSERT INTO projects_member(user_id,project_id) VALUES (3, 3);
