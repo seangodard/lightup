@@ -5,7 +5,7 @@ session_start();
 
 require_once('constants.php');
 require_once('models/register_login.php');
-require_once('views/sessions.php');
+require_once('sessions.php');
 
 // ------------------------------------------------------------------
 // Attempt to register the user with the given username and password,

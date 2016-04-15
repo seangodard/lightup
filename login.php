@@ -5,7 +5,7 @@ session_start();
 
 require_once('constants.php');
 require_once('models/register_login.php');
-require_once('views/sessions.php');
+require_once('sessions.php');
 
 // TODO : Make an optional button to keep the user logged in with cookies : Fri 08 Apr 2016 08:19:57 PM EDT 
 // TODO : Do this^^ only after a log out option has been set on all pages : Mon 11 Apr 2016 09:53:23 PM EDT 
