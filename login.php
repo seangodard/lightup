@@ -4,7 +4,7 @@
 session_start();
 
 require_once('constants.php');
-require_once('models/register_login.php');
+require_once('models/users.php');
 require_once('sessions.php');
 
 // TODO : Make an optional button to keep the user logged in with cookies : Fri 08 Apr 2016 08:19:57 PM EDT 
@@ -21,7 +21,7 @@ if (isset($_POST['login_name']) && isset($_POST['login_pass'])) {
 
 	// Setup session with the username if the user has been logged in
 	if ($valid) {
-		login($_POST['login_name']);
+		login(getUserId($_POST['login_name'], $db));
 		header('Location: profile.php');
 		exit();
 	}

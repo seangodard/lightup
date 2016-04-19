@@ -3,7 +3,13 @@
 // Start up sessions
 session_start();
 
-// TODO : Add redirect to profile page if the user is already signed in : Mon 11 Apr 2016 09:53:23 PM EDT 
+require_once('sessions.php');
+
+// Redirect the user to their profile page if they are already signed in 
+if (isLoggedIn()) {
+	header('Location: profile.php');
+	exit();
+}
 
 require_once('constants.php');
 require_once('sessions.php');

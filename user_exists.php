@@ -1,6 +1,6 @@
 <?php 
 
-require_once('models/register_login.php');
+require_once('models/users.php');
 
 // --------------------------------------------------------------
 // Determine if the given username has been registered.

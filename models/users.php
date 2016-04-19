@@ -3,7 +3,7 @@
 require_once('models/db_connection.php');
 
 /**
- * A collection of functions for registering and verifying users.
+ * A collection of functions for manipulating and retreiving user information.
  */
 
 // ------------------------------------------------------------------
@@ -31,7 +31,6 @@ function registerUser($username, $password, $db) {
 	else { return false; }
 }
 
-// TODO : Debug new version : Wed 13 Apr 2016 03:14:28 PM EDT 
 // ------------------------------------------------------------------
 // Attempt to validate the user login credentials.
 // @param db a valid database connection
@@ -64,8 +63,45 @@ function userExists($username, $db) {
 	$check_username = $db->prepare('SELECT username FROM users WHERE username = :username');
 	$check_username->bindParam(':username', $username);
 	$check_username->execute();
+	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
 	$check_username = $check_username->fetchAll();
 
 	if (count($check_username) > 0) { return true; }
 	else { return false; }
+}
+
+// TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
+// ------------------------------------------------------------------
+// A function to get the user_id based on the username.
+// @param username the username to get the id for
+// @param db a valid database connection
+// @return the user_id for the user or -1 if no id exists for that user
+// ------------------------------------------------------------------
+function getUserId($username, $db) {
+	$get_id = $db->prepare('SELECT user_id FROM users WHERE username = :username');
+	$get_id->bindParam(':username', $username);
+	$get_id->execute();
+	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
+	$get_id = $get_id->fetchAll();
+
+	if (count($get_id) > 0) { return $get_id[0]['user_id']; }
+	else { return -1; }
+}
+
+// TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
+// ------------------------------------------------------------------
+// A function to get the username based on the user_id.
+// @param user_id the user_id to get the username for
+// @param db a valid database connection
+// @return the username for the user or null if no user has that id
+// ------------------------------------------------------------------
+function getUsername($user_id, $db) {
+	$get_username = $db->prepare('SELECT username FROM users WHERE user_id = :user_id');
+	$get_username->bindParam(':user_id', $user_id);
+	$get_username->execute();
+	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
+	$get_username = $get_username->fetchAll();
+
+	if (count($get_username) > 0) { return $get_username[0]['username']; }
+	else { return null; }
 }
