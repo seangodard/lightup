@@ -14,7 +14,7 @@ require_once('models/db_connection.php');
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function findUserID($username, $db) {
+/*function findUserID($username, $db) {
 	// Prepare the query to get the user_id
 	$user_id = $db->prepare('SELECT user_id FROM users WHERE username=:username');
 
@@ -27,17 +27,14 @@ function findUserID($username, $db) {
 	if (isset($user_id[0]))
 		return $user_id[0]['user_id'];
 	return null;
-}
+}*/
 
 // ------------------------------------------------------------------
 // Select the projects the user is a member of.
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectProjects($username, $db) {
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
-
+function selectProjects($user_id, $db) {
 	if (!(isset($user_id))) {
 		return null;
 	}
@@ -60,10 +57,7 @@ function selectProjects($username, $db) {
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectContactAndBlurb($username, $db) {
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
-
+function selectContactAndBlurb($user_id, $db) {
 	if ((!(isset($user_id))) || $user_id == '') {
 		return null;
 	}
@@ -87,7 +81,7 @@ function selectContactAndBlurb($username, $db) {
 // @param section the column to check
 // -------------------------------------------------------------------
 function notBlankContactAndBlurb($section, $db) {
-	if (isset(selectContactAndBlurb($_SESSION['username'], $db)[$section]) && (selectContactAndBlurb($_SESSION['username'], $db)[$section]) !== '')
+	if (isset(selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) && (selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) !== '')
 		return true;
 	return false;
 }
@@ -98,7 +92,7 @@ function notBlankContactAndBlurb($section, $db) {
 // @param section the column to check
 // -------------------------------------------------------------------
 function getContactAndBlurb($section, $db) {
-	return selectContactAndBlurb($_SESSION['username'], $db)[$section];
+	return selectContactAndBlurb(getLoggedInUserID(), $db)[$section];
 }
 
 // ------------------------------------------------------------------
@@ -106,16 +100,18 @@ function getContactAndBlurb($section, $db) {
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectExpSkillsHobbies($username, $db) {
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
-
+function selectExpSkillsHobbies($user_id, $section, $db) {
 	if ((!(isset($user_id))) || $user_id == '') {
 		return null;
 	}
 	
 	// Prepare the query to get the user's profile
-	$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN experiences WHERE user_id=:user_id');
+	if ($section === 'experiences')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN experiences WHERE user_id=:user_id');
+	elseif ($section === 'skills')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN skills WHERE user_id=:user_id');
+	elseif ($section === 'hobbies')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN hobbies WHERE user_id=:user_id');
 
 	// Bind the parameters to retrieve projects
 	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
@@ -125,7 +121,7 @@ function selectExpSkillsHobbies($username, $db) {
 }
 
 
-
+/*
 // TODO: Check this to make sure it's right
 function update($username, $section, $data, $db) {
 	$query = 'UPDATE profiles SET ' . $section . '=' . $data . ' WHERE user_id='.findUserID($username);
@@ -134,4 +130,4 @@ function update($username, $section, $data, $db) {
 	$update = $update->execute();
 
 	// Maybe add a check to see if it's successful
-}
+}*/

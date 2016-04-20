@@ -9,12 +9,12 @@
 			<h1>Profile Page of: <?php echo htmlentities(getLoggedInUsername($db), ENT_QUOTES, 'utf-8'); ?></h1>
 			<h1>With user id: <?php echo htmlentities(getLoggedInUserID(), ENT_QUOTES, 'utf-8'); ?></h1>
 			<a href="../logout.php">Logout</a>
-			<form action="project.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></form>
+			<form action="edit_profile.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></form>
 		</div>
 
 		<div class="sidebar">
 			<ul>
-<?php foreach (selectProjects(getLoggedInUser(), $db) as $row): ?>
+<?php foreach ((selectProjects(getLoggedInUserID(), $db)) as $row): ?>
 				<li id="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<form action="project.php" method="post">
 						<button class="projects" name="project" type="submit" value="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
@@ -70,9 +70,9 @@
 			<div id="experiences">
 				<h2>Experiences</h2>
 				<ul>
-<?php foreach (selectExpSkillsHobbies(getLoggedInUser(), $db) as $row): ?>
+<?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "experiences", $db)) as $row): ?>
 					<li id="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['experiences'], ENT_QUOTES, 'utf-8'); ?>
+						<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>
 					</li>
 <?php endforeach; ?>
 				</ul>
@@ -80,11 +80,22 @@
 
 
 			<div id="skills">
-				<h2>Experiences</h2>
+				<h2>Skills</h2>
 				<ul>
-<?php foreach (selectExpSkillsHobbies(getLoggedInUser(), $db) as $row): ?>
-					<li id="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['skills'], ENT_QUOTES, 'utf-8'); ?>
+<?php foreach (selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db) as $row): ?>
+					<li id="<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>
+					</li>
+<?php endforeach; ?>
+				</ul>
+			</div>
+
+			<div id="hobbies">
+				<h2>Hobbies</h2>
+				<ul>
+<?php foreach (selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db) as $row): ?>
+					<li id="<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>
 					</li>
 <?php endforeach; ?>
 				</ul>

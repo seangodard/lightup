@@ -51,33 +51,60 @@ CREATE TABLE profiles (
 	country VARCHAR(40),
 	phone VARCHAR(10),
 	email VARCHAR(40),
-	skills VARCHAR(40),
-	hobbies VARCHAR(40),
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, skills, hobbies) 
-	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com", "Awesomeness", "Being Awesome");
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, skills, hobbies) 
-	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com", "Keeping it fresh", "Art");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com");
 
 
-# TODO: Fix this
 CREATE TABLE experiences(
 	exp_id INT AUTO_INCREMENT,
 	user_id INT,
-	experiences VARCHAR(1000),
+	experience VARCHAR(1000),
 	PRIMARY KEY(exp_id, user_id),
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
-INSERT INTO experiences(user_id, experiences) VALUES(1, "Over 9000!!!");
-INSERT INTO experiences(user_id, experiences) VALUES(1, "Breakdance");
-INSERT INTO experiences(user_id, experiences) VALUES(1, "Sponge-Bob");
-INSERT INTO experiences(user_id, experiences) VALUES(1, "Running man");
-INSERT INTO experiences(user_id, experiences) VALUES(2, "*&!^%*^&%(&^");
-INSERT INTO experiences(user_id, experiences) VALUES(3, "Super programming skillz");
+INSERT INTO experiences(user_id, experience) VALUES(1, "Over 9000!!!");
+INSERT INTO experiences(user_id, experience) VALUES(1, "Research Intern");
+INSERT INTO experiences(user_id, experience) VALUES(1, "Mentor");
+INSERT INTO experiences(user_id, experience) VALUES(1, "Co-manager");
+INSERT INTO experiences(user_id, experience) VALUES(2, "Mentor");
+INSERT INTO experiences(user_id, experience) VALUES(2, "Research Intern");
+INSERT INTO experiences(user_id, experience) VALUES(3, "Hacktivist");
 
+CREATE TABLE skills(
+	skill_id INT AUTO_INCREMENT,
+	user_id INT,
+	skill VARCHAR(1000),
+	PRIMARY KEY(skill_id, user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO skills(user_id, skill) VALUES(1, "Awesomeness");
+INSERT INTO skills(user_id, skill) VALUES(1, "Breakdance");
+INSERT INTO skills(user_id, skill) VALUES(1, "Sponge-Bob");
+INSERT INTO skills(user_id, skill) VALUES(1, "Running man");
+INSERT INTO skills(user_id, skill) VALUES(2, "*&!^%*^&%(&^");
+INSERT INTO skills(user_id, skill) VALUES(2, "C");
+INSERT INTO skills(user_id, skill) VALUES(3, "Super programming skillz");
+INSERT INTO skills(user_id, skill) VALUES(3, "Proficient in C");
+
+CREATE TABLE hobbies(
+	hobby_id INT AUTO_INCREMENT,
+	user_id INT,
+	hobby VARCHAR(1000),
+	PRIMARY KEY(hobby_id, user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO hobbies(user_id, hobby) VALUES(1, "Being Awesome");
+INSERT INTO hobbies(user_id, hobby) VALUES(2, "Art");
+INSERT INTO hobbies(user_id, hobby) VALUES(2, "Customization");
+INSERT INTO hobbies(user_id, hobby) VALUES(3, "Hacking");
 
 CREATE TABLE projects_member (
 	user_id INT NOT NULL,
