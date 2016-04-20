@@ -10,26 +10,6 @@ require_once('models/db_connection.php');
  */
 
 // ------------------------------------------------------------------
-// Find the user_id based on username
-// @param db a valid database connection
-// @param username the registered and logged-in user (retrieved from session)
-// -------------------------------------------------------------------
-/*function findUserID($username, $db) {
-	// Prepare the query to get the user_id
-	$user_id = $db->prepare('SELECT user_id FROM users WHERE username=:username');
-
-	// Bind the parameter to retrieve the user_id
-	$user_id->bindParam(':username', $username, PDO::PARAM_STR);
-	$user_id->execute();
-
-	// Retrieve the user_id
-	$user_id = $user_id->fetchAll(PDO::FETCH_ASSOC);
-	if (isset($user_id[0]))
-		return $user_id[0]['user_id'];
-	return null;
-}*/
-
-// ------------------------------------------------------------------
 // Select the projects the user is a member of.
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
@@ -119,15 +99,3 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 	return $profile->fetchAll(PDO::FETCH_ASSOC);
 
 }
-
-
-/*
-// TODO: Check this to make sure it's right
-function update($username, $section, $data, $db) {
-	$query = 'UPDATE profiles SET ' . $section . '=' . $data . ' WHERE user_id='.findUserID($username);
-	echo $query;
-	$update = $db->prepare($query);
-	$update = $update->execute();
-
-	// Maybe add a check to see if it's successful
-}*/
