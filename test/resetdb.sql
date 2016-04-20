@@ -1,12 +1,13 @@
 use lightup;
 
-drop table if exists projects_member;
-drop table if exists profiles;
-drop table if exists projects;
-drop table if exists users;
+DROP TABLE IF EXISTS experiences;
+DROP TABLE IF EXISTS projects_member;
+DROP TABLE IF EXISTS profiles;
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS users;
 
 /* Note: this will automatically create an index on the username since it is unique */
-create table users (
+CREATE TABLE users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(16) NOT NULL UNIQUE,
 	hashed_pass VARCHAR(255) NOT NULL,
@@ -28,7 +29,7 @@ INSERT INTO users(username, hashed_pass) VALUES ("domino", "$2y$10$PIfFGTaqzeHNJ
 
 /*  project(project_id, name, description, picture, creation_timestamp)*/
 /* TODO: picture is the reference path to the directory containing the image [4/11/16] */
-create table projects (
+CREATE TABLE projects (
 	project_id INT AUTO_INCREMENT PRIMARY KEY,
 	project_name VARCHAR(40) NOT NULL UNIQUE,
 	description VARCHAR(1000),
@@ -42,7 +43,7 @@ INSERT INTO projects(project_name, description, picture) VALUES ("Knitting Needl
 
 /* users(user_id, username, password, profile_picture, name, blurb, city, state, country,
 phone, email, experience, skills, hobbies) */
-create table profiles (
+CREATE TABLE profiles (
 	user_id INT PRIMARY KEY,
 	blurb VARCHAR(1000),
 	city VARCHAR(40),
@@ -50,17 +51,35 @@ create table profiles (
 	country VARCHAR(40),
 	phone VARCHAR(10),
 	email VARCHAR(40),
-	experiences VARCHAR(40),
 	skills VARCHAR(40),
 	hobbies VARCHAR(40),
 	FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experiences, skills, hobbies) 
-	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com", "Over 9000!!!", "Awesomeness", "Being Awesome");
-INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, experiences, skills, hobbies) 
-	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com", "*&!^%*^&%(&^", "Keeping it fresh", "Art");
 
-create table projects_member (
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, skills, hobbies) 
+	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com", "Awesomeness", "Being Awesome");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email, skills, hobbies) 
+	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com", "Keeping it fresh", "Art");
+
+
+# TODO: Fix this
+CREATE TABLE experiences(
+	exp_id INT AUTO_INCREMENT,
+	user_id INT,
+	experiences VARCHAR(1000),
+	PRIMARY KEY(exp_id, user_id),
+	FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
+INSERT INTO experiences(user_id, experiences) VALUES(1, "Over 9000!!!");
+INSERT INTO experiences(user_id, experiences) VALUES(1, "Breakdance");
+INSERT INTO experiences(user_id, experiences) VALUES(1, "Sponge-Bob");
+INSERT INTO experiences(user_id, experiences) VALUES(1, "Running man");
+INSERT INTO experiences(user_id, experiences) VALUES(2, "*&!^%*^&%(&^");
+INSERT INTO experiences(user_id, experiences) VALUES(3, "Super programming skillz");
+
+
+CREATE TABLE projects_member (
 	user_id INT NOT NULL,
 	project_id INT NOT NULL,
 	PRIMARY KEY(user_id,project_id),

@@ -6,80 +6,91 @@
 	</head>
 	<body>
 		<div class="top_bar">
-			<h1>Profile Page of: <?php echo htmlentities($_SESSION['username'], ENT_QUOTES, 'utf-8'); ?></h1>
-			<a href="../logout.php">Logout</a>
-			<form action="project.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></form>
+			<h1>Profile Page of: <?php echo htmlentities(getLoggedInUser(), ENT_QUOTES, 'utf-8'); ?></h1>
+			<a href="logout.php">Logout</a>
+			<form action="edit_profile.php">
+				<input type="image" src="views/images/settings.png" alt="settings" width="37" height="37">
+			</form>
 		</div>
 
 		<div class="sidebar">
 			<ul>
-<?php foreach (selectProjects($_SESSION['username'], $db) as $row): ?>
+<?php foreach (selectProjects(getLoggedInUser(), $db) as $row): ?>
 				<li id="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-					<button class="projects"><?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?></button>
+					<form action="project.php" method="post">
+						<button class="projects" name="project" type="submit" value="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
+						</button>
+					</form>
 				</li>
 <?php endforeach; ?>
 			</ul>
 		</div>
 
-		<div>
-<?php if (notBlank('blurb', $db)): ?>
-			<h2>About Me</h2>
-			<p><?php echo htmlentities(get('blurb', $db), ENT_QUOTES, 'utf-8'); ?></p>
+		<div class="main_body">
+			<div class="about_me">
+<?php if (notBlankContactAndBlurb('blurb', $db)): ?>
+				<h2>About Me</h2>
+				<p><?php echo htmlentities(getContactAndBlurb('blurb', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
-		</div>
+			</div>
 
-		<div>
-<?php if ((notBlank('city', $db)) || (notBlank('state', $db))|| (notBlank('country', $db))|| (notBlank('phone', $db)) || (notBlank('email', $db))): ?>
-			<h2>Contact Info</h2>
-			<ul>
-<?php if (notBlank('city', $db)): ?>
-				<li>
-					City: <?php echo htmlentities(get('city', $db), ENT_QUOTES, 'utf-8'); ?>
-				</li>
+			<div id="contact_info">
+<?php if ((notBlankContactAndBlurb('city', $db)) || (notBlankContactAndBlurb('state', $db))|| (notBlankContactAndBlurb('country', $db))|| (notBlankContactAndBlurb('phone', $db)) || (notBlankContactAndBlurb('email', $db))): ?>
+				<h2>Contact Info</h2>
+				<ul>
+<?php if (notBlankContactAndBlurb('city', $db)): ?>
+					<li>
+						City: <?php echo htmlentities(getContactAndBlurb('city', $db), ENT_QUOTES, 'utf-8'); ?>
+					</li>
 <?php endif; ?>
-<?php if (notBlank('state', $db)): ?>
-				<li>
-					State: <?php echo htmlentities(get('state', $db), ENT_QUOTES, 'utf-8'); ?>
-				</li>
+<?php if (notBlankContactAndBlurb('state', $db)): ?>
+					<li>
+						State: <?php echo htmlentities(getContactAndBlurb('state', $db), ENT_QUOTES, 'utf-8'); ?>
+					</li>
 <?php endif; ?>
-<?php if (notBlank('country', $db)): ?>
-				<li>
-					Country: <?php echo htmlentities(get('country', $db), ENT_QUOTES, 'utf-8'); ?>
-				</li>
+<?php if (notBlankContactAndBlurb('country', $db)): ?>
+					<li>
+						Country: <?php echo htmlentities(getContactAndBlurb('country', $db), ENT_QUOTES, 'utf-8'); ?>
+					</li>
 <?php endif; ?>
-<?php if (notBlank('phone', $db)): ?>
-				<li>
-					Phone: <?php echo htmlentities(get('phone', $db), ENT_QUOTES, 'utf-8'); ?>
-				</li>
+<?php if (notBlankContactAndBlurb('phone', $db)): ?>
+					<li>
+						Phone: <?php echo htmlentities(getContactAndBlurb('phone', $db), ENT_QUOTES, 'utf-8'); ?>
+					</li>
 <?php endif; ?>
-<?php if (notBlank('email', $db)): ?>
-				<li>
-					Email: <?php echo htmlentities(get('email', $db), ENT_QUOTES, 'utf-8'); ?>
-				</li>
+<?php if (notBlankContactAndBlurb('email', $db)): ?>
+					<li>
+						Email: <?php echo htmlentities(getContactAndBlurb('email', $db), ENT_QUOTES, 'utf-8'); ?>
+					</li>
 <?php endif; ?>
-			</ul>
+				</ul>
 <?php endif; ?>
-		</div>
+			</div>
 
-		<div>
-<?php if (notBlank('experiences', $db)): ?>
-			<h2>Experiences</h2>
-			<p><?php echo htmlentities(get('experiences', $db), ENT_QUOTES, 'utf-8'); ?></p>
-<?php endif; ?>
-		</div>
+			<div id="experiences">
+				<h2>Experiences</h2>
+				<ul>
+<?php foreach (selectExpSkillsHobbies(getLoggedInUser(), $db) as $row): ?>
+					<li id="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<?php echo htmlentities($row['experiences'], ENT_QUOTES, 'utf-8'); ?>
+					</li>
+<?php endforeach; ?>
+				</ul>
+			</div>
 
-		<div>
-<?php if (notBlank('skills', $db)): ?>
-			<h2>Skills</h2>
-			<p><?php echo htmlentities(get('skills', $db), ENT_QUOTES, 'utf-8'); ?></p>
-<?php endif; ?>
-		</div>
 
-		<div>
-<?php if (notBlank('hobbies', $db)): ?>
-			<h2>Hobbies</h2>
-			<p><?php echo htmlentities(get('hobbies', $db), ENT_QUOTES, 'utf-8'); ?></p>
-<?php endif; ?>
+			<div id="skills">
+				<h2>Experiences</h2>
+				<ul>
+<?php foreach (selectExpSkillsHobbies(getLoggedInUser(), $db) as $row): ?>
+					<li id="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<?php echo htmlentities($row['skills'], ENT_QUOTES, 'utf-8'); ?>
+					</li>
+<?php endforeach; ?>
+				</ul>
+			</div>
+
 		</div>
 
 	</body>	

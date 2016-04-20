@@ -7,4 +7,4 @@ require_once('models/profile.php');
 
 $db = databaseConnection();
 
-require_once('views/profile.php');
+require_once('views/edit_profile.php');

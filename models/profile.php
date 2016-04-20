@@ -2,6 +2,8 @@
 
 require_once('models/db_connection.php');
 
+// TODO: change so that it all selects by user_id
+
 /**
  * A collection of functions for selecting and editting information
  * regarding for a registered and logged-in user.
@@ -54,11 +56,11 @@ function selectProjects($username, $db) {
 }
 
 // ------------------------------------------------------------------
-// Select the username's profile information
+// Select the username's profile blurb and contact
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectProfileInfo($username, $db) {
+function selectContactAndBlurb($username, $db) {
 	// Call function to retrieve user_id based on username
 	$user_id = findUserID($username, $db);
 
@@ -84,12 +86,52 @@ function selectProfileInfo($username, $db) {
 // @param db a valid database connection
 // @param section the column to check
 // -------------------------------------------------------------------
-function notBlank($section, $db) {
-	if (isset(selectProfileInfo($_SESSION['username'], $db)[$section]) && (selectProfileInfo($_SESSION['username'], $db)[$section]) !== '')
+function notBlankContactAndBlurb($section, $db) {
+	if (isset(selectContactAndBlurb($_SESSION['username'], $db)[$section]) && (selectContactAndBlurb($_SESSION['username'], $db)[$section]) !== '')
 		return true;
 	return false;
 }
 
-function get($section, $db) {
-	return selectProfileInfo($_SESSION['username'], $db)[$section];
+// ------------------------------------------------------------------
+// Return the data is a specified column
+// @param db a valid database connection
+// @param section the column to check
+// -------------------------------------------------------------------
+function getContactAndBlurb($section, $db) {
+	return selectContactAndBlurb($_SESSION['username'], $db)[$section];
+}
+
+// ------------------------------------------------------------------
+// Select the username's profile blurb and contact
+// @param db a valid database connection
+// @param username the registered and logged-in user (retrieved from session)
+// -------------------------------------------------------------------
+function selectExpSkillsHobbies($username, $db) {
+	// Call function to retrieve user_id based on username
+	$user_id = findUserID($username, $db);
+
+	if ((!(isset($user_id))) || $user_id == '') {
+		return null;
+	}
+	
+	// Prepare the query to get the user's profile
+	$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN experiences WHERE user_id=:user_id');
+
+	// Bind the parameters to retrieve projects
+	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+	$profile->execute();
+	return $profile->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+
+
+// TODO: Check this to make sure it's right
+function update($username, $section, $data, $db) {
+	$query = 'UPDATE profiles SET ' . $section . '=' . $data . ' WHERE user_id='.findUserID($username);
+	echo $query;
+	$update = $db->prepare($query);
+	$update = $update->execute();
+
+	// Maybe add a check to see if it's successful
 }
