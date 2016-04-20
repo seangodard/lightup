@@ -1,22 +1,30 @@
 <?php
 
-// TODO : Change to use user_id instead of username : Wed 13 Apr 2016 04:51:05 PM EDT 
+require_once('models/users.php');
 
-// TODO : Debug : Mon 11 Apr 2016 10:01:45 PM EDT 
+// Note: Returned data does not have html escaped
+
 // -----------------------------------------------------------------
 // @return whether or not a user is currently logged in
 // -----------------------------------------------------------------
 function isLoggedIn() {
-	return isset($_SESSION['username']);
+	return isset($_SESSION['user_id']);
 }
 
-// TODO : Debug : Wed 13 Apr 2016 12:27:59 PM EDT 
 // -----------------------------------------------------------------
-// @return whether or not a user is currently logged in
+// @return the logged in username or null if no user is logged in
 // -----------------------------------------------------------------
-function getLoggedInUser() {
-	if (isset($_SESSION['username'])) {
-		return $_SESSION['username'];
+function getLoggedInUsername($db) {
+	if (isset($_SESSION['user_id'])) { return getUsername($_SESSION['user_id'], $db); }
+	else { return null; }
+}
+
+// -----------------------------------------------------------------
+// @return the user_id of the logged in user
+// -----------------------------------------------------------------
+function getLoggedInUserID() {
+	if (isset($_SESSION['user_id'])) {
+		return $_SESSION['user_id'];
 	}
 	return null;
 }
@@ -25,19 +33,18 @@ function getLoggedInUser() {
 // Set the session information for user.
 // Requires that the user has first been validated!
 // -----------------------------------------------------------------
-function login($username) {
+function login($user_id) {
 	session_regenerate_id(true); // Create a new session for login
-	$_SESSION['username'] = $username;
+	$_SESSION['user_id'] = $user_id;
 }
 
-// TODO : Debug : Mon 11 Apr 2016 09:57:40 PM EDT 
 // -----------------------------------------------------------------
 // Removes the session username (if one is set) so we know the user
 // is no longer logged in.
 // -----------------------------------------------------------------
 function logout() {
-	if (isset($_SESSION['username'])) {
-		unset($_SESSION['username']);
+	if (isset($_SESSION['user_id'])) {
+		unset($_SESSION['user_id']);
 	}
 }
 

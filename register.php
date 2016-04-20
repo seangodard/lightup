@@ -4,7 +4,7 @@
 session_start();
 
 require_once('constants.php');
-require_once('models/register_login.php');
+require_once('models/users.php');
 require_once('sessions.php');
 
 // ------------------------------------------------------------------
@@ -20,7 +20,7 @@ if (isset($_POST['register_name']) && isset($_POST['register_pass'])) {
 	// Setup session if the user has been logged in
 	// If the username is set then we know that the user is logged in
 	if ($result) {
-		login($_POST['register_name']);
+		login(getUserId($_POST['register_name'], $db));
 		header('Location: profile.php');
 		exit();
 	}

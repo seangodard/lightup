@@ -5,7 +5,7 @@ require_once('sessions.php');
 // Responsible for ending the session
 // So grab the session and destroy it
 
-// Pieces of a sessiona re stored in different places
+// Pieces of a session are stored in different places
 session_start();
 
 // End login session
