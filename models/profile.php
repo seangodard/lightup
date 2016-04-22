@@ -2,8 +2,6 @@
 
 require_once('models/db_connection.php');
 
-// TODO: change so that it all selects by user_id
-
 /**
  * A collection of functions for selecting and editting information
  * regarding for a registered and logged-in user.
@@ -76,7 +74,7 @@ function getContactAndBlurb($section, $db) {
 }
 
 // ------------------------------------------------------------------
-// Select the username's profile blurb and contact
+// Select the username's profile experiences, skills, and hobbies
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
@@ -97,5 +95,13 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
 	$profile->execute();
 	return $profile->fetchAll(PDO::FETCH_ASSOC);
+}
 
+function updateAboutMe($aboutMe, $db) {
+	// UPDATE profiles SET blurb='Friendly' WHERE user_id=1;
+	$query = "UPDATE profiles SET blurb='" . $aboutMe . "' WHERE user_id=" . getLoggedInUserID();
+	if ($db->query($query) == true)
+		echo 'Update successful';
+	else
+		echo 'Error updating';
 }

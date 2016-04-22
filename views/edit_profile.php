@@ -27,7 +27,13 @@
 		</div>
 
 		<div class="main_body">
-			<h2>About Me</h2>
+			<form action="profile.php" method="post">
+				<h2>About Me</h2>
+					<div class="about_me">
+						<input type="text" name="aboutMe" value="<?php echo htmlentities(getContactAndBlurb('blurb', $db), ENT_QUOTES, 'utf-8'); ?>">
+					</div>
+				<input type="submit">
+			</form>
 		</div>
 	</body>
 </html>
