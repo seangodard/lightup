@@ -8,34 +8,11 @@ require_once('models/db_connection.php');
  */
 
 // ------------------------------------------------------------------
-// Find the user_id based on username
-// @param db a valid database connection
-// @param username the registered and logged-in user (retrieved from session)
-// -------------------------------------------------------------------
-function findUserID($username, $db) {
-	// Prepare the query to get the user_id
-	$user_id = $db->prepare('SELECT user_id FROM users WHERE username=:username');
-
-	// Bind the parameter to retrieve the user_id
-	$user_id->bindParam(':username', $username, PDO::PARAM_STR);
-	$user_id->execute();
-
-	// Retrieve the user_id
-	$user_id = $user_id->fetchAll(PDO::FETCH_ASSOC);
-	if (isset($user_id[0]))
-		return $user_id[0]['user_id'];
-	return null;
-}
-
-// ------------------------------------------------------------------
 // Select the projects the user is a member of.
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectProjects($username, $db) {
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
-
+function selectProjects($user_id, $db) {
 	if (!(isset($user_id))) {
 		return null;
 	}
@@ -54,14 +31,11 @@ function selectProjects($username, $db) {
 }
 
 // ------------------------------------------------------------------
-// Select the username's profile information
+// Select the username's profile blurb and contact
 // @param db a valid database connection
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
-function selectProfileInfo($username, $db) {
-	// Call function to retrieve user_id based on username
-	$user_id = findUserID($username, $db);
-
+function selectContactAndBlurb($user_id, $db) {
 	if ((!(isset($user_id))) || $user_id == '') {
 		return null;
 	}
@@ -84,12 +58,50 @@ function selectProfileInfo($username, $db) {
 // @param db a valid database connection
 // @param section the column to check
 // -------------------------------------------------------------------
-function notBlank($section, $db) {
-	if (isset(selectProfileInfo($_SESSION['username'], $db)[$section]) && (selectProfileInfo($_SESSION['username'], $db)[$section]) !== '')
+function notBlankContactAndBlurb($section, $db) {
+	if (isset(selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) && (selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) !== '')
 		return true;
 	return false;
 }
 
-function get($section, $db) {
-	return selectProfileInfo($_SESSION['username'], $db)[$section];
+// ------------------------------------------------------------------
+// Return the data is a specified column
+// @param db a valid database connection
+// @param section the column to check
+// -------------------------------------------------------------------
+function getContactAndBlurb($section, $db) {
+	return selectContactAndBlurb(getLoggedInUserID(), $db)[$section];
+}
+
+// ------------------------------------------------------------------
+// Select the username's profile experiences, skills, and hobbies
+// @param db a valid database connection
+// @param username the registered and logged-in user (retrieved from session)
+// -------------------------------------------------------------------
+function selectExpSkillsHobbies($user_id, $section, $db) {
+	if ((!(isset($user_id))) || $user_id == '') {
+		return null;
+	}
+	
+	// Prepare the query to get the user's profile
+	if ($section === 'experiences')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN experiences WHERE user_id=:user_id');
+	elseif ($section === 'skills')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN skills WHERE user_id=:user_id');
+	elseif ($section === 'hobbies')
+		$profile = $db->prepare('SELECT * FROM profiles NATURAL JOIN hobbies WHERE user_id=:user_id');
+
+	// Bind the parameters to retrieve projects
+	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+	$profile->execute();
+	return $profile->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function updateAboutMe($aboutMe, $db) {
+	// UPDATE profiles SET blurb='Friendly' WHERE user_id=1;
+	$query = "UPDATE profiles SET blurb='" . $aboutMe . "' WHERE user_id=" . getLoggedInUserID();
+	if ($db->query($query) == true)
+		echo 'Update successful';
+	else
+		echo 'Error updating';
 }
