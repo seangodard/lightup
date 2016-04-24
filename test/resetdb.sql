@@ -1,13 +1,18 @@
 use lightup;
 
+drop table if exists project_journal;
+drop table if exists profiles;
 drop table if exists projects_member;
 drop table if exists profiles;
 drop table if exists projects;
 drop table if exists users;
 
+/* TODO : Split the schema from the test data and put them in the models folder : Sat 16 Apr 2016 11:21:00 AM EDT */
+/* TODO : Add indexes? : Sat 16 Apr 2016 04:33:15 PM EDT */
+
 /* Note: this will automatically create an index on the username since it is unique */
 create table users (
-	user_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	username VARCHAR(16) NOT NULL UNIQUE,
 	hashed_pass VARCHAR(255) NOT NULL,
 	CONSTRAINT user_length_check CHECK(LENGTH(username) > 3)
@@ -28,6 +33,7 @@ INSERT INTO users(username, hashed_pass) VALUES ("domino", "$2y$10$PIfFGTaqzeHNJ
 
 /*  project(project_id, name, description, picture, creation_timestamp)*/
 /* TODO: picture is the reference path to the directory containing the image [4/11/16] */
+/* TODO : Why is this timestamp on update? Don't we want this never to change here? : Sat 16 Apr 2016 04:29:25 PM EDT */
 create table projects (
 	project_id INT AUTO_INCREMENT PRIMARY KEY,
 	project_name VARCHAR(40) NOT NULL UNIQUE,
@@ -38,7 +44,7 @@ create table projects (
 
 INSERT INTO projects(project_name, description, picture) VALUES ("LightUp", "Web Programming Final Project.", "views/lightup.svg");
 INSERT INTO projects(project_name, description, picture) VALUES ("Sky Group, LTD.", "Skyler is awesome club.", "views/sky.jpg");
-INSERT INTO projects(project_name, description, picture) VALUES ("Knitting Needle Katanas", "Web Programming Final Project", "views/lightup.svg");
+INSERT INTO projects(project_name, description, picture) VALUES ("Katana Knitting Needles", "Web Programming Final Project", "views/lightup.svg");
 
 /* users(user_id, username, password, profile_picture, name, blurb, city, state, country,
 phone, email, experience, skills, hobbies) */
@@ -73,3 +79,20 @@ INSERT INTO projects_member(user_id,project_id) VALUES (1, 2);
 INSERT INTO projects_member(user_id,project_id) VALUES (2, 3);
 INSERT INTO projects_member(user_id,project_id) VALUES (2, 1);
 INSERT INTO projects_member(user_id,project_id) VALUES (3, 3);
+
+/* project_journal(entry_id, user_id, project_id, title, body, entry_time)*/
+/* TODO : Add check that the user is a member of the project before adding : Wed 20 Apr 2016 12:20:03 PM EDT */
+create table project_journal (
+	entry_id INT AUTO_INCREMENT NOT NULL,
+	posting_user_id INT NOT NULL,
+	project_id INT NOT NULL,
+	title VARCHAR(40) NOT NULL,
+	body VARCHAR(1000) NOT NULL, 
+	entry_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (entry_id),
+	FOREIGN KEY (posting_user_id) REFERENCES users(user_id),
+	FOREIGN KEY (project_id) REFERENCES projects(project_id)
+);
+/* Some journal test data */
+INSERT INTO project_journal(posting_user_id, project_id, title, body) VALUES (2, 3, 'Brilliant idea team!', 'I just had the greatest idea ever, it will make us millions!');
+INSERT INTO project_journal(posting_user_id, project_id, title, body) VALUES (3, 3, 'Better idea team!', 'I just had a way better ida, it will make us billions!');
