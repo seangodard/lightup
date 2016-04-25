@@ -19,19 +19,20 @@ if (isset($_POST['login_name']) && isset($_POST['login_pass'])) {
 
 	$valid = validateCredentials($_POST['login_name'], $_POST['login_pass'], $db);
 
-	// Setup session with the username if the user has been logged in
+	// Setup session with the username if the users credentials have been verified
 	if ($valid) {
 		login(getUserId($_POST['login_name'], $db));
 		header('Location: profile.php');
 		exit();
 	}
 	else {
-		// TODO : Refactor so second query isn't needed : Mon 11 Apr 2016 02:36:00 PM EDT 
 		// Set the error according to if it was an incorrect username or password
-		if (userExists($_POST['username'], $db)) {
-			setSessionMessage('login_name', 'Username has not yet been registered.');
+		if (!userExists($_POST['login_name'], $db)) {
+			setSessionMessage('login_name', 'Username '.htmlentities($_POST['login_name'], ENT_QUOTES, 'utf-8').
+				' has not yet been registered.');
 		}
 		else {
+			setAttemptedUsername($_POST['login_name']);
 			setSessionMessage('login_pass', 'Incorrect password.');
 		}
 		header('Location: index.php');
