@@ -97,11 +97,35 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 	return $profile->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// ------------------------------------------------------------------
+// Update the user's profile blurb
+// @param db a valid database connection
+// @param $aboutMe the new profile blurb
+// -------------------------------------------------------------------
 function updateAboutMe($aboutMe, $db) {
-	// UPDATE profiles SET blurb='Friendly' WHERE user_id=1;
+	$aboutMe = escapeSingleQuotes($aboutMe);
 	$query = "UPDATE profiles SET blurb='" . $aboutMe . "' WHERE user_id=" . getLoggedInUserID();
 	if ($db->query($query) == true)
 		echo 'Update successful';
 	else
 		echo 'Error updating';
+}
+
+// ------------------------------------------------------------------
+// Escape single quotes
+// @param $str the string to escape single quotes of
+// -------------------------------------------------------------------
+function escapeSingleQuotes($str) {
+	$new_str = "";
+	$str_length = strlen($str);
+	for ($i = 0; $i < $str_length; $i++) {
+		$char = substr($str, $i, 1);
+		if ($char === "'") {
+			$new_str .= "\\" . $char;
+		}
+		else {
+			$new_str .= $char;
+		}
+	}
+	return $new_str;
 }
