@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   width="127.00938mm"
+   height="218.28481mm"
+   viewBox="0 0 450.03325 773.45009"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
@@ -39,9 +39,9 @@
        xlink:href="#linearGradient4224"
        id="radialGradient4230"
        cx="372.1438"
-       cy="423.65528"
+       cy="423.65527"
        fx="372.1438"
-       fy="423.65528"
+       fy="423.65527"
        r="225.01662"
        gradientTransform="matrix(-1,0,0,1.275431,744.2876,-116.68778)"
        gradientUnits="userSpaceOnUse" />
@@ -54,16 +54,20 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="447.37279"
-     inkscape:cy="388.68353"
+     inkscape:cx="300.24561"
+     inkscape:cy="759.24687"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="876"
-     inkscape:window-x="1366"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -79,7 +83,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-147.12718,-136.66211)">
     <path
        style="fill:#00451d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 373.70944,211.26911 72.20433,92.8938 -30.73661,-1.0375 56.81592,45.07207 -38.84105,-1.83726 70.56555,59.51049 -56.39498,-5.65685 75.9584,71.20703 -130.37254,13.27208 -2.26724,15.95957 -29.47861,-0.032 -3.39673,-15.92761 -128.81809,-9.35983 72.70391,-74.45849 -56.54118,3.91224 73.54557,-59.74821 -40.82185,2.07498 52.14662,-45.73285 -29.04192,1.08383 z"

@@ -1,0 +1,128 @@
+/* Main Font */
+@import url(https://fonts.googleapis.com/css?family=Tangerine);
+@import url(https://fonts.googleapis.com/css?family=Sacramento);
+
+/* Secondary Font */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+/* Small Screens */
+* {
+	margin: 0px;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 18px;
+}
+
+body {
+	background: #F7F7F7;
+}
+
+h1 {
+	font-size: 45px;
+	padding: 5% 0 5% 0;
+	font-family: 'Sacramento', cursive;
+}
+
+h2 {
+	font-size: 25px;
+	color: #F7F7F7;
+    font-weight: 100;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+#central_image {
+	width: 30%;
+	padding-top: 10%;
+	margin: auto;
+	display: block;
+}
+
+p { 
+	text-align: center;
+	padding: 0% 10% 0% 10%;
+}
+
+#main_body {
+	padding: 3%;
+}
+
+#sidebar {
+	background: #1E1E1E;
+	padding: 3%;
+    box-shadow: inset 0px 5px 10px;
+}
+
+#sidebar form {
+	text-align: center;
+}
+
+#login_container {
+	margin: 0 0 10% 0;
+}
+
+input {
+	padding: 8px;
+	margin: 4px;
+	border-radius: 2px;
+	border-style: none;
+	background: #F7F7F7;
+}
+
+input[type='submit'] {
+    background: #565656;
+	width: 176px;
+	font-weight: 100;
+	color: #CECECE;
+}
+
+.has_error input {
+	border: 2px #B70000;
+    border-style: solid;
+	background-image:url('/views/images/red_cross.svg');
+	background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: right center;
+	background-position: 150px 10px;
+}
+
+.has_error .feedback_message {
+	color: #B70000;
+}
+
+/* Larger Screens */
+@media all and (min-width: 830px) {
+	html, body {
+		height: 100%
+	}
+
+	#sidebar {
+		width: 28%;
+		position: fixed;
+		top: 0;
+		height: 100%;
+		max-width: 300px;
+		box-shadow: inset -5px 0px 10px;
+	}
+
+	#sidebar_content {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	#main_body {
+		width: 60%;
+		margin-left: 34%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+@media all and (max-height: 450px) {
+	#sidebar {
+		overflow: scroll;
+	}
+}

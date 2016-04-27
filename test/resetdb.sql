@@ -12,12 +12,12 @@ DROP TABLE IF EXISTS users;
 /* TODO : Split the schema from the test data and put them in the models folder : Sat 16 Apr 2016 11:21:00 AM EDT */
 /* TODO : Add indexes? : Sat 16 Apr 2016 04:33:15 PM EDT */
 
+/* TODO : Fix username length check not working : Mon 25 Apr 2016 05:53:35 PM EDT */
 /* Note: this will automatically create an index on the username since it is unique */
 CREATE TABLE users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(16) NOT NULL UNIQUE,
-	hashed_pass VARCHAR(255) NOT NULL,
-	CONSTRAINT user_length_check CHECK(LENGTH(username) > 3)
+	hashed_pass VARCHAR(255) NOT NULL
 );
 
 /* username = sky pass = coolio */
