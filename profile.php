@@ -7,8 +7,15 @@ require_once('models/profile.php');
 
 $db = databaseConnection();
 
-if (isset($_POST['aboutMe'])) {
-	updateAboutMe($_POST['aboutMe'], $db);
+foreach ($_POST as $key => $value) {
+	if (strpos($key, 'exp') !== false)
+		updateExpSkillsHobbies($value, 'experiences', substr($key, -1), $db);
+	else if (strpos($key, 'skill') !== false)
+		updateExpSkillsHobbies($value, 'skills', substr($key, -1), $db);
+	else if (strpos($key, 'hobby') !== false)
+		updateExpSkillsHobbies($value, 'hobbies', substr($key, -1), $db);
+	else
+		updateProfile($value, $key, $db);
 }
 
 require_once('views/profile.php');

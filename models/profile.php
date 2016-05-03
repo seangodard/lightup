@@ -94,21 +94,46 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 	// Bind the parameters to retrieve projects
 	$profile->bindParam(':user_id', $user_id, PDO::PARAM_STR);
 	$profile->execute();
+	$rowCount = $profile->rowCount();
 	return $profile->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // ------------------------------------------------------------------
-// Update the user's profile blurb
+// Update a certain section of the user's profile
 // @param db a valid database connection
-// @param $aboutMe the new profile blurb
+// @param $data the data for a section of the profile
+// @param $section the section to update
 // -------------------------------------------------------------------
-function updateAboutMe($aboutMe, $db) {
-	$aboutMe = escapeSingleQuotes($aboutMe);
-	$query = "UPDATE profiles SET blurb='" . $aboutMe . "' WHERE user_id=" . getLoggedInUserID();
-	if ($db->query($query) == true)
-		echo 'Update successful';
-	else
-		echo 'Error updating';
+function updateProfile($data, $section, $db) {
+	$data = escapeSingleQuotes($data);
+	$query = "UPDATE profiles SET " . $section . "='" . $data . "' WHERE user_id=" . getLoggedInUserID();
+	$update = $db->prepare($query);
+	return $update->execute();
+}
+
+// ------------------------------------------------------------------
+// Update a user's experience, skills, or hobbies
+// @param db a valid database connection
+// @param $data the data for a section of the profile
+// @param $section the section to update
+// @param $index the id of the experience, skill, or hobby
+// -------------------------------------------------------------------
+function updateExpSkillsHobbies($data, $section, $index, $db) {
+	if ($section === 'experiences') {
+		$update = $db->prepare('UPDATE experiences SET experience=:data WHERE user_id=:user_id AND exp_id=:exp_id');
+		$update->bindParam(':exp_id', $index, PDO::PARAM_STR);
+	}
+	elseif ($section === 'skills') {
+		$update = $db->prepare('UPDATE skills SET skill=:data WHERE user_id=:user_id AND skill_id=:skill_id');
+		$update->bindParam(':skill_id', $index, PDO::PARAM_STR);
+	}
+	elseif ($section === 'hobbies') {
+		$update = $db->prepare('UPDATE hobbies SET hobby=:data WHERE user_id=:user_id AND hobby_id=:hobby_id');
+		$update->bindParam(':hobby_id', $index, PDO::PARAM_STR);
+	}
+	$update->bindParam(':data', $data, PDO::PARAM_STR);
+	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
+	return $update->execute();
 }
 
 // ------------------------------------------------------------------
