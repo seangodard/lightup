@@ -5,6 +5,7 @@
 /* Secondary Font */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
+/* TODO fix the buttons not matching the input size */
 /* Small Screens */
 * {
 	margin: 0px;
@@ -16,19 +17,28 @@ body {
 	background: #F7F7F7;
 }
 
-h1 {
-	font-size: 45px;
-	padding: 5% 0 5% 0;
+#header h1 {
+	padding: 8px;
+	font-size: 30px;
 	font-family: 'Sacramento', cursive;
+}
+
+h2, h3, h4 {
+	color: #000000;
 }
 
 h2 {
 	font-size: 25px;
-	color: #F7F7F7;
     font-weight: 100;
+	font-size: 40px;
+    font-weight: 600;
 }
 
-h1, h2 {
+h3 {
+	font-size: 30px;
+}
+
+h1, h2, h3, h4 {
 	text-align: center;
 }
 
@@ -50,24 +60,16 @@ p {
 
 #sidebar {
 	background: #1E1E1E;
-	padding: 3%;
     box-shadow: inset 0px 5px 10px;
-}
-
-#sidebar form {
-	text-align: center;
-}
-
-#login_container {
-	margin: 0 0 10% 0;
 }
 
 input {
 	padding: 8px;
-	margin: 4px;
+	margin: 4px 0px;
 	border-radius: 2px;
 	border-style: none;
-	background: #F7F7F7;
+	background: #FFFFFF;
+	box-sizing : border-box;
 }
 
 input[type='submit'] {
@@ -90,6 +92,63 @@ input[type='submit'] {
 	color: #B70000;
 }
 
+textarea {
+	width: 100%;
+	box-sizing : border-box;
+}
+
+#header {
+	height: 60px;
+	color: #FFFFFF;
+    background: #565656;
+	box-shadow: 0px 4px 8px #000000;
+}
+
+.entry_summary {
+    width: 100%;
+    background: none;
+    border: solid;
+    color: #F7F7F7;
+    padding: 10px 0px;
+	border-width: 0px 0px 1px 0px;
+	outline: none;
+}
+
+.entry_summary:focus, .entry_summary:hover {
+	background: #565656;
+}
+
+#tools {
+	height: 40px;
+}
+
+#entry_title {
+	width: 100%;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#tools * {
+	float: right;
+	background: none;
+	outline: none;
+	width: 40px;
+	height: 40px;
+	margin: 0px;
+}
+
+#add_entry {
+	background: #1E1E1E;
+}
+
+#add_entry:hover {
+    background: #565656;
+}
+
+#main_body section {
+	padding: 20px 0px;
+}
+
 /* Larger Screens */
 @media all and (min-width: 830px) {
 	html, body {
@@ -98,25 +157,21 @@ input[type='submit'] {
 
 	#sidebar {
 		width: 28%;
-		position: fixed;
-		top: 0;
-		height: 100%;
+		position: absolute;
+		top: 60px;
+		bottom: 0;
+		overflow-y: scroll;
 		max-width: 300px;
 		box-shadow: inset -5px 0px 10px;
 	}
 
 	#sidebar_content {
 		position: relative;
-		top: 50%;
-		transform: translateY(-50%);
 	}
 
 	#main_body {
-		width: 60%;
-		margin-left: 34%;
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+		width: 66%;
+		margin-left: 28%;
 	}
 }
 

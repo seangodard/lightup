@@ -67,20 +67,36 @@ function isMember($user_id, $project_id, $db) {
 // @param user_id the user_id of the user making the request
 // @param project_id the id for the project the user wants entries for
 // @param db a valid database connection
-// @return an array with keys [entry_id, poster_username, title, entry_time]
+// @return an array with keys [entry_id, poster_username, title, entry_time, posting_user_id]
 // 	or null if there are no entries or the user is not a member of the project
 // ------------------------------------------------------------------
 function getJournalSummaries($user_id, $project_id, $db) {
+	return getJournalSummariesFollowing($user_id, $project_id, 0, $db);
+}
+
+// TODO : Debug : Sat 16 Apr 2016 04:59:16 PM EDT 
+// ------------------------------------------------------------------
+// Retreive the sorted summaries of the teams journal following the given timestamp
+// 	in a format which contains only the timestamp, posting user, and brief title.
+// @param user_id the user_id of the user making the request
+// @param project_id the id for the project the user wants entries for
+// @param timestamp the timestamp after which to retrieve new entry summaries
+// @param db a valid database connection
+// @return an array with keys [entry_id, poster_username, title, entry_time, posting_user_id]
+// 	or null if there are no entries or the user is not a member of the project
+// ------------------------------------------------------------------
+function getJournalSummariesFollowing($user_id, $project_id, $timestamp, $db) {
 	// Verify that the user is a member of the project and then retrieve journal if memeber
 	if (isMember($user_id, $project_id, $db)) {
 		// TODO : Speed up query : Thu 21 Apr 2016 08:26:43 PM EDT 
-		$journal_summary = $db->prepare('SELECT entry_id, username as poster_username, title, entry_time 
-											FROM 
-												(SELECT entry_id, posting_user_id as user_id, title, entry_time
-												FROM project_journal WHERE project_id = :project_id) as t1
-											NATURAL JOIN 
-												(SELECT user_id, username FROM users) as t2 ORDER BY entry_time DESC');
+		$journal_summary = $db->prepare('SELECT entry_id, username as poster_username, title, entry_time, user_id as posting_user_id
+												FROM 
+											(SELECT entry_id, posting_user_id as user_id, title,
+											entry_time FROM project_journal WHERE project_id = :project_id AND entry_time > :entry_time) as t1 
+												NATURAL JOIN 
+											(SELECT user_id, username FROM users) as t2 ORDER BY entry_time DESC;');
 		$journal_summary->bindParam(':project_id', $project_id);
+		$journal_summary->bindParam(':entry_time', $timestamp);
 		$journal_summary->execute();
 		$journal_summary = $journal_summary->fetchAll(PDO::FETCH_ASSOC);
 
@@ -90,7 +106,6 @@ function getJournalSummaries($user_id, $project_id, $db) {
 	else { return null; }
 }
 
-// TODO : Debug : Sat 16 Apr 2016 04:59:16 PM EDT 
 // ------------------------------------------------------------------
 // Retreive all information on the given entry if the user is a part of
 // 	project that the entry belongs to.
@@ -123,6 +138,31 @@ function getJournalEntryData($user_id, $project_id, $entry_id, $db) {
 	else { return null; }
 }
 
-// TODO : Add an entry : Sat 16 Apr 2016 10:49:22 AM EDT 
+// ------------------------------------------------------------------
+// Attempts to add the given entry to the given project under the given
+// 	user_id
+// 	@param user_id the user id of the posting user
+// 	@param project_id the project id the user would like to add an entry to
+// 	@param title the title of the entry
+// 	@param body the content of the entry
+// 	@param db a valid database connection
+// 	@return whether or not the entry was added to the database
+// ------------------------------------------------------------------
+function addJournalEntry($user_id, $project_id, $title, $body, $db) {
+	// Verify that the user is a member of the project before adding the post
+	if (isMember($user_id, $project_id, $db)) {
+		$insert = $db->prepare('INSERT INTO project_journal(posting_user_id, project_id, title, body)
+		   	values (:posting_user_id, :project_id, :title, :body)');
+		$insert->bindParam(':posting_user_id', $user_id);
+		$insert->bindParam(':project_id', $project_id);
+		$insert->bindParam(':title', $title);
+		$insert->bindParam(':body', $body);
+		$insert->execute();
+
+		if ($insert->rowCount() > 0) { return true; }
+		else { return false; }	
+	}
+	else { return false; }	
+}
 
 // TODO : Edit an entry. Must own the entry. : Sat 16 Apr 2016 10:49:22 AM EDT 

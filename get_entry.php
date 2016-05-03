@@ -7,7 +7,9 @@ require_once('constants.php');
 require_once('sessions.php');
 require_once('models/projects.php');
 
-// TODO : Here : Thu 21 Apr 2016 09:27:55 PM EDT 
+// ------------------------------------------------------------
+// Attempts to retrieve all the information for the journal entry
+// ------------------------------------------------------------
 if (isset($_POST['project_id']) && isset($_POST['entry_id'])) {
 	// Attempt to connect to the database 
 	$db = databaseConnection();
@@ -21,3 +23,5 @@ if (isset($_POST['project_id']) && isset($_POST['entry_id'])) {
 		echo json_encode($result); 
 	}
 }
+// TODO : Otherwise redirect to home page? : Wed 27 Apr 2016 04:31:06 PM EDT 
+
