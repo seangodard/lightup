@@ -7,6 +7,7 @@
 // TODO : Add email and first/last name fields : Fri 08 Apr 2016 07:54:52 PM EDT 
 // TODO : Add a limit to the maximum size of a username here and in php? : Sun 10 Apr 2016 10:02:49 AM EDT 
 // TODO : Add constraint to password length : Mon 25 Apr 2016 06:16:17 PM EDT 
+// TODO : Add auto focusing to html/ javascript for errors/ initial log in: Wed 27 Apr 2016 04:18:25 PM EDT 
 
 //----------------------------------------------------------------------
 // An AJAX function for registration handling
