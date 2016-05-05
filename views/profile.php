@@ -9,15 +9,15 @@
 			<h1>Profile Page of: <?php echo htmlentities(getLoggedInUsername($db), ENT_QUOTES, 'utf-8'); ?></h1>
 			<h1>With user id: <?php echo htmlentities(getLoggedInUserID(), ENT_QUOTES, 'utf-8'); ?></h1>
 			<a href="../logout.php">Logout</a>
-			<form action="edit_profile.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></form>
+			<a href="edit_profile.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></a>
 		</div>
 
 		<div class="sidebar">
 			<ul>
 <?php foreach ((selectProjects(getLoggedInUserID(), $db)) as $row): ?>
-				<li id="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+				<li id="project_'<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<form action="project.php" method="post">
-						<button class="projects" name="project" type="submit" value="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<button class="projects" name="project" type="submit" value="project_'<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
 						</button>
 					</form>
@@ -68,37 +68,48 @@
 			</div>
 
 			<div id="experiences">
+<?php if (notBlankExpSkillsHobbies("experiences", $db)): ?>
 				<h2>Experiences</h2>
 				<ul>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "experiences", $db)) as $row): ?>
-					<li id="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
+<?php if ($row['experience'] !== ''): ?>
+					<li id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>
 					</li>
+<?php endif; ?>
 <?php endforeach; ?>
 				</ul>
+<?php endif; ?>
 			</div>
 
-
 			<div id="skills">
+<?php if (notBlankExpSkillsHobbies("skills", $db)): ?>
 				<h2>Skills</h2>
 				<ul>
 <?php foreach (selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db) as $row): ?>
-					<li id="<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
+<?php if ($row['skill'] !== ''): ?>
+					<li id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>
 					</li>
+<?php endif; ?>
 <?php endforeach; ?>
 				</ul>
+<?php endif; ?>
 			</div>
 
 			<div id="hobbies">
+<?php if (notBlankExpSkillsHobbies("hobbies", $db)): ?>
 				<h2>Hobbies</h2>
 				<ul>
 <?php foreach (selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db) as $row): ?>
-					<li id="<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
+<?php if ($row['hobby'] !== ''): ?>
+					<li id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>
 					</li>
+<?php endif; ?>
 <?php endforeach; ?>
 				</ul>
+<?php endif; ?>
 			</div>
 		</div>
 	</body>

@@ -65,6 +65,25 @@ function notBlankContactAndBlurb($section, $db) {
 }
 
 // ------------------------------------------------------------------
+// Check that a table is not blank for a user's profile
+// @param db a valid database connection
+// @param section the table to check
+// -------------------------------------------------------------------
+function notBlankExpSkillsHobbies($section, $db) {
+	if ($section == 'experiences') {
+		$table = $db->prepare('SELECT * FROM experiences WHERE user_id=:user_id');
+	}
+	elseif($section == 'skills')
+		$table = $db->prepare('SELECT * FROM skills WHERE user_id=:user_id');
+	elseif($section == 'hobbies')
+		$table = $db->prepare('SELECT * FROM hobbies WHERE user_id=:user_id');
+	$table->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
+	$table->execute();
+	if ($table->rowCount() > 0) { return true; } 
+	else { return false; }
+}
+
+// ------------------------------------------------------------------
 // Return the data is a specified column
 // @param db a valid database connection
 // @param section the column to check
@@ -105,9 +124,20 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 // @param $section the section to update
 // -------------------------------------------------------------------
 function updateProfile($data, $section, $db) {
-	$data = escapeSingleQuotes($data);
-	$query = "UPDATE profiles SET " . $section . "='" . $data . "' WHERE user_id=" . getLoggedInUserID();
-	$update = $db->prepare($query);
+	if ($section === 'blurb')
+		$update = $db->prepare('UPDATE profiles SET blurb=:data WHERE user_id=:user_id');
+	elseif ($section === 'city')
+		$update = $db->prepare('UPDATE profiles SET city=:data WHERE user_id=:user_id');
+	elseif ($section === 'state')
+		$update = $db->prepare('UPDATE profiles SET state=:data WHERE user_id=:user_id');
+	elseif ($section === 'country')
+		$update = $db->prepare('UPDATE profiles SET country=:data WHERE user_id=:user_id');
+	elseif ($section === 'phone')
+		$update = $db->prepare('UPDATE profiles SET phone=:data WHERE user_id=:user_id');
+	elseif ($section === 'email')
+		$update = $db->prepare('UPDATE profiles SET email=:data WHERE user_id=:user_id');
+	$update->bindParam(':data', $data, PDO::PARAM_STR);
+	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
 	return $update->execute();
 }
 
@@ -134,23 +164,4 @@ function updateExpSkillsHobbies($data, $section, $index, $db) {
 	$update->bindParam(':data', $data, PDO::PARAM_STR);
 	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
 	return $update->execute();
-}
-
-// ------------------------------------------------------------------
-// Escape single quotes
-// @param $str the string to escape single quotes of
-// -------------------------------------------------------------------
-function escapeSingleQuotes($str) {
-	$new_str = "";
-	$str_length = strlen($str);
-	for ($i = 0; $i < $str_length; $i++) {
-		$char = substr($str, $i, 1);
-		if ($char === "'") {
-			$new_str .= "\\" . $char;
-		}
-		else {
-			$new_str .= $char;
-		}
-	}
-	return $new_str;
 }
