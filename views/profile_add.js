@@ -14,22 +14,22 @@ $(document).ready(function() {
 		$.post('edit_profile.php', {addSection:section}, function(response) {
 			if (section === 'experiences') {
 				var new_item = '<li id="exp_'+response.id+'">' +
-							'<input type="text" name="exp_'+response.id+'" value="'+response.experiences+'">' +
-							'<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">' +
+							'<input type="text" name="exp_'+response.id+'" value="'+response.experiences+'"> ' +
+							'<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">' +
 							'</li>';
 				$('#experiences ul').append(new_item);
 			}
 			else if (section === 'skills') {
 				var new_item = '<li id="skill_'+response.id+'">' +
-							'<input type="text" name="skill_'+response.id+'" value="'+response.skills+'">' +
-							'<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">' +
+							'<input type="text" name="skill_'+response.id+'" value="'+response.skills+'"> ' +
+							'<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">' +
 							'</li>';
 				$('#skills ul').append(new_item);
 			}
 			else if (section === 'hobbies') {
 				var new_item = '<li id="hobby_'+response.id+'">' +
-							'<input type="text" name="hobby_'+response.id+'" value="'+response.hobbies+'">' +
-							'<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">' +
+							'<input type="text" name="hobby_'+response.id+'" value="'+response.hobbies+'"> ' +
+							'<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">' +
 							'</li>';
 				$('#hobbies ul').append(new_item);
 			}

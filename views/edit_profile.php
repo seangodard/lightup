@@ -17,7 +17,7 @@
 <?php foreach ((selectProjects(getLoggedInUserID(), $db)) as $row): ?>
 				<li id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
-					<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">
+					<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">
 				</li>
 <?php endforeach; ?>
 			</ul>
@@ -57,11 +57,11 @@
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "experiences", $db)) as $row): ?>
 					<li id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<input type="text" name="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>">
-						<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">
+						<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">
 					</li>
 <?php endforeach; ?>
 				</ul>
-				<input type="image" class="add" src="views/images/green_plus.png" alt="drop" width="20" height="20">
+				<input type="image" class="add" src="views/images/add.svg" alt="drop" width="20" height="20">
 			</div>
 
 			<div id="skills">
@@ -70,11 +70,11 @@
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db)) as $row): ?>
 					<li id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<input type="text" name="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>">
-						<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">
+						<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">
 					</li>
 <?php endforeach; ?>
 				</ul>
-				<input type="image" class="add" src="views/images/green_plus.png" alt="drop" width="20" height="20">
+				<input type="image" class="add" src="views/images/add.svg" alt="drop" width="20" height="20">
 			</div>
 
 			<div id="hobbies">
@@ -83,11 +83,11 @@
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db)) as $row): ?>
 					<li id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
 						<input type="text" name="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>">
-						<input type="image" class="drop" src="views/images/drop.gif" alt="drop" width="20" height="20">
+						<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="20" height="20">
 					</li>
 <?php endforeach; ?>
 				</ul>
-				<input type="image" class="add" src="views/images/green_plus.png" alt="drop" width="20" height="20">
+				<input type="image" class="add" src="views/images/add.svg" alt="drop" width="20" height="20">
 			</div>
 			
 			<input type="submit" value="Save">
