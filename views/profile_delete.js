@@ -11,8 +11,10 @@ $(document).ready(function() {
 		var section = $(this).parent();
 		var section_id = section.attr('id');
 
+		console.log('Delete: ' + section_id);
 		// Send an AJAX request to delete section & remove section from HTML
-		$.post('edit_profile.php', {dropSection:section_id}, function(response) {
+		$.post('profile_add_box.php', {dropSection:section_id}, function(response) {
+			console.log('Response: '+response);
 			if (response) {
 				section.remove();
 			}

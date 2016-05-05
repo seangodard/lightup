@@ -22,7 +22,7 @@ if (isset($_POST['login_name']) && isset($_POST['login_pass'])) {
 	// Setup session with the username if the users credentials have been verified
 	if ($valid) {
 		login(getUserId($_POST['login_name'], $db));
-		header('Location: profile.php');
+		header('Location: profile.php?id=' . getLoggedInUserID());
 		exit();
 	}
 	else {

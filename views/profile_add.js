@@ -11,7 +11,7 @@ $(document).ready(function() {
 		var section = $(this).parent().attr('id');
 
 		// Send an AJAX request to add an input box and respond accordinly in HTML
-		$.post('edit_profile.php', {addSection:section}, function(response) {
+		$.post('profile_add_box.php', {addSection:section}, function(response) {
 			if (section === 'experiences') {
 				var new_item = '<li id="exp_'+response.id+'">' +
 							'<input type="text" name="exp_'+response.id+'" value="'+response.experiences+'"> ' +

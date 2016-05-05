@@ -70,6 +70,24 @@ function userExists($username, $db) {
 	else { return false; }
 }
 
+
+// --------------------------------------------------------------
+// Determine if the given user_id has been registered.
+// @param db a valid database connection
+// @param user_id the user_id to check existance of
+// @return whether or not the given user_id already exists
+// --------------------------------------------------------------
+function userIDExists($user_id, $db) {
+	$check_user = $db->prepare('SELECT user_id FROM users WHERE user_id= :user_id');
+	$check_user->bindParam(':user_id', $user_id);
+	$check_user->execute();
+	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
+	$check_user = $check_user->fetchAll();
+
+	if (count($check_user) > 0) { return true; }
+	else { return false; }
+}
+
 // TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
 // ------------------------------------------------------------------
 // A function to get the user_id based on the username.

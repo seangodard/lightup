@@ -28,7 +28,7 @@ if (isset($_POST['register_name']) && isset($_POST['register_pass'])) {
 	// If the username is set then we know that the user is logged in
 	if ($result) {
 		login(getUserId($_POST['register_name'], $db));
-		header('Location: profile.php');
+		header('Location: profile.php?id=' . getLoggedInUserID());
 		exit();
 	}
 	else {
