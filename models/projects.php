@@ -218,7 +218,7 @@ function getProjectPageInfo($project_id, $db) {
 	$select->bindParam(':project_id', $project_id);
 	$select->execute();
 
-	$select = $select->fetchAll(DO::FETCH_ASSOC);
+	$select = $select->fetchAll(PDO::FETCH_ASSOC);
 
 	if (count($select) > 0) {
 		return array( "project_id" => $select['project_id'], "project_name" => $select['project_name'], "description" => $select['description']);
