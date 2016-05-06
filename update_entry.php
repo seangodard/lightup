@@ -7,7 +7,6 @@ require_once('constants.php');
 require_once('sessions.php');
 require_once('models/projects.php');
 
-// TODO : this 
 // ------------------------------------------------------------
 // Attempt to update the entry in the database for the logged in user
 // @echo whether or not the update succeeded as a json object

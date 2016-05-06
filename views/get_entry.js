@@ -6,7 +6,6 @@ $(document).ready(function() {
 		var entry_id = $(this).children('input').attr('value');
 
 		// TODO : Here : Thu 21 Apr 2016 09:00:18 PM EDT 
-		// TODO : Have the journal entry show an add form if there are no entries being shown : Thu 21 Apr 2016 09:30:12 PM EDT 
 		// Send in the request to get the entry data
 		$.post('get_entry.php', {project_id : project_id, entry_id : entry_id}, function(response) {
 			// Make sure that the entry was retrieved properly (should be an empty object if not allowed/non-existant)

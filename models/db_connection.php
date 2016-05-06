@@ -16,7 +16,6 @@ function databaseConnection() {
         return $db;
     }
     catch (PDOException $e) {
-		// TODO : Debug : Mon 11 Apr 2016 10:04:56 PM EDT 
 		// TODO : Change to a no-connection to DB webpage : Mon 11 Apr 2016 10:04:16 PM EDT 
 		header('Location: index.php');
 		exit();

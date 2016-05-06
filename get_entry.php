@@ -23,5 +23,7 @@ if (isset($_POST['project_id']) && isset($_POST['entry_id'])) {
 		echo json_encode($result); 
 	}
 }
-// TODO : Otherwise redirect to home page? : Wed 27 Apr 2016 04:31:06 PM EDT 
-
+else {
+	header('Location: /');
+	exit();
+}

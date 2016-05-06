@@ -20,21 +20,21 @@
 			<h1>LightUp</h1>
 			<input type="hidden" id="logged_in_user_id" value="<?php echo getLoggedInUserID(); ?>">
 		</div>
-		<div id="main_body">
-			<div id="heading">
+		<div id="main_body" class="flex">
+			<div id="heading" class="flex_fit">
 				<h2><?php echo 'Journal of: '.$escaped_project_name; ?></h2>
 				<input type="hidden" id="project_id" value="<?php echo $escaped_project_id; ?>">
 			</div>
-			<div id="tool_bar">
+			<div id="tool_bar" class="flex_fit">
 				<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">
 				<input type="image" id="add" src="/views/images/add.svg" alt="add">
 			</div>
-			<div id="add_form">
-				<div class=".form_group">
+			<div id="add_form" class="flex flex_grow">
+				<div class="form_group flex_fit">
 					<input type="text" placeholder="Title" id="entry_title" name="entry_title">
 				</div>
-				<textarea id="entry_body"></textarea>
-				<input type="submit" id="add_entry" value="Done">
+				<textarea id="entry_body" class="flex_grow"></textarea>
+				<input type="submit" id="add_entry" value="Done" class="flex_fit">
 			</div>
 		</div>
 		<div id="sidebar">

@@ -7,14 +7,18 @@
 		<meta name="viewport" content="width=device-width, height=device-height">
 	</head>
 	<body>
-		<div id="main_body">
-			<img src="views/images/lightup.svg" alt="LightUp" id="central_image"/>
-			<h1>LightUp</h1>
-			<p>
-				Welcome to LightUp! Have you ever had an idea but never believed that anyone would be interested 
-				in it? Or perhaps wondered if maybe someone was already working on it and you just want to join in? Well you've
-				come to the right place! Welcome to LightUp, the place where ideas are meant to be shared!
-			</p>
+		<div id="main_body" class="flex">
+			<div class="flex_grow">
+				<img src="views/images/lightup.svg" alt="LightUp" id="central_image"/>
+			</div>
+			<div class="flex_fit">
+				<h1>LightUp</h1>
+				<p>
+					Welcome to LightUp! Have you ever had an idea but never believed that anyone would be interested 
+					in it? Or perhaps wondered if maybe someone was already working on it and you just want to join in? Well you've
+					come to the right place! Welcome to LightUp, the place where ideas are meant to be shared!
+				</p>
+			</div>
 		</div>
 		<div id="sidebar">
 			<div id="sidebar_content">
@@ -28,7 +32,7 @@
 						</div>
 						<div id="login_pass" class="form_group<?php if (hasMessage('login_pass')) {echo ' has_error';} ?>">
 							<input type="password" placeholder="Password" name="login_pass"
-								class="<?php if (hasMessage('login_pass')) {echo 'has_error';} ?>">
+								class="<?php if (hasMessage('login_pass')) {echo 'has_error';} ?>" <?php if (hasMessage('login_pass')) {echo 'autofocus';} ?>>
 							<?php if (hasMessage('login_pass')) {echo getFeedbackMessage('login_pass');} ?>
 						</div>
 						<input type="submit" value="Login" id="login" class="submit">

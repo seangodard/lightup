@@ -2,7 +2,6 @@
 // A javascript file for handling journal entry retrieval and adding of
 // 	entries
 //----------------------------------------------------------------------
-// TODO : Find out how to make is so the text area fills the height
 // TODO : When to notify the user?
 // TODO : Fix the bug where you get double posts if you click between very fast : Fri 06 May 2016 02:36:55 PM EDT 
 
@@ -16,7 +15,6 @@ function entryRetrievalButtonEvent() {
 	entryRetrieval(entry_id, posting_user_id);
 }
 
-// TODO : This : Mon 25 Apr 2016 06:57:52 PM EDT 
 //----------------------------------------------------------------------
 // Set up the journal summary buttons to retrieve and fill in the body
 // 	below the project title
@@ -90,8 +88,6 @@ function setAddForm() {
 	$('#add_entry').on('click', addEntry);
 }
 
-// TODO : Debug
-//----------------------------------------------------------------------
 // Set up the body of the journal page with a form to edit the given entry
 //----------------------------------------------------------------------
 function setEditForm() {
@@ -125,7 +121,6 @@ function setEditForm() {
 	$('#update_entry').on('click', updateEntry);
 }
 
-// TODO : Here
 //----------------------------------------------------------------------
 // Send the data along to update the entry
 //----------------------------------------------------------------------
