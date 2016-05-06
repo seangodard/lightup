@@ -166,3 +166,145 @@ function addJournalEntry($user_id, $project_id, $title, $body, $db) {
 }
 
 // TODO : Edit an entry. Must own the entry. : Sat 16 Apr 2016 10:49:22 AM EDT 
+
+// TODO : Debug : Th 5 May 2016 8:53:35 AM EDT 
+// ------------------------------------------------------------------
+//  Retrieve a project's information
+// 	@param project_id the project id the user would like to retrieve information about
+// 	@param db a valid database connection
+// 	@return array with project's information or null if none was found
+// ------------------------------------------------------------------
+function getProjectPageInfo($project_id, $db) {
+	$select = $db->prepare('SELECT * FROM projects WHERE project_id=:project_id');
+	$select->bindParam(':project_id', $project_id);
+	$select->execute();
+
+	$select = $select->fetchAll(DO::FETCH_ASSOC);
+
+	if (count($select) > 0) {
+		return array( "project_id" => $select['project_id'], "project_name" => $select['project_name'], "description" => $select['description']);
+	}
+	else { return null; }
+}
+
+// TODO : Debug : Th 5 May 2016 9:03:07 AM EDT 
+// ------------------------------------------------------------------
+//  Retrieve the members of a project
+// 	@param project_id the project id the user would like to retrieve information about
+// 	@param db a valid database connection
+// 	@return array with members of the project or null if none was found
+// ------------------------------------------------------------------
+function getProjectMembers($project_id, $db) {
+	$select = $db->prepare('SELECT * FROM projects_member NATURAL JOIN users WHERE project_id=:project_id');
+	$select->bindParam(':project_id', $project_id);
+	$select->execute();
+
+	$select = $select->fetchAll(PDO::FETCH_ASSOC);
+
+	if (count($select) > 0) {
+		return array( "user_id" => $select['user_id'], "username" => $select['username']);
+	}
+	else { return null; }
+}
+
+// TODO : Debug : Th 5 May 2016 9:12:52 AM EDT 
+// ------------------------------------------------------------------
+//  Update a project's information
+// 	@param project_id the project id the user would like to retrieve information about
+// 	@param project_name the new project name
+// 	@param project_description the new project description
+// 	@param db a valid database connection
+// 	@return whether or not the update was successful
+// ------------------------------------------------------------------
+function updateProjectInfo($project_id, $project_name, $project_description, $db) {
+	$update = $db->prepare('UPDATE projects SET project_name=:project_name,description=:description WHERE project_id=:project_id');
+	$update->bindParam(':project_name', $project_name);
+	$update->bindParam(':description', $project_description);
+	$update->bindParam('project_id', $project_id);
+
+	return $update->execute();
+}
+
+// TODO : Debug : Th 5 May 2016 9:26:50 AM EDT 
+// ------------------------------------------------------------------
+// A function to get a list project names that match a certain pattern.
+// @param pattern the pattern to match
+// @param db a valid database connection
+// @return an array of projects that match the pattern
+// ------------------------------------------------------------------
+function getProjectsLike($pattern, $db) {
+	$get_projects_like = $db->prepare('SELECT project_name FROM projects WHERE project_name like :name');
+	$get_projects_like->bindParam(':name', $pattern);
+	$get_projects_like->execute();
+
+	if (count($get_projects_like) > 0) {
+		// Source: http://php.net/manual/en/function.array-push.phps
+		$results = array();
+	    foreach ($selection as $row) {
+	    	$results[$row['project_id']] = $row['project_name']; // Not 100% sure this line works
+	    }
+
+	    return $results;
+	}
+	else { return false; }
+}
+
+// TODO : Debug : Th 5 May 2016 9:28:00 AM EDT 
+// ------------------------------------------------------------------
+// Add a user to a project's member queue
+// @param user_id the user's id to add
+// @param project_id the project to add the user to
+// @param db a valid database connection
+// @return an array of projects that match the pattern
+// ------------------------------------------------------------------
+function addToMembersQueue($user_id, $project_id, $db) {
+	$insert = $db->prepare('INSERT INTO projects_member(user_id, project_id) VALUES(:user_id,:project_id)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':project_id', $project_id);
+
+	return $insert->execute();
+}
+
+// TODO : Debug : Th 5 May 2016 9:33:28 AM EDT 
+// ------------------------------------------------------------------
+// Retrieve the members of a project
+// @param requesting_user_id the user requesting to join a project
+// @param project_id the project to check the member's of
+// @param db a valid database connection
+// @return an array of project members or null if none
+// ------------------------------------------------------------------
+function getProjectMembersQueue($requesting_user_id, $project_id, $db) {
+	if (isMember($requesting_user_id, $project_id, $db)) {
+		$select = $db->prepare('SELECT * FROM projects_member NATURAL JOIN users WHERE user_id=:user_id AND project_id=:project_id');
+		$select->bindParam(':user_id', $requesting_user_id);
+		$select->bindParam(':project_id', $project_id);
+		$select->execute();
+
+		$select = $select->fetchAll(PDO::FETCH_ASSOC);
+
+		if (count($select) > 0) {
+			return array( "user_id" => $select['user_id'], "username" => $select['username']);
+		}
+		else { return null; }
+	}
+}
+
+// TODO : Debug : Th 5 May 2016 9:48:46 AM EDT 
+// ------------------------------------------------------------------
+// Add a member to a project
+// @param requesting_user_id the user requesting to add a member to a project
+// $param user_id the user to add to the project
+// @param project_id the project to add a member to
+// @param db a valid database connection
+// @return whether or not the user was added
+// ------------------------------------------------------------------
+function addProjectMember($requesting_user_id, $user_id, $project_id, $db) {
+	if (isMember($requesting_user_id, $project_id, $db)) {
+		$insert = $db->prepare('INSERT INTO projects_member(user_id,project_id) VALUES(:user_id,:project_id)');
+		$insert->bindParam(':user_id', $user_id);
+		$insert->bindParam(':project_id', $project_id);
+
+		return $insert->execute();
+	}
+	return false;
+}
