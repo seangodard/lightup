@@ -1,21 +1,23 @@
 <?php 
 
-require_once('sessions.php');
 require_once('login_verification.php');
 require_once('constants.php');
+require_once('sessions.php');
 require_once('models/profile.php');
 
 $db = databaseConnection();
 
-foreach ($_POST as $key => $value) {
-	if (strpos($key, 'exp') !== false)
-		updateExpSkillsHobbies($value, 'experiences', substr($key, -1), $db);
-	else if (strpos($key, 'skill') !== false)
-		updateExpSkillsHobbies($value, 'skills', substr($key, -1), $db);
-	else if (strpos($key, 'hobby') !== false)
-		updateExpSkillsHobbies($value, 'hobbies', substr($key, -1), $db);
-	else
-		updateProfile($value, $key, $db);
+if (isLoggedIn()) {
+	if (isset($_GET['id']) && (!userIDExists($_GET['id'], $db))) {
+		header('Location: /profile.php?id='.getLoggedInUserID());
+		exit();
+	}
+	else {
+		require_once('views/profile.php');
+		exit();
+	}
 }
-
-require_once('views/profile.php');
+else {
+	header('Location: /');
+	exit();
+}

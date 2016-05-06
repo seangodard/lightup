@@ -54,23 +54,30 @@ function selectContactAndBlurb($user_id, $db) {
 }
 
 // ------------------------------------------------------------------
-// Check that a certain column is not blank for a user's profile
-// @param db a valid database connection
-// @param section the column to check
-// -------------------------------------------------------------------
-function notBlankContactAndBlurb($section, $db) {
-	if (isset(selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) && (selectContactAndBlurb(getLoggedInUserID(), $db)[$section]) !== '')
-		return true;
-	return false;
-}
-
-// ------------------------------------------------------------------
 // Return the data is a specified column
 // @param db a valid database connection
 // @param section the column to check
 // -------------------------------------------------------------------
-function getContactAndBlurb($section, $db) {
-	return selectContactAndBlurb(getLoggedInUserID(), $db)[$section];
+function getContactAndBlurb($user_id, $section, $db) {
+	return selectContactAndBlurb($user_id, $db)[$section];
+}
+
+// ------------------------------------------------------------------
+// Check that a table is not blank for a user's profile
+// @param db a valid database connection
+// @param section the table to check
+// -------------------------------------------------------------------
+function notBlankExpSkillsHobbies($user_id, $section, $db) {
+	if ($section == 'experiences')
+		$table = $db->prepare('SELECT * FROM experiences WHERE user_id=:user_id');
+	elseif($section == 'skills')
+		$table = $db->prepare('SELECT * FROM skills WHERE user_id=:user_id');
+	elseif($section == 'hobbies')
+		$table = $db->prepare('SELECT * FROM hobbies WHERE user_id=:user_id');
+	$table->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+	$table->execute();
+	if ($table->rowCount() > 0) { return true; } 
+	else { return false; }
 }
 
 // ------------------------------------------------------------------
@@ -79,9 +86,8 @@ function getContactAndBlurb($section, $db) {
 // @param username the registered and logged-in user (retrieved from session)
 // -------------------------------------------------------------------
 function selectExpSkillsHobbies($user_id, $section, $db) {
-	if ((!(isset($user_id))) || $user_id == '') {
+	if ((!(isset($user_id))) || $user_id == '')
 		return null;
-	}
 	
 	// Prepare the query to get the user's profile
 	if ($section === 'experiences')
@@ -105,9 +111,22 @@ function selectExpSkillsHobbies($user_id, $section, $db) {
 // @param $section the section to update
 // -------------------------------------------------------------------
 function updateProfile($data, $section, $db) {
-	$data = escapeSingleQuotes($data);
-	$query = "UPDATE profiles SET " . $section . "='" . $data . "' WHERE user_id=" . getLoggedInUserID();
-	$update = $db->prepare($query);
+	if ($section === 'blurb')
+		$update = $db->prepare('UPDATE profiles SET blurb=:data WHERE user_id=:user_id');
+	elseif ($section === 'city')
+		$update = $db->prepare('UPDATE profiles SET city=:data WHERE user_id=:user_id');
+	elseif ($section === 'state')
+		$update = $db->prepare('UPDATE profiles SET state=:data WHERE user_id=:user_id');
+	elseif ($section === 'country')
+		$update = $db->prepare('UPDATE profiles SET country=:data WHERE user_id=:user_id');
+	elseif ($section === 'phone')
+		$update = $db->prepare('UPDATE profiles SET phone=:data WHERE user_id=:user_id');
+	elseif ($section === 'email')
+		$update = $db->prepare('UPDATE profiles SET email=:data WHERE user_id=:user_id');
+	else 
+		return false;
+	$update->bindParam(':data', $data, PDO::PARAM_STR);
+	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
 	return $update->execute();
 }
 
@@ -131,26 +150,9 @@ function updateExpSkillsHobbies($data, $section, $index, $db) {
 		$update = $db->prepare('UPDATE hobbies SET hobby=:data WHERE user_id=:user_id AND hobby_id=:hobby_id');
 		$update->bindParam(':hobby_id', $index, PDO::PARAM_STR);
 	}
+	else
+		return false;
 	$update->bindParam(':data', $data, PDO::PARAM_STR);
 	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
 	return $update->execute();
-}
-
-// ------------------------------------------------------------------
-// Escape single quotes
-// @param $str the string to escape single quotes of
-// -------------------------------------------------------------------
-function escapeSingleQuotes($str) {
-	$new_str = "";
-	$str_length = strlen($str);
-	for ($i = 0; $i < $str_length; $i++) {
-		$char = substr($str, $i, 1);
-		if ($char === "'") {
-			$new_str .= "\\" . $char;
-		}
-		else {
-			$new_str .= $char;
-		}
-	}
-	return $new_str;
 }

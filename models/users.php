@@ -69,6 +69,23 @@ function userExists($username, $db) {
 	else { return false; }
 }
 
+// --------------------------------------------------------------
+// Determine if the given user_id has been registered.
+// @param db a valid database connection
+// @param user_id the user_id to check existance of
+// @return whether or not the given user_id already exists
+// --------------------------------------------------------------
+function userIDExists($user_id, $db) {
+	$check_user = $db->prepare('SELECT user_id FROM users WHERE user_id= :user_id');
+	$check_user->bindParam(':user_id', $user_id);
+	$check_user->execute();
+	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
+	$check_user = $check_user->fetchAll();
+
+	if (count($check_user) > 0) { return true; }
+	else { return false; }
+}
+
 // ------------------------------------------------------------------
 // A function to get the user_id based on the username.
 // @param username the username to get the id for
@@ -99,4 +116,28 @@ function getUsername($user_id, $db) {
 
 	if (count($get_username) > 0) { return $get_username['username']; }
 	else { return null; }
+}
+
+// TODO : Debug : Th 5 May 2016 8:41:35 AM EDT 
+// ------------------------------------------------------------------
+// A function to get a list usernames that match a certain pattern.
+// @param pattern the pattern to match
+// @param db a valid database connection
+// @return the an array of usernames that match the pattern
+// ------------------------------------------------------------------
+function getUsersLike($pattern, $db) {
+	$get_username_like = $db->prepare('SELECT username FROM users WHERE username like :name');
+	$get_username_like->bindParam(':name', $pattern);
+	$get_username_like->execute();
+
+	if (count($get_username_like) > 0) {
+		// Source: http://php.net/manual/en/function.array-push.phps
+		$results = array();
+	    foreach ($selection as $row) {
+	    	$results[$row['user_id']] = $row['username']; // Not 100% sure this line works
+	    }
+
+	    return $results;
+	}
+	else { return false; }
 }
