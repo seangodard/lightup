@@ -18,13 +18,14 @@
 	<body>
 		<div id="header">
 			<h1>LightUp</h1>
+			<input type="hidden" id="logged_in_user_id" value="<?php echo getLoggedInUserID(); ?>">
 		</div>
 		<div id="main_body">
 			<div id="heading">
 				<h2><?php echo 'Journal of: '.$escaped_project_name; ?></h2>
 				<input type="hidden" id="project_id" value="<?php echo $escaped_project_id; ?>">
 			</div>
-			<div id="tools">
+			<div id="tool_bar">
 				<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">
 				<input type="image" id="add" src="/views/images/add.svg" alt="add">
 			</div>

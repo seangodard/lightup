@@ -73,10 +73,10 @@ input {
 }
 
 input[type='submit'] {
-    background: #565656;
+    background: #009E2D;
 	width: 176px;
 	font-weight: 100;
-	color: #CECECE;
+	color: #FFFFFF;
 }
 
 .has_error input {
@@ -114,11 +114,15 @@ textarea {
 	outline: none;
 }
 
+#sidebar_content .entry_summary:first-of-type {
+	border-width: 1px 0px 1px 0px;
+}
+
 .entry_summary:focus, .entry_summary:hover {
 	background: #565656;
 }
 
-#tools {
+#tool_bar {
 	height: 40px;
 }
 
@@ -128,7 +132,7 @@ textarea {
     font-weight: 600;
 }
 
-#tools * {
+#tool_bar * {
 	float: right;
 	background: none;
 	outline: none;
@@ -147,6 +151,29 @@ textarea {
 
 #main_body section {
 	padding: 20px 0px;
+}
+
+.journal_entry {
+	white-space: pre-wrap;
+}
+
+/* Set scrollbar style */
+/* Source: https://css-tricks.com/examples/WebKitScrollbars/ */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgba(0,158,45,1); 
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
 /* Larger Screens */
@@ -172,11 +199,9 @@ textarea {
 	#main_body {
 		width: 66%;
 		margin-left: 28%;
-	}
-}
-
-@media all and (max-height: 450px) {
-	#sidebar {
-		overflow: scroll;
+		position: absolute;
+		top: 60px;
+		bottom: 0px;
+		overflow-y: scroll;
 	}
 }

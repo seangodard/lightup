@@ -1,7 +1,5 @@
 <?php
 
-// TODO : this : Wed 27 Apr 2016 04:25:10 PM EDT 
-
 // Start the session
 session_start();
 
@@ -14,12 +12,20 @@ require_once('models/projects.php');
 // @echo whether or not the add succeeded as a json object
 // ------------------------------------------------------------
 if (isset($_POST['project_id']) && isset($_POST['title']) && isset($_POST['body'])) {
-	// Attempt to connect to the database 
-	$db = databaseConnection();
+	if (strlen($_POST['title']) <= 30) {
+		// Attempt to connect to the database 
+		$db = databaseConnection();
 
-	// TODO : Here : Wed 27 Apr 2016 04:32:50 PM EDT 
-	$result = addJournalEntry(getLoggedInUserID(), $_POST['project_id'], $_POST['title'], $_POST['body'], $db);
-	echo json_encode($result);
+		$result = addJournalEntry(getLoggedInUserID(), $_POST['project_id'], $_POST['title'], $_POST['body'], $db);
+		echo json_encode($result);
+		exit();
+	}
+	// TODO : Pass back an error on the field that the title should be less than 30 chars : Fri 06 May 2016 03:04:51 PM EDT 
+	else {
+
+	}
+}
+else {
+	header('Location: /');
 	exit();
 }
-// TODO : Otherwise redirect to home page? : Wed 27 Apr 2016 04:31:06 PM EDT 
