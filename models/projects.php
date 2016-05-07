@@ -234,14 +234,14 @@ function getProjectPageInfo($project_id, $db) {
 // 	@return array with members of the project or null if none was found
 // ------------------------------------------------------------------
 function getProjectMembers($project_id, $db) {
-	$select = $db->prepare('SELECT * FROM projects_member NATURAL JOIN users WHERE project_id=:project_id');
+	$select = $db->prepare('SELECT user_id, username FROM projects_member NATURAL JOIN users WHERE project_id=:project_id');
 	$select->bindParam(':project_id', $project_id);
 	$select->execute();
 
 	$select = $select->fetchAll(PDO::FETCH_ASSOC);
 
 	if (count($select) > 0) {
-		return array( "user_id" => $select['user_id'], "username" => $select['username']);
+		return $select;
 	}
 	else { return null; }
 }
@@ -346,4 +346,38 @@ function addProjectMember($requesting_user_id, $user_id, $project_id, $db) {
 		return $insert->execute();
 	}
 	return false;
+}
+
+// TODO : Debug : Sat 07 May 2016 11:29:48 AM EDT 
+// --------------------------------------------------------------
+// Determine if the given project_id exits in the database.
+// @param project_id the project_id to check existance of
+// @param db a valid database connection
+// @return whether or not a project with the given project_id exists
+// --------------------------------------------------------------
+function projectIDExists($project_id, $db) {
+	$check_project = $db->prepare('SELECT project_id FROM projects WHERE project_id=:project_id');
+	$check_project->bindParam(':project_id', $project_id);
+	$check_project->execute();
+	$check_project = $check_project->fetchAll();
+
+	if (count($check_project) > 0) { return true; }
+	else { return false; }
+}
+
+// TODO : Debug : Sat 07 May 2016 11:29:48 AM EDT 
+// --------------------------------------------------------------
+// Get the description of the project.
+// @param project_id the project_id to get the description for
+// @param db a valid database connection
+// @return the description of the project or null if the project doesn't exist
+// --------------------------------------------------------------
+function getProjectDescription($project_id, $db) {
+	$project_desc = $db->prepare('SELECT description FROM projects WHERE project_id=:project_id');
+	$project_desc->bindParam(':project_id', $project_id);
+	$project_desc->execute();
+	$project_description = $project_desc->fetch();
+
+	if ($project_desc->rowCount()) { return $project_description['description']; }
+	else { return null; }
 }
