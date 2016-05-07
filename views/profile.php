@@ -124,11 +124,11 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 		<div id="sidebar_content">
 <?php foreach ((selectProjects($profile_id, $db)) as $row): ?>
 			<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-				<form action="project.php" method="post">
+				<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<button class="projects" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-									<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
+						<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
 					</button>
-				</form>
+				</a>
 			</div>
 <?php endforeach; ?>
 		</div>

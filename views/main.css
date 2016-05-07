@@ -82,8 +82,13 @@ p {
 	padding-left: 1%;
 }
 
+.profile {
+	padding-left: 5%;
+}
+
 .shifted_body {
-		padding-left: 5%;
+	overflow: auto;
+	padding-left: 5%;
 }
 
 .area {
@@ -94,6 +99,15 @@ p {
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.about_me {
+	width: 95%;
+	height: 15%;
+}
+
+.save {
+	clear: left;
 }
 
 input {
