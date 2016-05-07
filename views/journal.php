@@ -22,7 +22,7 @@
 				<a href="journal.php?id=<?php echo $project_id?>"><div class="button current_page">Journal</div></a>
 				<a href="home.php?id=<?php echo $project_id?>"><div class="button">Main</div></a>
 			</div>
-			<div id="main_body" class="flex">
+			<div id="main_body" class="flex shifted">
 				<div id="heading" class="flex_fit">
 					<h2><?php echo $escaped_project_name; ?></h2>
 					<input type="hidden" id="project_id" value="<?php echo $escaped_project_id; ?>">

@@ -8,6 +8,8 @@
 		<div class="top_bar">
 			<h1>Profile Page of: <?php echo htmlentities(getLoggedInUsername($db), ENT_QUOTES, 'utf-8'); ?></h1>
 			<h1>With user id: <?php echo htmlentities(getLoggedInUserID(), ENT_QUOTES, 'utf-8'); ?></h1>
+			<link rel="stylesheet" href="views/main.css">
+			<meta name="viewport" content="width=device-width, height=device-height">
 			<a href="../logout.php">Logout</a>
 		</div>
 

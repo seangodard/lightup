@@ -18,117 +18,122 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 	<head>
 		<meta charset="utf-8">
 		<title>Profile</title>
+		<link rel="stylesheet" href="views/main.css">
+		<meta name="viewport" content="width=device-width, height=device-height">
 	</head>
 	<body>
-		<div class="top_bar">
-			<h1>Profile Page of: <?php echo htmlentities(getUsername($profile_id, $db), ENT_QUOTES, 'utf-8'); ?></h1>
-			<h1>With user id: <?php echo htmlentities($profile_id, ENT_QUOTES, 'utf-8'); ?></h1>
-			<a href="../logout.php">Logout</a>
+		<?php require_once('views/top_bar.php') ?>
+		<div id="content">
+			<div id="main_body">
+				<div id="heading" class="profile_title">
 <?php if (getLoggedInUserID() === $profile_id): ?>
-			<a href="edit_profile.php"><input type="image" src="views/images/settings.png" alt="settings" width="37" height="37"></a>
+					<div id="tool_bar">
+						<a href="edit_profile.php"><input type="image" id="edit" src="/views/images/edit.svg" alt="edit"></a>
+					</div>
 <?php endif; ?>
-		</div>
+					<h2><?php echo htmlentities(getUsername($profile_id, $db), ENT_QUOTES, 'utf-8'); ?></h2>
+				</div>
 
-		<div class="sidebar">
-			<ul>
-<?php foreach ((selectProjects($profile_id, $db)) as $row): ?>
-				<li id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-					<form action="project.php" method="post">
-						<button class="projects" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
-						</button>
-					</form>
-				</li>
-<?php endforeach; ?>
-			</ul>
-		</div>
 
-		<div class="main_body">
-			<div class="about_me">
+				<div class="shifted_body column_layout">
+					<div class="column">
+						<div class="about_me left_justified area">
 <?php if (notBlankContactAndBlurb($profile_id, 'blurb', $db)): ?>
-				<h2>About Me</h2>
-				<p><?php echo htmlentities(getContactAndBlurb($profile_id, 'blurb', $db), ENT_QUOTES, 'utf-8'); ?></p>
+							<h3>About Me</h3>
+							<p class="left_justified"><?php echo htmlentities(getContactAndBlurb($profile_id, 'blurb', $db), ENT_QUOTES, 'utf-8'); ?></p>
 <?php endif; ?>
-			</div>
+						</div>
 
-			<div id="contact_info">
+					<div id="contact_info" class="left_justified area">
 <?php if ((notBlankContactAndBlurb($profile_id, 'city', $db)) || (notBlankContactAndBlurb($profile_id, 'state', $db))|| (notBlankContactAndBlurb($profile_id, 'country', $db))|| (notBlankContactAndBlurb($profile_id, 'phone', $db)) || (notBlankContactAndBlurb($profile_id, 'email', $db))): ?>
-				<h2>Contact Info</h2>
-				<ul>
+						<h3>Contact Info</h3>
 <?php if (notBlankContactAndBlurb($profile_id, 'city', $db)): ?>
-					<li>
-						City: <?php echo htmlentities(getContactAndBlurb($profile_id, 'city', $db), ENT_QUOTES, 'utf-8'); ?>
-					</li>
+						<div class="medium_justified">
+							City: <?php echo htmlentities(getContactAndBlurb($profile_id, 'city', $db), ENT_QUOTES, 'utf-8'); ?>
+						</div>
 <?php endif; ?>
 <?php if (notBlankContactAndBlurb($profile_id, 'state', $db)): ?>
-					<li>
-						State: <?php echo htmlentities(getContactAndBlurb($profile_id, 'state', $db), ENT_QUOTES, 'utf-8'); ?>
-					</li>
+						<div class="medium_justified">
+							State: <?php echo htmlentities(getContactAndBlurb($profile_id, 'state', $db), ENT_QUOTES, 'utf-8'); ?>
+						</div>
 <?php endif; ?>
 <?php if (notBlankContactAndBlurb($profile_id, 'country', $db)): ?>
-					<li>
-						Country: <?php echo htmlentities(getContactAndBlurb($profile_id, 'country', $db), ENT_QUOTES, 'utf-8'); ?>
-					</li>
+						<div class="medium_justified">
+							Country: <?php echo htmlentities(getContactAndBlurb($profile_id, 'country', $db), ENT_QUOTES, 'utf-8'); ?>
+						</div>
 <?php endif; ?>
 <?php if (notBlankContactAndBlurb($profile_id, 'phone', $db)): ?>
-					<li>
-						Phone: <?php echo htmlentities(getContactAndBlurb($profile_id, 'phone', $db), ENT_QUOTES, 'utf-8'); ?>
-					</li>
+						<div class="medium_justified">
+							Phone: <?php echo htmlentities(getContactAndBlurb($profile_id, 'phone', $db), ENT_QUOTES, 'utf-8'); ?>
+						</div>
 <?php endif; ?>
 <?php if (notBlankContactAndBlurb($profile_id, 'email', $db)): ?>
-					<li>
-						Email: <?php echo htmlentities(getContactAndBlurb($profile_id, 'email', $db), ENT_QUOTES, 'utf-8'); ?>
-					</li>
+						<div class="medium_justified">
+							Email: <?php echo htmlentities(getContactAndBlurb($profile_id, 'email', $db), ENT_QUOTES, 'utf-8'); ?>
+						</div>
 <?php endif; ?>
-				</ul>
 <?php endif; ?>
-			</div>
-
-			<div id="experiences">
+					</div>
+				</div>
+				
+					<div class="column">
+						<div id="experiences" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "experiences", $db)): ?>
-				<h2>Experiences</h2>
-				<ul>
+							<h3>Experiences</h3>
 <?php foreach ((selectExpSkillsHobbies($profile_id, "experiences", $db)) as $row): ?>
 <?php if ($row['experience'] !== ''): ?>
-					<li id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>
-					</li>
+							<div class="medium_justified" id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>
+							</div>
 <?php endif; ?>
 <?php endforeach; ?>
-				</ul>
 <?php endif; ?>
-			</div>
+						</div>
 
-			<div id="skills">
+						<div id="skills" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "skills", $db)): ?>
-				<h2>Skills</h2>
-				<ul>
+							<h3>Skills</h3>
 <?php foreach (selectExpSkillsHobbies($profile_id, "skills", $db) as $row): ?>
 <?php if ($row['skill'] !== ''): ?>
-					<li id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>
-					</li>
+							<div class="medium_justified" id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>
+							</div>
 <?php endif; ?>
 <?php endforeach; ?>
-				</ul>
 <?php endif; ?>
-			</div>
+						</div>
 
-			<div id="hobbies">
+						<div id="hobbies" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "hobbies", $db)): ?>
-				<h2>Hobbies</h2>
-				<ul>
+							<h3>Hobbies</h3>
 <?php foreach (selectExpSkillsHobbies($profile_id, "hobbies", $db) as $row): ?>
 <?php if ($row['hobby'] !== ''): ?>
-					<li id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>
-					</li>
+							<div class="medium_justified" id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>
+							</div>
 <?php endif; ?>
 <?php endforeach; ?>
-				</ul>
 <?php endif; ?>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+	<div id="sidebar">
+		<div id="sidebar_content">
+<?php foreach ((selectProjects($profile_id, $db)) as $row): ?>
+			<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+				<form action="project.php" method="post">
+					<button class="projects" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+									<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
+					</button>
+				</form>
+			</div>
+<?php endforeach; ?>
+		</div>
+	</div>
+
 	</body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="views/lib.js"></script>

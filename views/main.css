@@ -27,8 +27,6 @@ h2, h3, h4 {
 }
 
 h2 {
-	font-size: 25px;
-    font-weight: 100;
 	font-size: 40px;
     font-weight: 600;
 }
@@ -62,6 +60,40 @@ p {
     box-shadow: inset 0px 5px 10px;
     position: relative;
     top: 60px;
+}
+
+.profile_title {
+	padding-bottom: 30px;
+}
+
+.left_justified {
+	padding: 0%;
+}
+
+.left_justified, .left_justified h3 {
+	text-align: left;
+}
+
+.medium_justified {
+	padding-left: 4%;
+}
+
+.logout {
+	padding-left: 1%;
+}
+
+.shifted_body {
+		padding-left: 5%;
+}
+
+.area {
+	padding-bottom: 2%;
+}
+
+#header_logo {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 input {
@@ -107,7 +139,7 @@ textarea {
     width: 100%;
 }
 
-.entry_summary {
+.entry_summary, .projects {
     width: 100%;
     background: none;
     border: solid;
@@ -117,11 +149,11 @@ textarea {
 	outline: none;
 }
 
-#sidebar_content .entry_summary:first-of-type {
+#sidebar_content .entry_summary:first-of-type, #sidebar_content .projects:first-of-type {
 	border-width: 1px 0px 1px 0px;
 }
 
-.entry_summary:focus, .entry_summary:hover {
+.entry_summary:focus, .entry_summary:hover, .projects:focus, .projects:hover {
 	background: #565656;
 }
 
@@ -235,8 +267,29 @@ textarea {
 		padding: 3%;
 		position: absolute;
 		width: 94%;
-		bottom: 0px;
+		
+	}
+
+	.shifted {
 		top: 44px;
+		bottom: 0px;
+	}
+
+	.column {
+		height: 100%;
+		float: left;
+		width: 49%;
+	}
+	
+	.column_layout .column:first-of-type {
+		border-width: 0px 1px 0px 0px;
+    	border-style: solid;
+    	border-color: #000000;
+    	width: 44%;
+	}
+	.column_layout .column:nth-child(2) {
+		padding-left: 8%;
+    	width: 41%;
 	}
 
 	#sidebar_content {
