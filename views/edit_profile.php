@@ -89,10 +89,13 @@ $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
 
 		<div id="sidebar">
 			<div id="sidebar_content">
+				<div class="sidebar_title">
+					My Projects
+				</div>
 <?php foreach ((selectProjects(getLoggedInUserID(), $db)) as $row): ?>
 				<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<button class="projects" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<button class="sidebar_entry" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
 							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
 							<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
 						</button>
