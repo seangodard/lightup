@@ -87,11 +87,41 @@ function getMessage($tag_id) {
 }
 
 // -----------------------------------------------------------------
+// Set the last attempted username in the session so that failed logins
+// 	can show the username attempted in the field
+// -----------------------------------------------------------------
+function setAttemptedUsername($username) {
+	$_SESSION['attempted_username'] = htmlentities($username, ENT_QUOTES, 'utf-8');
+}
+
+// -----------------------------------------------------------------
+// @return if there is a previously attempted username stored in sessions
+// -----------------------------------------------------------------
+function isAttemptedUsername() {
+	if (isset($_SESSION['attempted_username'])) {
+		return true;
+	}
+	else return false;
+}
+
+// -----------------------------------------------------------------
+// @return the last attempted username or null if there was none
+// -----------------------------------------------------------------
+function getAttemptedUsername() {
+	if (isset($_SESSION['attempted_username'])) {
+		$attempted_username = $_SESSION['attempted_username'];
+		unset($_SESSION['attempted_username']);
+		return $attempted_username;
+	}
+	else return null;
+}
+
+// -----------------------------------------------------------------
 // Get any session messages applying to the field wrapped in a span 
 // and clear the message
 // @param tag_id the message tag id
 // @return the message for the id wrapped in a span of class feedback_message
 // -----------------------------------------------------------------
 function getFeedbackMessage($tag_id) {
-	return '<span class="feedback_message">'.getMessage($tag_id).'</span>';
+	return '<div class="feedback_message">'.getMessage($tag_id).'</div>';
 }
