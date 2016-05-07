@@ -16,25 +16,28 @@
 		<meta name="viewport" content="width=device-width, height=device-height">
 	</head>
 	<body>
-		<div id="header">
-			<h1>LightUp</h1>
-			<input type="hidden" id="logged_in_user_id" value="<?php echo getLoggedInUserID(); ?>">
-		</div>
-		<div id="main_body" class="flex">
-			<div id="heading" class="flex_fit">
-				<h2><?php echo 'Journal of: '.$escaped_project_name; ?></h2>
-				<input type="hidden" id="project_id" value="<?php echo $escaped_project_id; ?>">
+		<?php require_once('views/top_bar.php') ?>
+		<div id="content">
+			<div id="nav_links">
+				<a href="journal.php?id=<?php echo $project_id?>"><div class="button current_page">Journal</div></a>
+				<a href="home.php?id=<?php echo $project_id?>"><div class="button">Main</div></a>
 			</div>
-			<div id="tool_bar" class="flex_fit">
-				<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">
-				<input type="image" id="add" src="/views/images/add.svg" alt="add">
-			</div>
-			<div id="add_form" class="flex flex_grow">
-				<div class="form_group flex_fit">
-					<input type="text" placeholder="Title" id="entry_title" name="entry_title">
+			<div id="main_body" class="flex">
+				<div id="heading" class="flex_fit">
+					<h2><?php echo $escaped_project_name; ?></h2>
+					<input type="hidden" id="project_id" value="<?php echo $escaped_project_id; ?>">
 				</div>
-				<textarea id="entry_body" class="flex_grow"></textarea>
-				<input type="submit" id="add_entry" value="Done" class="flex_fit">
+				<div id="tool_bar" class="flex_fit">
+					<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">
+					<input type="image" id="add" src="/views/images/add.svg" alt="add">
+				</div>
+				<div id="add_form" class="flex flex_grow">
+					<div class="form_group flex_fit">
+						<input type="text" placeholder="Title" id="entry_title" name="entry_title">
+					</div>
+					<textarea id="entry_body" class="flex_grow"></textarea>
+					<input type="submit" id="add_entry" value="Done" class="flex_fit">
+				</div>
 			</div>
 		</div>
 		<div id="sidebar">

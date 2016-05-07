@@ -75,14 +75,13 @@ function setAddForm() {
 
 	// Show the form in the form
 	$('#main_body').append(
-			'<div id="add_form">'
-				+'<div class=".formgroup">'
+			'<div id="add_form" class="flex flex_grow">'
+				+'<div class="formgroup flex_fit">'
 					+'<input type="text" placeholder="Title" id="entry_title" name="entry_title">'
 				+'</div>'
-				+'<textarea id="entry_body"></textarea>'
-				+'<input type="submit" id="add_entry" value="Done">'
-			+'</div>'
-		+'</div>');
+				+'<textarea id="entry_body" class="flex_grow"></textarea>'
+				+'<input type="submit" id="add_entry" class="flex_fit" value="Done">'
+			+'</div>');
 
 	// Enable the add action
 	$('#add_entry').on('click', addEntry);
@@ -107,15 +106,14 @@ function setEditForm() {
 
 	// Show the form with the old values filled in
 	$('#main_body').append(
-			'<div id="update_form">'
-				+'<div class=".formgroup">'
+			'<div id="update_form" class="flex flex_grow">'
+				+'<div class="formgroup flex_fit">'
 					+'<input type="text" id="entry_title" name="entry_title" value="'+current_title+'">'
 				+'</div>'
-				+'<textarea id="entry_body">'+current_body+'</textarea>'
+				+'<textarea id="entry_body" class="flex_grow">'+current_body+'</textarea>'
 				+'<input type="hidden" id="visible_entry_id" value="'+entry_id+'">'
-				+'<input type="submit" id="update_entry" value="Done">'
-			+'</div>'
-		+'</div>');
+				+'<input type="submit" id="update_entry" class="flex_fit" value="Done">'
+			+'</div>');
 
 	// Enable the update action
 	$('#update_entry').on('click', updateEntry);
@@ -153,14 +151,14 @@ function updateEntry() {
 		if (response) {
 			// Remove the old post with this entry id 
 			$('#sidebar_content').children().first().children('.entry_id').val(entry_id).parent().remove().first();
-	
-			// Open the new edited version within the window
-			var user_id = $('#logged_in_user_id').val();
-			entryRetrieval(entry_id, user_id);
 		}
-		// TODO : Notify the user that their request failed : Thu 28 Apr 2016 03:18:41 PM EDT 
+		// TODO : Notify the user that nothing in the database changed: Thu 28 Apr 2016 03:18:41 PM EDT 
 		else {
+
 		}
+		// Open the possibly new edited version within the window
+		var user_id = $('#logged_in_user_id').val();
+		entryRetrieval(entry_id, user_id);
 	}, 'json');
 }
 
@@ -202,6 +200,7 @@ function addEntry() {
 				}
 				// TODO : Notify the user that their request failed : Thu 28 Apr 2016 03:18:41 PM EDT 
 				else {
+
 				}
 	}, 'json');	
 }
