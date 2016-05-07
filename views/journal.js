@@ -150,9 +150,9 @@ function updateEntry() {
 	$.post('update_entry.php', {entry_id : entry_id, title : entry_title, body : entry_body}, function(response) {
 		if (response) {
 			// Remove the old post with this entry id 
-			$('#sidebar_content').children().first().children('.entry_id').val(entry_id).parent().remove().first();
+			$('#sidebar_content').children('.sidebar_entry').children('.entry_id[value="'+entry_id+'"]').parent().remove();
 		}
-		// TODO : Notify the user that nothing in the database changed: Thu 28 Apr 2016 03:18:41 PM EDT 
+		// TODO : Notify the user that nothing in the database has changed: Thu 28 Apr 2016 03:18:41 PM EDT 
 		else {
 
 		}
@@ -212,7 +212,7 @@ function addEntry() {
 function getLatestEntrySummaries() {
 	//if (isset($_POST['project_id']) && isset($_POST['timestamp'])) {
 	var project_id = $('#project_id').val();
-	var last_timestamp = $('#sidebar_content').children().first().children('.timestamp').text();
+	var last_timestamp = $('#sidebar_content').children(':nth-child(2)').children('.timestamp').text();
 
 	// Request the latest entries
 	if (last_timestamp != null && project_id != null) {
@@ -220,10 +220,10 @@ function getLatestEntrySummaries() {
 			
 			// For each new summary create and add the button to the top of the list in the correct order
 			$.each(response.reverse(), function() {
-				var new_summary_button = $('<button class="entry_summary">'
+				var new_summary_button = $('<button class="sidebar_entry">'
 											+'<input type="hidden" class="entry_id" value="'+this.entry_id+'">'
 											+'<input type="hidden" class="entry_user_id" value="'+this.posting_user_id+'">'
-											+'<div>'+this.title+' -- '+this.poster_username+'</div>'
+											+'<div>'+this.title+' : '+this.poster_username+'</div>'
 											+'<div class="timestamp">'+this.entry_time+'</div>'
 										+'</button>');
 
@@ -231,7 +231,7 @@ function getLatestEntrySummaries() {
 				new_summary_button.on('click', entryRetrievalButtonEvent);
 
 				// Add the button to the sidebar
-				$('#sidebar_content').prepend(new_summary_button);
+				$('#sidebar_content').children(':nth-child(1)').after(new_summary_button);
 			});
 		}, 'json');
 	}
@@ -270,7 +270,7 @@ function putEditButton() {
 //----------------------------------------------------------------------
 $(document).ready(function() {
 	// Setup AJAX on each of the buttons so that clicking them opens the full text
-	$('.entry_summary').on('click', entryRetrievalButtonEvent);
+	$('.sidebar_entry').on('click', entryRetrievalButtonEvent);
 
 	// Setup the add button to fill the main body with a form to add an entry
 	$('#add').on('click', setAddForm);

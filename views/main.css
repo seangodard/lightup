@@ -107,7 +107,20 @@ textarea {
     width: 100%;
 }
 
-.entry_summary {
+.sidebar_title {
+    width: 100%;
+    background: none;
+    border: solid;
+    color: #F7F7F7;
+    padding: 10px 0px;
+	border-width: 2px 0px 2px 0px;
+	outline: none;
+	font-weight: 900;
+	text-align: center;
+	text-shadow: #000000 2px 2px;
+}
+
+.sidebar_entry {
     width: 100%;
     background: none;
     border: solid;
@@ -117,11 +130,7 @@ textarea {
 	outline: none;
 }
 
-#sidebar_content .entry_summary:first-of-type {
-	border-width: 1px 0px 1px 0px;
-}
-
-.entry_summary:focus, .entry_summary:hover {
+.sidebar_entry:focus, .sidebar_entry:hover {
 	background: #565656;
 }
 

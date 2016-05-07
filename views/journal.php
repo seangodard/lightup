@@ -20,7 +20,7 @@
 		<div id="content">
 			<div id="nav_links">
 				<a href="journal.php?id=<?php echo $project_id?>"><div class="button current_page">Journal</div></a>
-				<a href="home.php?id=<?php echo $project_id?>"><div class="button">Main</div></a>
+				<a href="project.php?id=<?php echo $project_id?>"><div class="button">Main</div></a>
 			</div>
 			<div id="main_body" class="flex">
 				<div id="heading" class="flex_fit">
@@ -42,12 +42,13 @@
 		</div>
 		<div id="sidebar">
 			<div id="sidebar_content">
+				<div class="sidebar_title">Journal Entries </div>
 <?php if ($journal_summaries != null): ?>
 	<?php foreach($journal_summaries as $entry): ?>
-				<button class="entry_summary">
+				<button class="sidebar_entry">
 					<input type="hidden" class="entry_id" value="<?php echo htmlentities($entry['entry_id'], ENT_QUOTES, 'utf-8'); ?>">
 					<input type="hidden" class="entry_user_id" value="<?php echo htmlentities($entry['posting_user_id'], ENT_QUOTES, 'utf-8'); ?>">
-					<div><?php echo htmlentities($entry['title'], ENT_QUOTES, 'utf-8').' -- '.
+					<div><?php echo htmlentities($entry['title'], ENT_QUOTES, 'utf-8').' : '.
 						htmlentities($entry['poster_username'], ENT_QUOTES, 'utf-8') ?></div>
 					<div class="timestamp"><?php echo htmlentities($entry['entry_time'], ENT_QUOTES, 'utf-8') ?></div>
 				</button>
