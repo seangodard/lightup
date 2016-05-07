@@ -27,8 +27,6 @@ h2, h3, h4 {
 }
 
 h2 {
-	font-size: 25px;
-    font-weight: 100;
 	font-size: 40px;
     font-weight: 600;
 }
@@ -62,6 +60,58 @@ p {
     box-shadow: inset 0px 5px 10px;
     position: relative;
     top: 60px;
+}
+
+.profile_title {
+	padding-bottom: 30px;
+}
+
+.left_justified {
+	padding: 0%;
+}
+
+.left_justified, .left_justified h3 {
+	text-align: left;
+}
+
+.medium_justified {
+	padding-left: 4%;
+}
+
+/* TODO */
+.logout {
+	position: relative;
+	padding-left: 1%;
+}
+
+/* TODO */
+.search_box {
+	position: relative;
+	float: right;
+}
+
+.shifted_body {
+	overflow: auto;
+	padding-left: 5%;
+}
+
+.area {
+	padding-bottom: 2%;
+}
+
+#header_logo {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.about_me {
+	width: 95%;
+	height: 15%;
+}
+
+.save {
+	clear: left;
 }
 
 input {
@@ -114,18 +164,18 @@ textarea {
     color: #F7F7F7;
     padding: 10px 0px;
 	border-width: 2px 0px 2px 0px;
-	outline: none;
 	font-weight: 900;
 	text-align: center;
 	text-shadow: #000000 2px 2px;
+	outline: none;
 }
 
 .sidebar_entry {
-    width: 100%;
-    background: none;
-    border: solid;
-    color: #F7F7F7;
-    padding: 10px 0px;
+	width: 100%;
+	background: none;
+	border: solid;
+	color: #F7F7F7;
+	padding: 10px 0px;
 	border-width: 0px 0px 1px 0px;
 	outline: none;
 }
@@ -244,8 +294,29 @@ textarea {
 		padding: 3%;
 		position: absolute;
 		width: 94%;
-		bottom: 0px;
+		
+	}
+
+	.shifted {
 		top: 44px;
+		bottom: 0px;
+	}
+
+	.column {
+		height: 100%;
+		float: left;
+		width: 49%;
+	}
+	
+	.column_layout .column:first-of-type {
+		border-width: 0px 1px 0px 0px;
+    	border-style: solid;
+    	border-color: #000000;
+    	width: 44%;
+	}
+	.column_layout .column:nth-child(2) {
+		padding-left: 8%;
+    	width: 41%;
 	}
 
 	#sidebar_content {
