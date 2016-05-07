@@ -63,13 +63,11 @@ function userExists($username, $db) {
 	$check_username = $db->prepare('SELECT username FROM users WHERE username = :username');
 	$check_username->bindParam(':username', $username);
 	$check_username->execute();
-	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
 	$check_username = $check_username->fetchAll();
 
 	if (count($check_username) > 0) { return true; }
 	else { return false; }
 }
-
 
 // --------------------------------------------------------------
 // Determine if the given user_id has been registered.
@@ -88,7 +86,6 @@ function userIDExists($user_id, $db) {
 	else { return false; }
 }
 
-// TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
 // ------------------------------------------------------------------
 // A function to get the user_id based on the username.
 // @param username the username to get the id for
@@ -99,14 +96,12 @@ function getUserId($username, $db) {
 	$get_id = $db->prepare('SELECT user_id FROM users WHERE username = :username');
 	$get_id->bindParam(':username', $username);
 	$get_id->execute();
-	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
-	$get_id = $get_id->fetchAll();
+	$get_id = $get_id->fetch();
 
-	if (count($get_id) > 0) { return $get_id[0]['user_id']; }
+	if (count($get_id) > 0) { return $get_id['user_id']; }
 	else { return -1; }
 }
 
-// TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
 // ------------------------------------------------------------------
 // A function to get the username based on the user_id.
 // @param user_id the user_id to get the username for
@@ -117,10 +112,9 @@ function getUsername($user_id, $db) {
 	$get_username = $db->prepare('SELECT username FROM users WHERE user_id = :user_id');
 	$get_username->bindParam(':user_id', $user_id);
 	$get_username->execute();
-	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
-	$get_username = $get_username->fetchAll();
+	$get_username = $get_username->fetch();
 
-	if (count($get_username) > 0) { return $get_username[0]['username']; }
+	if (count($get_username) > 0) { return $get_username['username']; }
 	else { return null; }
 }
 

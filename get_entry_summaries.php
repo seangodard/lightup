@@ -1,7 +1,5 @@
 <?php 
 
-// TODO : Do a check of what happens when these controllers are navigated to : Thu 28 Apr 2016 03:30:36 PM EDT 
-
 // Start the session
 session_start();
 
@@ -25,4 +23,7 @@ if (isset($_POST['project_id']) && isset($_POST['timestamp'])) {
 		echo json_encode($result); 
 	}
 }
-// TODO : Otherwise redirect to home page? : Wed 27 Apr 2016 04:31:06 PM EDT 
+else {
+	header('Location: /');
+	exit();
+}
