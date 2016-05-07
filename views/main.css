@@ -79,15 +79,20 @@ p {
 }
 
 /* TODO */
-.logout {
-	position: fixed;
+.profile, .logout {
+	float: left;
 	padding-left: 1%;
 }
 
 /* TODO */
-.search_box {
-	position: relative;
+#search_box {
 	float: right;
+	padding: 10px 10px 10px 0px;
+}
+
+#search_box input {
+	margin: 0px;
+	background: #F7F7F7;
 }
 
 .shifted_body {
