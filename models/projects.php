@@ -8,7 +8,6 @@ require_once('models/db_connection.php');
  * 	any of these operations.
  */
 
-// TODO : Debug : Sat 16 Apr 2016 11:18:35 AM EDT 
 // ------------------------------------------------------------------
 // A function to get the project_id based on the project name.
 // @param project the project name to get the id for
@@ -53,14 +52,12 @@ function isMember($user_id, $project_id, $db) {
 	$check_membership->bindParam(':user_id', $user_id);
 	$check_membership->bindParam(':project_id', $project_id);
 	$check_membership->execute();
-	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
 	$check_membership = $check_membership->fetchAll();
 
 	if (count($check_membership) > 0) { return true; }
 	else { return false; }
 }
 
-// TODO : Debug : Sat 16 Apr 2016 04:59:16 PM EDT 
 // ------------------------------------------------------------------
 // Retreive the sorted summaries of the teams journal which contains
 // 	only the timestamp, posting user, and brief title.
@@ -74,7 +71,6 @@ function getJournalSummaries($user_id, $project_id, $db) {
 	return getJournalSummariesFollowing($user_id, $project_id, 0, $db);
 }
 
-// TODO : Debug : Sat 16 Apr 2016 04:59:16 PM EDT 
 // ------------------------------------------------------------------
 // Retreive the sorted summaries of the teams journal following the given timestamp
 // 	in a format which contains only the timestamp, posting user, and brief title.
@@ -88,7 +84,6 @@ function getJournalSummaries($user_id, $project_id, $db) {
 function getJournalSummariesFollowing($user_id, $project_id, $timestamp, $db) {
 	// Verify that the user is a member of the project and then retrieve journal if memeber
 	if (isMember($user_id, $project_id, $db)) {
-		// TODO : Speed up query : Thu 21 Apr 2016 08:26:43 PM EDT 
 		$journal_summary = $db->prepare('SELECT entry_id, username as poster_username, title, entry_time, user_id as posting_user_id
 												FROM 
 											(SELECT entry_id, posting_user_id as user_id, title,
@@ -119,7 +114,6 @@ function getJournalSummariesFollowing($user_id, $project_id, $timestamp, $db) {
 function getJournalEntryData($user_id, $project_id, $entry_id, $db) {
 	// Verify that the user is a member of the project and then retrieve journal if memeber
 	if (isMember($user_id, $project_id, $db)) {
-		// TODO : Speed up query : Thu 21 Apr 2016 08:26:43 PM EDT 
 		$journal_entry = $db->prepare('SELECT entry_id, username as poster_username, user_id AS posting_user_id, title, 
 													body, entry_time
 												FROM 
@@ -165,7 +159,52 @@ function addJournalEntry($user_id, $project_id, $title, $body, $db) {
 	else { return false; }	
 }
 
-// TODO : Edit an entry. Must own the entry. : Sat 16 Apr 2016 10:49:22 AM EDT 
+// ------------------------------------------------------------
+// A helper to get the project_id of the given entry
+// @param entry_id the entry_id that you would like to look up
+// @param db a valid database connection
+// @return the project_id of the entry or null if it doesn't exist
+// ------------------------------------------------------------
+function getEntryProjectID($entry_id, $db) {
+	$find_project_id = $db->prepare('SELECT project_id FROM project_journal WHERE entry_id = :entry_id');
+	$find_project_id->bindParam(':entry_id', $entry_id);
+	$find_project_id->execute();
+	$find_project_id = $find_project_id->fetch(PDO::FETCH_ASSOC);
+
+	if (count($find_project_id > 0)) { return $find_project_id['project_id']; }
+	else { return null; }
+}
+
+// ------------------------------------------------------------------
+// Attempts to update the given entry
+// 	@param user_id the user id of the user attempting the update
+// 	@param entry_id the id of the entry that the user would like to modify 
+// 	@param title the updated title of the entry
+// 	@param body the updated content of the entry
+// 	@param db a valid database connection
+// 	@return whether or not the entry was updated in the database
+// ------------------------------------------------------------------
+function updateJournalEntry($user_id, $entry_id, $title, $body, $db) {
+	// Verify that the user is a member of the project before updating the post
+	$project_id = getEntryProjectID($entry_id, $db);
+	if ($project_id != null) {
+		if (isMember($user_id, $project_id, $db)) {
+
+			// Attempt to update the post
+			$insert = $db->prepare('UPDATE project_journal SET title=:title, body=:body WHERE
+										entry_id=:entry_id AND posting_user_id=:user_id');
+			$insert->bindParam(':user_id', $user_id);
+			$insert->bindParam(':entry_id', $entry_id);
+			$insert->bindParam(':title', $title);
+			$insert->bindParam(':body', $body);
+			$insert->execute();
+
+			if ($insert->rowCount() > 0) { return true; }
+			else { return false; }	
+		}
+		else { return false; }	
+	}
+}
 
 // TODO : Debug : Th 5 May 2016 8:53:35 AM EDT 
 // ------------------------------------------------------------------
@@ -179,7 +218,7 @@ function getProjectPageInfo($project_id, $db) {
 	$select->bindParam(':project_id', $project_id);
 	$select->execute();
 
-	$select = $select->fetchAll(DO::FETCH_ASSOC);
+	$select = $select->fetchAll(PDO::FETCH_ASSOC);
 
 	if (count($select) > 0) {
 		return array( "project_id" => $select['project_id'], "project_name" => $select['project_name'], "description" => $select['description']);
