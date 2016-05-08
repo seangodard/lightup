@@ -20,12 +20,6 @@ body {
 	background: #1F1F1F;
 }
 
-#header h1 {
-	padding: 8px;
-	font-size: 30px;
-	font-family: 'Sacramento', cursive;
-}
-
 h2, h3, h4 {
 	color: #000000;
 }
@@ -106,15 +100,34 @@ p {
 	padding-bottom: 2%;
 }
 
+.header1 {
+	z-index: 1000;
+	background: #565656;
+}
+
+.header2 {
+	z-index: 1001;
+}
+
 #header_logo {
-	position: fixed;
 	left: 50%;
-	transform: translateX(-50%);
+	padding: 8px;
+	font-size: 30px;
+	font-family: 'Sacramento', cursive;
+}
+
+.create_project {
+	width: 90%;
+	padding: 3%;
 }
 
 .about_me {
 	width: 95%;
 	height: 15%;
+}
+
+.file_upload {
+	background: none;
 }
 
 #center_main_body {
@@ -127,7 +140,7 @@ p {
     height: 100%;
 }
 
-.result_title {
+.result_title, .project_title {
 	position: relative;
     padding: 5%;
 }
@@ -170,14 +183,12 @@ textarea {
 	box-sizing : border-box;
 }
 
-#header {
+.header {
     height: 60px;
     color: #FFFFFF;
-    background: #565656;
     box-shadow: 0px 4px 8px #000000;
     position: absolute;
     width: 100%;
-    z-index: 1000;
 }
 
 .sidebar_title {
@@ -279,6 +290,12 @@ textarea {
 textarea {
 	height: 100px;
 }
+
+/*
+#description {
+	width: 90%;
+	margin-left: 5%;
+}*/
 
 /* Set scrollbar style */
 /* Source: https://css-tricks.com/examples/WebKitScrollbars/ */

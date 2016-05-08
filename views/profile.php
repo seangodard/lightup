@@ -135,7 +135,7 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 			</div>
 <?php endforeach; ?>
 			<div id="add_project">
-				<a href="new_project.php">
+				<a href="create_project_controller.php">
 					<button class="sidebar_entry" name="new_project" type="submit" value="new_project">
 						+
 					</button>
