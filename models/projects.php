@@ -206,7 +206,6 @@ function updateJournalEntry($user_id, $entry_id, $title, $body, $db) {
 	}
 }
 
-// TODO : Debug : Th 5 May 2016 8:53:35 AM EDT 
 // ------------------------------------------------------------------
 //  Retrieve a project's information
 // 	@param project_id the project id the user would like to retrieve information about
@@ -214,14 +213,14 @@ function updateJournalEntry($user_id, $entry_id, $title, $body, $db) {
 // 	@return array with project's information or null if none was found
 // ------------------------------------------------------------------
 function getProjectPageInfo($project_id, $db) {
-	$select = $db->prepare('SELECT * FROM projects WHERE project_id=:project_id');
+	$select = $db->prepare('SELECT project_id, project_name, description FROM projects WHERE project_id=:project_id');
 	$select->bindParam(':project_id', $project_id);
 	$select->execute();
 
-	$select = $select->fetchAll(PDO::FETCH_ASSOC);
+	$select = $select->fetch(PDO::FETCH_ASSOC);
 
 	if (count($select) > 0) {
-		return array( "project_id" => $select['project_id'], "project_name" => $select['project_name'], "description" => $select['description']);
+		return $select;
 	}
 	else { return null; }
 }
@@ -255,13 +254,17 @@ function getProjectMembers($project_id, $db) {
 // 	@param db a valid database connection
 // 	@return whether or not the update was successful
 // ------------------------------------------------------------------
-function updateProjectInfo($project_id, $project_name, $project_description, $db) {
-	$update = $db->prepare('UPDATE projects SET project_name=:project_name,description=:description WHERE project_id=:project_id');
-	$update->bindParam(':project_name', $project_name);
-	$update->bindParam(':description', $project_description);
-	$update->bindParam('project_id', $project_id);
-
-	return $update->execute();
+function updateProjectInfo($project_id, $project_name, $project_description, $user_id, $db) {
+	if (isMember($user_id, $project_id, $db)) {
+		$update = $db->prepare('UPDATE projects SET project_name=:project_name,description=:description WHERE project_id=:project_id');
+		$update->bindParam(':project_name', $project_name);
+		$update->bindParam(':description', $project_description);
+		$update->bindParam('project_id', $project_id);
+		return $update->execute();
+	}
+	else {
+		return false;
+	}
 }
 
 // TODO : Debug : Th 5 May 2016 9:26:50 AM EDT 
