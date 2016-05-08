@@ -80,39 +80,39 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 						<div id="experiences" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "experiences", $db)): ?>
 							<h3>Experiences</h3>
-<?php foreach ((selectExpSkillsHobbies($profile_id, "experiences", $db)) as $row): ?>
-<?php if ($row['experience'] !== ''): ?>
+	<?php foreach ((selectExpSkillsHobbies($profile_id, "experiences", $db)) as $row): ?>
+		<?php if ($row['experience'] !== ''): ?>
 							<div class="medium_justified" id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
 								<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>
 							</div>
-<?php endif; ?>
-<?php endforeach; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
 <?php endif; ?>
 						</div>
 
 						<div id="skills" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "skills", $db)): ?>
 							<h3>Skills</h3>
-<?php foreach (selectExpSkillsHobbies($profile_id, "skills", $db) as $row): ?>
-<?php if ($row['skill'] !== ''): ?>
+	<?php foreach (selectExpSkillsHobbies($profile_id, "skills", $db) as $row): ?>
+		<?php if ($row['skill'] !== ''): ?>
 							<div class="medium_justified" id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
 								<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>
 							</div>
-<?php endif; ?>
-<?php endforeach; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
 <?php endif; ?>
 						</div>
 
 						<div id="hobbies" class="left_justified area">
 <?php if (notBlankExpSkillsHobbies($profile_id, "hobbies", $db)): ?>
 							<h3>Hobbies</h3>
-<?php foreach (selectExpSkillsHobbies($profile_id, "hobbies", $db) as $row): ?>
-<?php if ($row['hobby'] !== ''): ?>
+	<?php foreach (selectExpSkillsHobbies($profile_id, "hobbies", $db) as $row): ?>
+		<?php if ($row['hobby'] !== ''): ?>
 							<div class="medium_justified" id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
 								<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>
 							</div>
-<?php endif; ?>
-<?php endforeach; ?>
+		<?php endif; ?>
+	<?php endforeach; ?>
 <?php endif; ?>
 						</div>
 					</div>

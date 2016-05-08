@@ -6,12 +6,17 @@ $(document).ready(function() {
 	$('.drop').on('click', function() {
 		// Prevent the page from reloading to allow user to finish updating profile
 		event.preventDefault();
-
-		// Get the section and its id to delete
+		
 		var section = $(this).parent();
-		var section_id = section.attr('id');
+		var info = section.attr('class');
+		var section_id;
 
-		console.log('Delete: ' + section_id);
+		if (info != 'info') {
+			section = section.parent();
+		}
+
+		section_id = section.attr('id');
+		
 		// Send an AJAX request to delete section & remove section from HTML
 		$.post('profile_add_box.php', {dropSection:section_id}, function(response) {
 			console.log('Response: '+response);

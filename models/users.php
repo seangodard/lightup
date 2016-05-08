@@ -118,7 +118,6 @@ function getUsername($user_id, $db) {
 	else { return null; }
 }
 
-// TODO : Debug : Th 5 May 2016 8:41:35 AM EDT 
 // ------------------------------------------------------------------
 // A function to get a list usernames that match a certain pattern.
 // @param pattern the pattern to match
@@ -126,18 +125,14 @@ function getUsername($user_id, $db) {
 // @return the an array of usernames that match the pattern
 // ------------------------------------------------------------------
 function getUsersLike($pattern, $db) {
-	$get_username_like = $db->prepare('SELECT username FROM users WHERE username like :name');
+	$pattern = '%' . $pattern . '%';
+	$get_username_like = $db->prepare('SELECT user_id FROM users WHERE username like :name');
 	$get_username_like->bindParam(':name', $pattern);
 	$get_username_like->execute();
 
-	if (count($get_username_like) > 0) {
-		// Source: http://php.net/manual/en/function.array-push.phps
-		$results = array();
-	    foreach ($selection as $row) {
-	    	$results[$row['user_id']] = $row['username']; // Not 100% sure this line works
-	    }
-
-	    return $results;
+	if ($get_username_like->rowCount() > 0) {
+		return $get_username_like;
 	}
-	else { return false; }
+
+	else { return null; }
 }

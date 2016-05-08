@@ -12,7 +12,7 @@
 	</div>
 	<div id="search_box">
 		<form action="search.php" method="get">
-			<input type="search" name="search">
+			<input type="search" placeholder="Search" name="search">
 		</form>
 	</div>
 </div>

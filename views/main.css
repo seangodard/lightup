@@ -62,7 +62,7 @@ p {
     top: 60px;
 }
 
-.profile_title {
+.profile_title, .result_title {
 	padding-bottom: 30px;
 }
 
@@ -78,16 +78,19 @@ p {
 	padding-left: 4%;
 }
 
-/* TODO */
-.logout {
-	position: relative;
+.profile, .logout {
+	float: left;
 	padding-left: 1%;
 }
 
-/* TODO */
-.search_box {
-	position: relative;
+#search_box {
 	float: right;
+	padding: 10px 10px 10px 0px;
+}
+
+#search_box input {
+	margin: 0px;
+	background: #F7F7F7;
 }
 
 .shifted_body {
@@ -108,6 +111,17 @@ p {
 .about_me {
 	width: 95%;
 	height: 15%;
+}
+
+.center_main_body {
+	width: 75%;
+	text-align: center;
+}
+
+.result_title {
+	position: relative;
+    top: 60px;
+    padding: 5%;
 }
 
 .save {
@@ -188,7 +202,7 @@ textarea {
 	height: 40px;
 }
 
-#entry_title {
+.title {
 	width: 100%;
     font-size: 30px;
     font-weight: 600;
@@ -209,6 +223,20 @@ textarea {
 
 #main_body section {
 	padding: 20px 0px;
+}
+
+.button1 {
+	margin: 0px;
+	width: 75%;
+}
+
+.button2 {
+	margin: 0px;
+	width: 25%;
+}
+
+.button1, .button2 {
+	float: left;
 }
 
 .journal_entry {
