@@ -1,6 +1,10 @@
 <?php 
 
-require_once('login_verification.php');
+// ------------------------------------------------------------------
+// Redirect users to login in if they are not already
+// ------------------------------------------------------------------
+@require_once('login_verification.php');
+
 require_once('constants.php');
 require_once('sessions.php');
 require_once('models/profile.php');

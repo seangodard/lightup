@@ -225,7 +225,6 @@ function getProjectPageInfo($project_id, $db) {
 	else { return null; }
 }
 
-// TODO : Debug : Th 5 May 2016 9:03:07 AM EDT 
 // ------------------------------------------------------------------
 //  Retrieve the members of a project
 // 	@param project_id the project id the user would like to retrieve information about
@@ -245,7 +244,6 @@ function getProjectMembers($project_id, $db) {
 	else { return null; }
 }
 
-// TODO : Debug : Th 5 May 2016 9:12:52 AM EDT 
 // ------------------------------------------------------------------
 //  Update a project's information
 // 	@param project_id the project id the user would like to retrieve information about
@@ -303,7 +301,6 @@ function addToMembersQueue($user_id, $project_id, $db) {
 	return $insert->execute();
 }
 
-// TODO : Debug : Th 5 May 2016 9:33:28 AM EDT 
 // ------------------------------------------------------------------
 // Retrieve the members of a project
 // @param requesting_user_id the user requesting to join a project
@@ -313,17 +310,17 @@ function addToMembersQueue($user_id, $project_id, $db) {
 // ------------------------------------------------------------------
 function getProjectMembersQueue($requesting_user_id, $project_id, $db) {
 	if (isMember($requesting_user_id, $project_id, $db)) {
-		$select = $db->prepare('SELECT * FROM projects_member NATURAL JOIN users WHERE user_id=:user_id AND project_id=:project_id');
-		$select->bindParam(':user_id', $requesting_user_id);
+		$select = $db->prepare('SELECT user_id, username FROM members_queue NATURAL JOIN users WHERE project_id=:project_id');
 		$select->bindParam(':project_id', $project_id);
 		$select->execute();
 
 		$select = $select->fetchAll(PDO::FETCH_ASSOC);
 
-		if (count($select) > 0) {
-			return array( "user_id" => $select['user_id'], "username" => $select['username']);
-		}
+		if (count($select) > 0) { return $select; }
 		else { return null; }
+	}
+	else {
+		return null;
 	}
 }
 

@@ -24,10 +24,9 @@ if (isset($_GET['id'])) {
 
 	$db = databaseConnection();
 
-	// TODO : Change to redirect to project main public page : Tue 19 Apr 2016 09:51:39 AM EDT 
-	// Redirect users that are not part of the project
+	// Redirect users that are not part of the project to the project main page
 	if (!isMember(getLoggedInUserID($db), $project_id, $db)) {
-		header('Location: profile.php');
+		header('Location: project.php?id='.$project_id);
 		exit();
 	}
 	
@@ -37,7 +36,6 @@ if (isset($_GET['id'])) {
 	// ------------------------------------------------------------------
 	require_once('views/journal.php');
 }
-// TODO : Change this to redirect to project search page : Tue 19 Apr 2016 09:50:07 AM EDT 
 // Send them back to the home page
 else {
 	header('Location: profile.php');
