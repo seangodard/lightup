@@ -14,7 +14,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 <?php require_once('top_bar.php'); ?>
 			<div id="center_main_body">
 				<div class="result_title">
-					<h2>Results: <?php echo htmlentities($search, ENT_QUOTES, 'utf-8'); ?></h2><br>
+					<h2>Results: <?php echo htmlentities($search, ENT_QUOTES, 'utf-8'); ?></h2>
 				</div>
 				<div class="results">
 <?php if (getUsersLike($search, $db) == null): ?>
@@ -27,7 +27,6 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 					</div>
 	<?php endforeach; ?>
 <?php endif; ?>
-					<br>
 					<br>
 					
 <?php if (getProjectsLike($search, $db) == null): ?>
