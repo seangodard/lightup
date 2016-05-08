@@ -214,6 +214,20 @@ textarea {
 	padding: 20px 0px;
 }
 
+.button1 {
+	margin: 0px;
+	width: 75%;
+}
+
+.button2 {
+	margin: 0px;
+	width: 25%;
+}
+
+.button1, .button2 {
+	float: left;
+}
+
 .journal_entry {
 	white-space: pre-wrap;
 }

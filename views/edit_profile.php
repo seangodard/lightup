@@ -51,7 +51,7 @@ $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
 							<div id="experiences" class="left_justified area">
 								<h3>Experiences</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "experiences", $db)) as $row): ?>
-								<div id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<div id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" class="info">
 									<input type="text" name="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>">
 									<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
 								</div>
@@ -62,7 +62,7 @@ $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
 							<div id="skills" class="left_justified area">
 								<h3>Skills</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db)) as $row): ?>
-								<div id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<div id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" class="info">
 									<input type="text" name="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>">
 									<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
 								</div>
@@ -73,7 +73,7 @@ $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
 							<div id="hobbies" class="left_justified area">
 								<h3>Hobbies</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db)) as $row): ?>
-								<div id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<div id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" class="info">
 									<input type="text" name="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>">
 									<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
 								</div>
@@ -94,12 +94,16 @@ $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
 				</div>
 <?php foreach ((selectProjects(getLoggedInUserID(), $db)) as $row): ?>
 				<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-					<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<button class="sidebar_entry" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
-							<input type="image" class="drop" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
-						</button>
-					</a>
+					<div class="sidebar_entry two_buttons">
+						<div class="button1">
+						<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+								<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
+						</a>
+						</div>
+						<div class="button2">
+						<input type="image" class="drop" value="<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>" src="views/images/red_cross.svg" alt="drop" width="25" height="25">
+						</div>
+					<div>
 				</div>
 <?php endforeach; ?>
 			</div>
