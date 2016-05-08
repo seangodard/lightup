@@ -21,7 +21,7 @@ function setEditForm() {
 	$('#main_body').append(
 			'<div id="edit_project" class="flex flex_grow">'
 				+'<div class="formgroup flex_fit">'
-					+'<input type="text" id="project_entry_title" name="project_entry_title" value="'+old_title+'">'
+					+'<input type="text" id="project_entry_title" class="title" name="project_entry_title" value="'+old_title+'">'
 				+'</div>'
 				+'<textarea id="project_entry_body" class="flex_grow">'+old_body+'</textarea>'
 				+'<input type="submit" id="update_project" class="flex_fit" value="Done">'
@@ -58,15 +58,9 @@ function updateProject() {
 		return;
 	}
 
-	// TODO : Here : Sun 08 May 2016 11:31:56 AM EDT 
 	// Send the request to update the entry for the user
 	$.post('update_project_info.php', {project_id : project_id, project_title : new_title, project_body : new_body},
 		function(response) {
-			// TODO : Remove : Sun 08 May 2016 11:57:39 AM EDT 
-			console.log(response.project_name);
-			console.log(response.description);
-
-			// TODO : Here : Sun 08 May 2016 11:31:56 AM EDT 
 			// Fill in the body with the current project info/updated info
 			// Remove old form
 			$('#edit_project').remove();

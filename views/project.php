@@ -19,6 +19,9 @@
 		<?php require_once('views/top_bar.php') ?>
 		<div id="content">
 			<div id="nav_links">
+<?php if (isMember(getLoggedInUserID(), $project_id, $db)): ?>
+				<a href="journal.php?id=<?php echo $project_id?>"><div class="button">Journal</div></a>
+<?php endif; ?>
 				<a href="project.php?id=<?php echo $project_id?>"><div class="button current_page">Project Page</div></a>
 			</div>
 			<div id="main_body" class="flex">

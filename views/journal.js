@@ -102,7 +102,6 @@ function setEditForm() {
 
 	// Update the tools in the toolbar
 	$('#tool_bar').empty();
-	putAddButton();
 
 	// Show the form with the old values filled in
 	$('#main_body').append(
