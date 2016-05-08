@@ -77,7 +77,7 @@ function setAddForm() {
 	$('#main_body').append(
 			'<div id="add_form" class="flex flex_grow">'
 				+'<div class="formgroup flex_fit">'
-					+'<input type="text" placeholder="Title" id="entry_title" name="entry_title">'
+					+'<input type="text" placeholder="Title" id="entry_title" class="title" name="entry_title">'
 				+'</div>'
 				+'<textarea id="entry_body" class="flex_grow"></textarea>'
 				+'<input type="submit" id="add_entry" class="flex_fit" value="Done">'
@@ -108,7 +108,7 @@ function setEditForm() {
 	$('#main_body').append(
 			'<div id="update_form" class="flex flex_grow">'
 				+'<div class="formgroup flex_fit">'
-					+'<input type="text" id="entry_title" name="entry_title" value="'+current_title+'">'
+					+'<input type="text" id="entry_title" name="entry_title" class="title" value="'+current_title+'">'
 				+'</div>'
 				+'<textarea id="entry_body" class="flex_grow">'+current_body+'</textarea>'
 				+'<input type="hidden" id="visible_entry_id" value="'+entry_id+'">'

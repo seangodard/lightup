@@ -19,17 +19,22 @@
 		<?php require_once('views/top_bar.php') ?>
 		<div id="content">
 			<div id="nav_links">
-				<a href="journal.php?id=<?php echo $project_id?>"><div class="button">Journal</div></a>
-				<a href="project.php?id=<?php echo $project_id?>"><div class="button current_page">Main</div></a>
+				<a href="project.php?id=<?php echo $project_id?>"><div class="button current_page">Project Page</div></a>
 			</div>
 			<div id="main_body" class="flex">
-				<div id="heading" class="flex_fit">
-					<h2><?php echo $project_name; ?></h2>
-					<input type="hidden" id="project_id" value="<?php echo $project_id; ?>">
+				<input type="hidden" id="project_id" value="<?php echo $project_id?>">
+<?php if(isMember(getLoggedInUserID(), $project_id, $db)): ?>
+				<div id="tool_bar" class="flex_fit">
+					<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">
 				</div>
-				<div id="description" class="flex flex_grow">
-					<div id="project_desc"><?php echo $project_description; ?></div>
-					<input type="submit" id="add_entry" value="Edit" class="flex_fit">
+<?php endif; ?>
+				<div id="project_info">
+					<div id="heading" class="flex_fit">
+						<h2 id="project_title"><?php echo $project_name; ?></h2>
+					</div>
+					<div id="descriptio" class="flex flex_grow">
+						<div id="project_body"><?php echo $project_description; ?></div>
+					</div>
 				</div>
 			</div>
 		</div>

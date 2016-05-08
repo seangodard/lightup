@@ -20,7 +20,7 @@
 		<div id="content">
 			<div id="nav_links">
 				<a href="journal.php?id=<?php echo $project_id?>"><div class="button current_page">Journal</div></a>
-				<a href="project.php?id=<?php echo $project_id?>"><div class="button">Main</div></a>
+				<a href="project.php?id=<?php echo $project_id?>"><div class="button">Project Page</div></a>
 			</div>
 			<div id="main_body" class="flex shifted">
 				<div id="heading" class="flex_fit">
