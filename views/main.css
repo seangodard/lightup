@@ -62,7 +62,7 @@ p {
     top: 60px;
 }
 
-.profile_title {
+.profile_title, .result_title {
 	padding-bottom: 30px;
 }
 
@@ -111,6 +111,17 @@ p {
 .about_me {
 	width: 95%;
 	height: 15%;
+}
+
+.center_main_body {
+	width: 75%;
+	text-align: center;
+}
+
+.result_title {
+	position: relative;
+    top: 60px;
+    padding: 5%;
 }
 
 .save {
@@ -191,7 +202,7 @@ textarea {
 	height: 40px;
 }
 
-#entry_title {
+.title {
 	width: 100%;
     font-size: 30px;
     font-weight: 600;

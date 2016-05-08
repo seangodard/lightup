@@ -11,7 +11,7 @@
 		<a class="logout" href="../logout.php"><input type="image" src="views/images/logout.png" alt="logout" width="50" height="50"></a>
 	</div>
 	<div id="search_box">
-		<form action="search_controller.php" method="get">
+		<form action="search.php" method="get">
 			<input type="search" placeholder="Search" name="search">
 		</form>
 	</div>

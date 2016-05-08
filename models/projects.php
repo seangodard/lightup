@@ -272,20 +272,16 @@ function updateProjectInfo($project_id, $project_name, $project_description, $db
 // @return an array of projects that match the pattern
 // ------------------------------------------------------------------
 function getProjectsLike($pattern, $db) {
-	$get_projects_like = $db->prepare('SELECT project_name FROM projects WHERE project_name like :name');
+	$pattern = '%' . $pattern . '%';
+	$get_projects_like = $db->prepare('SELECT project_id FROM projects WHERE project_name like :name');
 	$get_projects_like->bindParam(':name', $pattern);
 	$get_projects_like->execute();
 
-	if (count($get_projects_like) > 0) {
-		// Source: http://php.net/manual/en/function.array-push.phps
-		$results = array();
-	    foreach ($selection as $row) {
-	    	$results[$row['project_id']] = $row['project_name']; // Not 100% sure this line works
-	    }
-
-	    return $results;
+	if ($get_projects_like->rowCount() > 0) {
+		return $get_projects_like;
 	}
-	else { return false; }
+
+	else { return null; }
 }
 
 // TODO : Debug : Th 5 May 2016 9:28:00 AM EDT 
