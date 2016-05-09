@@ -299,20 +299,25 @@ function getProjectsLike($pattern, $db) {
 	else { return null; }
 }
 
-// TODO : Debug : Th 5 May 2016 9:28:00 AM EDT 
 // ------------------------------------------------------------------
 // Add a user to a project's member queue
 // @param user_id the user's id to add
 // @param project_id the project to add the user to
 // @param db a valid database connection
-// @return an array of projects that match the pattern
+// @return whether or not the add was successful
 // ------------------------------------------------------------------
 function addToMembersQueue($user_id, $project_id, $db) {
-	$insert = $db->prepare('INSERT INTO projects_member(user_id, project_id) VALUES(:user_id,:project_id)');
-	$insert->bindParam(':user_id', $user_id);
-	$insert->bindParam(':project_id', $project_id);
+	if (projectIDExists($project_id, $db)) {
+		if(!isMember($user_id, $project_id, $db) && !isInMemberQueue($user_id, $project_id, $db)) {
+			$insert = $db->prepare('INSERT INTO members_queue(user_id, project_id) VALUES(:user_id,:project_id)');
+			$insert->bindParam(':user_id', $user_id);
+			$insert->bindParam(':project_id', $project_id);
 
-	return $insert->execute();
+			return $insert->execute();
+		}
+		else { return false; }
+	}
+	else { return false; }
 }
 
 // ------------------------------------------------------------------
@@ -338,7 +343,6 @@ function getProjectMembersQueue($requesting_user_id, $project_id, $db) {
 	}
 }
 
-// TODO : Debug : Mon 09 May 2016 02:17:47 PM EDT 
 // ------------------------------------------------------------------
 // @param user_id the id of the user to check
 // @param project_id the id of the project whose queue to look at
@@ -355,7 +359,6 @@ function isInMemberQueue($user_id, $project_id, $db) {
 	else { return false; }
 }
 
-// TODO : Debug : Th 5 May 2016 9:48:46 AM EDT 
 // ------------------------------------------------------------------
 // Add a member to a project and remove them from the project members queue if successful
 // @param requesting_user_id the user requesting to add a member to a project

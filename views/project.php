@@ -38,7 +38,7 @@
 					<div id="heading" class="flex_fit">
 						<h2 id="project_title"><?php echo $project_name; ?></h2>
 					</div>
-					<div id="descriptio" class="flex flex_grow">
+					<div id="description" class="flex flex_grow">
 						<div id="project_body"><?php echo $project_description; ?></div>
 					</div>
 				</div>
@@ -46,6 +46,15 @@
 		</div>
 		<div id="sidebar">
 			<div id="sidebar_content">
+<?php if(!isInMemberQueue(getLoggedInUserID(), $project_id, $db) && !isMember(getLoggedInUserID(), $project_id, $db)): ?>
+				<div id="join_bar">
+					<button id="request_join" class="side_large_button">Request to join!</button>
+				</div>
+<?php elseif(isInMemberQueue(getLoggedInUserID(), $project_id, $db)): ?>
+				<div id="join_bar">
+					<button class="side_large_button pressed">You're on the list!</button>
+				</div>
+<?php endif; ?>
 				<div class="sidebar_title">Project Members</div>
 <?php if ($raw_project_members != null): ?>
 	<?php foreach($raw_project_members as $member): ?>

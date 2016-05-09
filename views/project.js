@@ -164,9 +164,30 @@ function fillWithMembers() {
 }
 
 //----------------------------------------------------------------------
+// Set up the side request button to enable a user to click to request 
+// 	to join
+//----------------------------------------------------------------------
+function requestJoin() {
+	var project_id = $('#project_id').val();
+
+	// Send the request to join the project and update the button if you are put on 
+	// 	the queue
+	$.post('request_membership.php', {project_id : project_id}, function(response) {
+		// Notify user if it worked by updating the button
+		if (response) {
+			$('#join_bar').empty();
+			$('#join_bar').append('<button class="side_large_button pressed">You\'re on the list!</button>');
+		}
+	}, 'json');
+}
+
+//----------------------------------------------------------------------
 // Set up the buttons for when the document finishes loading
 //----------------------------------------------------------------------
 $(document).ready(function() {
 	// Setup the edit button to fill the main body with a form to edit the project info
 	$('#edit').on('click', setEditForm);
+
+	// Setup the request button to add the user to the project queue
+	$('#request_join').on('click', requestJoin);
 });

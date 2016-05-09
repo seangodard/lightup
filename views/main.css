@@ -153,6 +153,29 @@ p {
 	clear: left;
 }
 
+.side_large_button {
+	text-align: center;
+	padding: 8px;
+	margin: 4px 0px;
+	border-radius: 2px;
+	border-style: none;
+	box-sizing : border-box;
+    background: #009E2D;
+	width: 75%;
+	margin-top: 14px;
+	margin-left: 12.5%;
+	font-weight: 100;
+	color: #FFFFFF;
+}
+
+.side_large_button:hover {
+	background: #169E3D;
+}
+
+.pressed {
+    background: none;
+}
+
 input {
 	padding: 8px;
 	margin: 4px 0px;
