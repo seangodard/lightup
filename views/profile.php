@@ -1,6 +1,8 @@
 <?php 
 
 $profile_id = isset($_GET['id']) ? $_GET['id'] : getLoggedInUserID();
+$username = getUsername($profile_id, $db);
+$user_profile_picture = getProfilePicture($profile_id, $db);
 
 //------------------------------------------------------------------
 // Check that a certain column is not blank for a user's profile
@@ -31,7 +33,7 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 						<a href="edit_profile.php"><input type="image" id="edit" src="/views/images/edit.svg" alt="edit"></a>
 					</div>
 <?php endif; ?>
-					<h2><?php echo htmlentities(getUsername($profile_id, $db), ENT_QUOTES, 'utf-8'); ?></h2>
+					<h2><?php echo htmlentities($username, ENT_QUOTES, 'utf-8'); ?><input type="image" src="<?php echo htmlentities($user_profile_picture, ENT_QUOTES, 'utf-8'); ?>" alt="profile" width="50" height="50"></h2>
 				</div>
 
 
@@ -120,29 +122,29 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 			</div>
 		</div>
 
-	<div id="sidebar">
-		<div id="sidebar_content">
-			<div class="sidebar_title">
-				My Projects
-			</div>
+		<div id="sidebar">
+			<div id="sidebar_content">
+				<div class="sidebar_title">
+					My Projects
+				</div>
 <?php foreach ((selectProjects($profile_id, $db)) as $row): ?>
-			<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-				<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-					<button class="sidebar_entry" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
-						<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
-					</button>
-				</a>
-			</div>
+				<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+					<a href="journal.php?id=<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+						<button class="sidebar_entry" name="project" type="submit" value="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
+							<?php echo htmlentities($row['project_name'], ENT_QUOTES, 'utf-8'); ?>
+						</button>
+					</a>
+				</div>
 <?php endforeach; ?>
-			<div id="add_project">
-				<a href="create_project_controller.php">
-					<button class="sidebar_entry" name="new_project" type="submit" value="new_project">
-						+
-					</button>
-				</a>
+				<div id="add_project">
+					<a href="create_project_controller.php">
+						<button class="sidebar_entry" name="new_project" type="submit" value="new_project">
+							+
+						</button>
+					</a>
+				</div>
 			</div>
 		</div>
-	</div>
 
 	</body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

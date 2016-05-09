@@ -7,10 +7,8 @@ require_once('models/db_connection.php');
  */
 
 function userOrDefaultImage($file, $db) {
-	if (is_uploaded_file($file)) {
-		return 1;
-       //readfile($_FILES["fileToUpload"]['tmp_name']);
-    } else { return 0; }
+	if (is_uploaded_file($file)) { return 1; } 
+	else { return 0; }
 }
 
 // ------------------------------------------------------------------

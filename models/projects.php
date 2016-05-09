@@ -41,10 +41,10 @@ function getProjectName($project_id, $db) {
 }
 
 // ------------------------------------------------------------------
-// A function to get the project name based on the project id.
-// @param project_id the project id to get the name for
+// A function to get the picture filepath of a project based on the project id.
+// @param project_id the project id to get the picture for
 // @param db a valid database connection
-// @return the project name for the project or null if no id exists for that project
+// @return the filepath for the project's picture
 // ------------------------------------------------------------------
 function getProjectPicture($project_id, $db) {
 	$get_picture = $db->prepare('SELECT picture FROM projects WHERE project_id = :project_id');
@@ -52,8 +52,7 @@ function getProjectPicture($project_id, $db) {
 	$get_picture->execute();
 	$get_picture = $get_picture->fetch();
 
-	if (count($get_picture) > 0) { return $get_picture['picture']; }
-	else { return -1; }
+	return $get_picture['picture'];
 }
 
 // ------------------------------------------------------------------
