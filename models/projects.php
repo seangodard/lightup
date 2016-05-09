@@ -338,9 +338,26 @@ function getProjectMembersQueue($requesting_user_id, $project_id, $db) {
 	}
 }
 
+// TODO : Debug : Mon 09 May 2016 02:17:47 PM EDT 
+// ------------------------------------------------------------------
+// @param user_id the id of the user to check
+// @param project_id the id of the project whose queue to look at
+// @param db a valid database connection
+// @return if the given user_id is waiting in the members_queue
+// ------------------------------------------------------------------
+function isInMemberQueue($user_id, $project_id, $db) {
+	$check = $db->prepare('SELECT * FROM members_queue WHERE project_id=:project_id AND user_id=:user_id');
+	$check->bindParam(':user_id', $user_id);
+	$check->bindParam(':project_id', $project_id);
+	$check->execute();
+
+	if ($check->rowCount() > 0) { return true; }
+	else { return false; }
+}
+
 // TODO : Debug : Th 5 May 2016 9:48:46 AM EDT 
 // ------------------------------------------------------------------
-// Add a member to a project
+// Add a member to a project and remove them from the project members queue if successful
 // @param requesting_user_id the user requesting to add a member to a project
 // $param user_id the user to add to the project
 // @param project_id the project to add a member to
@@ -349,11 +366,39 @@ function getProjectMembersQueue($requesting_user_id, $project_id, $db) {
 // ------------------------------------------------------------------
 function addProjectMember($requesting_user_id, $user_id, $project_id, $db) {
 	if (isMember($requesting_user_id, $project_id, $db)) {
-		$insert = $db->prepare('INSERT INTO projects_member(user_id,project_id) VALUES(:user_id,:project_id)');
-		$insert->bindParam(':user_id', $user_id);
-		$insert->bindParam(':project_id', $project_id);
+		if (isInMemberQueue($user_id, $project_id, $db)) {
 
-		return $insert->execute();
+			// Start a transaction 
+			$db->beginTransaction();
+
+			$insert = $db->prepare('INSERT INTO projects_member(user_id,project_id) VALUES(:user_id,:project_id)');
+			$insert->bindParam(':user_id', $user_id);
+			$insert->bindParam(':project_id', $project_id);
+
+			// Remove the user from the project members queue if they are added successfully
+			if ($insert->execute()) {
+				$delete = $db->prepare('DELETE FROM members_queue WHERE user_id=:user_id
+													AND project_id=:project_id');
+				$delete->bindParam(':user_id', $user_id);
+				$delete->bindParam(':project_id', $project_id);
+
+				// Commit changes if both operations succeed
+				if($delete->execute()) {
+					return $db->commit();
+				}
+
+				// Undo changes if the delete failed for some reason
+				else {
+					$db->rollBack();
+					return false;
+				}
+			}
+			// Undo changes if the insert failed for some reason
+			else {
+				$db->rollBack();
+				return false;
+			}
+		}
 	}
 	return false;
 }

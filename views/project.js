@@ -89,8 +89,6 @@ function updateProject() {
 	}, 'json');
 }
 
-// TODO : Use the two button css already in place : Sun 08 May 2016 05:30:29 PM EDT 
-// TODO : Update so the user can click the secondary button of the element to add the user : Sun 08 May 2016 05:30:12 PM EDT 
 //----------------------------------------------------------------------
 // Set the sidebar to contain users that are in the projects members queue
 //----------------------------------------------------------------------
@@ -125,8 +123,6 @@ function fillWithMembersQueue() {
 	}, 'json');
 }
 
-// TODO : Here : Mon 09 May 2016 12:25:05 PM EDT 
-// TODO : This : Mon 09 May 2016 12:21:08 PM EDT 
 //----------------------------------------------------------------------
 // Attempt to add the given user in the projects queue to the project
 // 	as a member
@@ -134,20 +130,15 @@ function fillWithMembersQueue() {
 function addMember() {
 	var user_id = $(this).parent().parent().children('.queued_member_id').val();
 	var project_id = $('#project_id').val();
-
-	// TODO : Remove this : Mon 09 May 2016 12:25:12 PM EDT 
-	console.log('Trying to add member: '+user_id+' to project: '+project_id);
+	var pressed_button = $(this).parent().parent();
 
 	// Send the request to add the given member to the project
 	$.post('add_project_member.php', {user_id : user_id, project_id : project_id}, function(response) {
-		// TODO : Remove : Mon 09 May 2016 12:44:13 PM EDT 
-		console.log(response);
-
 		if (response) {
-			// TODO : Remove the button from the sidebar on success : Mon 09 May 2016 12:31:48 PM EDT 
-			$(this).parent().parent().remove();
+			// Remove the button for the user from the sidebar on success 
+			pressed_button.remove();
 		}
-	});
+	}, 'json');
 }
 
 //----------------------------------------------------------------------
