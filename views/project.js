@@ -116,11 +116,38 @@ function fillWithMembersQueue() {
 						+'<div class="button2 add_button">'
 							+'<button class="add_member">'+'+'+'</button>'
 						+'</div>'
-						+'<input type="hidden" id="queued_member_id" value="'+this.user_id+'">'
+						+'<input type="hidden" class="queued_member_id" value="'+this.user_id+'">'
 					+'</div>');
 			});
+
+			$('.add_member').on('click', addMember);
 		}
 	}, 'json');
+}
+
+// TODO : Here : Mon 09 May 2016 12:25:05 PM EDT 
+// TODO : This : Mon 09 May 2016 12:21:08 PM EDT 
+//----------------------------------------------------------------------
+// Attempt to add the given user in the projects queue to the project
+// 	as a member
+//----------------------------------------------------------------------
+function addMember() {
+	var user_id = $(this).parent().parent().children('.queued_member_id').val();
+	var project_id = $('#project_id').val();
+
+	// TODO : Remove this : Mon 09 May 2016 12:25:12 PM EDT 
+	console.log('Trying to add member: '+user_id+' to project: '+project_id);
+
+	// Send the request to add the given member to the project
+	$.post('add_project_member.php', {user_id : user_id, project_id : project_id}, function(response) {
+		// TODO : Remove : Mon 09 May 2016 12:44:13 PM EDT 
+		console.log(response);
+
+		if (response) {
+			// TODO : Remove the button from the sidebar on success : Mon 09 May 2016 12:31:48 PM EDT 
+			$(this).parent().parent().remove();
+		}
+	});
 }
 
 //----------------------------------------------------------------------
