@@ -21,7 +21,7 @@ function setEditForm() {
 	$('#main_body').append(
 			'<div id="edit_project" class="flex flex_grow">'
 				+'<div class="formgroup flex_fit">'
-					+'<input type="text" id="project_entry_title" name="project_entry_title" value="'+old_title+'">'
+					+'<input type="text" id="project_entry_title" class="title" name="project_entry_title" value="'+old_title+'">'
 				+'</div>'
 				+'<textarea id="project_entry_body" class="flex_grow">'+old_body+'</textarea>'
 				+'<input type="submit" id="update_project" class="flex_fit" value="Done">'
@@ -29,6 +29,9 @@ function setEditForm() {
 
 	// Enable the update action
 	$('#update_project').on('click', updateProject);
+
+	// Populate the sidebar with the members queue
+	fillWithMembersQueue();
 }
 
 //----------------------------------------------------------------------
@@ -58,15 +61,9 @@ function updateProject() {
 		return;
 	}
 
-	// TODO : Here : Sun 08 May 2016 11:31:56 AM EDT 
 	// Send the request to update the entry for the user
 	$.post('update_project_info.php', {project_id : project_id, project_title : new_title, project_body : new_body},
 		function(response) {
-			// TODO : Remove : Sun 08 May 2016 11:57:39 AM EDT 
-			console.log(response.project_name);
-			console.log(response.description);
-
-			// TODO : Here : Sun 08 May 2016 11:31:56 AM EDT 
 			// Fill in the body with the current project info/updated info
 			// Remove old form
 			$('#edit_project').remove();
@@ -81,12 +78,58 @@ function updateProject() {
 						+'<div id="project_body">'+response.description+'</div>'
 					+'</div>'
 				+'</div>');
-			
+
+			// Put the project members back in the sidebar
+			fillWithMembers();
 
 			// Put the edit button back
 			var edit_button = $('<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">');
 			$(edit_button).on('click', setEditForm);
 			$('#tool_bar').append(edit_button);
+	}, 'json');
+}
+
+//----------------------------------------------------------------------
+// Set the sidebar to contain users that are in the projects members queue
+//----------------------------------------------------------------------
+function fillWithMembersQueue() {
+	var project_id = $('#project_id').val();
+
+	// Send the request to get the users that are in the members queue
+	$.post('get_member_queue.php', {project_id : project_id}, function(response) {
+		// Remove the content from the sidebar and put new title
+		$('#sidebar_content').children().remove();
+		$('#sidebar_content').append('<div class="sidebar_title">Members Queue</div>');
+		
+		// Add the buttons for each of the members in the queue
+		$.each(response, function() {
+			$('#sidebar_content').append(
+				'<a href="profile.php?id='+this.user_id+'">'
+					+'<button class="sidebar_entry">'+this.username+'</button>'
+				+'</a>');
+		});
+	}, 'json');
+}
+
+//----------------------------------------------------------------------
+// Set the sidebar to contain users that are members of the project
+//----------------------------------------------------------------------
+function fillWithMembers() {
+	var project_id = $('#project_id').val();
+
+	// Send the request to get the users that are in the members queue
+	$.post('get_members.php', {project_id : project_id}, function(response) {
+		// Remove the content from the sidebar and put new title
+		$('#sidebar_content').children().remove();
+		$('#sidebar_content').append('<div class="sidebar_title">Project Members</div>');
+		
+		// Add the buttons for each of the members in the queue
+		$.each(response, function() {
+			$('#sidebar_content').append(
+				'<a href="profile.php?id='+this.user_id+'">'
+					+'<button class="sidebar_entry">'+this.username+'</button>'
+				+'</a>');
+		});
 	}, 'json');
 }
 

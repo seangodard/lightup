@@ -140,7 +140,7 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 						+
 					</button>
 				</a>
-			</div>d
+			</div>
 		</div>
 	</div>
 

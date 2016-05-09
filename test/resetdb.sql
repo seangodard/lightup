@@ -1,5 +1,6 @@
 USE lightup;
 
+DROP TABLE IF EXISTS members_queue;
 DROP TABLE IF EXISTS project_journal;
 DROP TABLE IF EXISTS projects_member;
 DROP TABLE IF EXISTS hobbies;
@@ -9,7 +10,6 @@ DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
 
-/* TODO : Split the schema from the test data and put them in the models folder : Sat 16 Apr 2016 11:21:00 AM EDT */
 /* TODO : Add indexes? : Sat 16 Apr 2016 04:33:15 PM EDT */
 
 /* TODO : Fix username length check not working : Mon 25 Apr 2016 05:53:35 PM EDT */
@@ -89,4 +89,13 @@ CREATE TABLE project_journal (
 	PRIMARY KEY (entry_id),
 	FOREIGN KEY (posting_user_id) REFERENCES users(user_id),
 	FOREIGN KEY (project_id) REFERENCES projects(project_id)
+);
+
+/* members_queue(project_id, user_id) */
+CREATE TABLE members_queue (
+	project_id INT NOT NULL,
+	user_id INT NOT NULL, 
+	PRIMARY KEY (project_id, user_id),
+	FOREIGN KEY (project_id) REFERENCES projects(project_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

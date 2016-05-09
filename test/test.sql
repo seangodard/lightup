@@ -60,3 +60,6 @@ INSERT INTO projects_member(user_id,project_id) VALUES (3, 3);
 /* Table: project_journal */
 INSERT INTO project_journal(posting_user_id, project_id, title, body) VALUES (2, 3, 'Brilliant idea team!', 'I just had the greatest idea ever, it will make us millions!');
 INSERT INTO project_journal(posting_user_id, project_id, title, body) VALUES (3, 3, 'Better idea team!', 'I just had a way better ida, it will make us billions!');
+
+/* Table: members_queue */
+INSERT INTO members_queue(project_id, user_id) VALUES(2, 6);

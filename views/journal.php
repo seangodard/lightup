@@ -33,7 +33,7 @@
 				</div>
 				<div id="add_form" class="flex flex_grow">
 					<div class="form_group flex_fit">
-						<input type="text" placeholder="Title" id="entry_title" name="entry_title">
+						<input type="text" placeholder="Title" id="entry_title" class="title" name="entry_title">
 					</div>
 					<textarea id="entry_body" class="flex_grow"></textarea>
 					<input type="submit" id="add_entry" value="Done" class="flex_fit">
