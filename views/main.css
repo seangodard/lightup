@@ -191,13 +191,11 @@ textarea {
     width: 100%;
 }
 
-.sidebar_title {
-    width: 100%;
-    background: none;
+.sidebar_title { width: 100%; background: none;
     border: solid;
     color: #F7F7F7;
     padding: 10px 0px;
-	border-width: 2px 0px 2px 0px;
+	border-width: 0px 0px 2px 0px;
 	font-weight: 900;
 	text-align: center;
 	text-shadow: #000000 2px 2px;
@@ -206,12 +204,50 @@ textarea {
 
 .sidebar_entry {
 	width: 100%;
-	background: none;
 	border: solid;
+	border-width: 0px 0px 2px 0px;
+	overflow: auto;
 	color: #F7F7F7;
+	background: #1F1F1F;
 	padding: 10px 0px;
-	border-width: 0px 0px 1px 0px;
+}
+
+.unpadded {
+	padding: 0px;
+}
+
+.sidebar_entry * {
+	color: #F7F7F7;
 	outline: none;
+	border: none;
+	text-align: center;
+	height: 100%;
+	background: none;
+}
+
+.button1 {
+	margin: 0px;
+	width: 75%;
+	padding: 10px 0px;
+}
+
+.button2 {
+	margin: 0px;
+	width: 25%;
+	height: 100%;
+	position: relative;
+}
+
+.add_button {
+	background: #009E2D;
+}
+
+.add_button:hover {
+	background: #1F1F1F;
+}
+
+.button1, .button2 {
+	float: left;
 }
 
 .sidebar_entry:focus, .sidebar_entry:hover {
@@ -243,20 +279,6 @@ textarea {
 
 #main_body section {
 	padding: 20px 0px;
-}
-
-.button1 {
-	margin: 0px;
-	width: 75%;
-}
-
-.button2 {
-	margin: 0px;
-	width: 25%;
-}
-
-.button1, .button2 {
-	float: left;
 }
 
 .journal_entry {

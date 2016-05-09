@@ -89,6 +89,8 @@ function updateProject() {
 	}, 'json');
 }
 
+// TODO : Use the two button css already in place : Sun 08 May 2016 05:30:29 PM EDT 
+// TODO : Update so the user can click the secondary button of the element to add the user : Sun 08 May 2016 05:30:12 PM EDT 
 //----------------------------------------------------------------------
 // Set the sidebar to contain users that are in the projects members queue
 //----------------------------------------------------------------------
@@ -102,12 +104,22 @@ function fillWithMembersQueue() {
 		$('#sidebar_content').append('<div class="sidebar_title">Members Queue</div>');
 		
 		// Add the buttons for each of the members in the queue
-		$.each(response, function() {
-			$('#sidebar_content').append(
-				'<a href="profile.php?id='+this.user_id+'">'
-					+'<button class="sidebar_entry">'+this.username+'</button>'
-				+'</a>');
-		});
+		if (response) {
+			$.each(response, function() {
+				$('#sidebar_content').append(
+					'<div class="sidebar_entry unpadded">'
+						+'<a href="profile.php?id='+this.user_id+'">'
+							+'<div class="button1">'
+								+this.username
+							+'</div>'
+						+'</a>'
+						+'<div class="button2 add_button">'
+							+'<button class="add_member">'+'+'+'</button>'
+						+'</div>'
+						+'<input type="hidden" id="queued_member_id" value="'+this.user_id+'">'
+					+'</div>');
+			});
+		}
 	}, 'json');
 }
 
