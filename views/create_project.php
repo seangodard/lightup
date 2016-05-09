@@ -13,12 +13,12 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 	<body>
 <?php require_once('top_bar.php'); ?>
 		<div id="center_main_body" class="create_project">
-			<form action="add_project_controller.php" method="post">
+			<form action="add_project_controller.php" method="post" enctype="multipart/form-data">
 				<div>
 					<input type="text" placeholder="Project Name" id="project_name" class="title" name="project_name" size="90">
 				</div>
 				<div id="description">
-				<textarea id="description_body" class="flex_grow">Description</textarea>
+				<textarea name="description" class="flex_grow">Description</textarea>
 				</div>
 				<div id="picture">
 					<input type="file" name="fileToUpload" id="fileToUpload" class="file_upload">

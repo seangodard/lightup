@@ -109,6 +109,10 @@ p {
 	background: #3E3C3C;
 }
 
+#profile_image {
+	margin: auto;
+}
+
 #header_logo {
 	left: 50%;
 	padding: 8px;

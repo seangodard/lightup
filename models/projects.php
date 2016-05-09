@@ -41,6 +41,22 @@ function getProjectName($project_id, $db) {
 }
 
 // ------------------------------------------------------------------
+// A function to get the project name based on the project id.
+// @param project_id the project id to get the name for
+// @param db a valid database connection
+// @return the project name for the project or null if no id exists for that project
+// ------------------------------------------------------------------
+function getProjectPicture($project_id, $db) {
+	$get_picture = $db->prepare('SELECT picture FROM projects WHERE project_id = :project_id');
+	$get_picture->bindParam(':project_id', $project_id);
+	$get_picture->execute();
+	$get_picture = $get_picture->fetch();
+
+	if (count($get_picture) > 0) { return $get_picture['picture']; }
+	else { return -1; }
+}
+
+// ------------------------------------------------------------------
 // A function that returns if the user is a member of the project.
 // @param user_id the id of the user to check membership of
 // @param project_id the id of the project to verify membership in
@@ -265,7 +281,6 @@ function updateProjectInfo($project_id, $project_name, $project_description, $us
 	}
 }
 
-// TODO : Debug : Th 5 May 2016 9:26:50 AM EDT 
 // ------------------------------------------------------------------
 // A function to get a list project names that match a certain pattern.
 // @param pattern the pattern to match
@@ -281,7 +296,6 @@ function getProjectsLike($pattern, $db) {
 	if ($get_projects_like->rowCount() > 0) {
 		return $get_projects_like;
 	}
-
 	else { return null; }
 }
 
@@ -376,4 +390,29 @@ function getProjectDescription($project_id, $db) {
 
 	if ($project_desc->rowCount()) { return $project_description['description']; }
 	else { return null; }
+}
+
+// --------------------------------------------------------------
+// Add a new project and then add the user as a member
+// @param project_name the project name
+// @param description the project description
+// @param picture the file path of the image
+// @param user_id the user adding the project
+// @param db a valid database connection
+// @return whether or not adding a project was successful
+// --------------------------------------------------------------
+function addProject($project_name, $description, $picture, $user_id, $db) {
+	$insert = $db->prepare('INSERT INTO projects(project_name,description,picture) VALUES(:project_name, :description,:picture)');
+	$insert->bindParam(':project_name', $project_name);
+	$insert->bindParam('description', $description);
+	$insert->bindParam(':picture', $picture);
+	$insert->execute();
+
+	$project_id = $db->lastInsertId();
+
+	$insert = $db->prepare('INSERT INTO projects_member(user_id,project_id) VALUES(:user_id,:project_id)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':project_id', $project_id);
+
+	return $insert->execute();
 }
