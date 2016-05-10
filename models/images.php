@@ -82,6 +82,6 @@ function uploadSuccess($upload, $temp, $path, $db) {
 // @return whether or not the upload was a success
 // ------------------------------------------------------------------
 function success($valid, $exists, $size, $type, $db) {
-	if ($valid == 1 && $exists == 1 && $size == 1 && $type == 1) { return 1; }
+	if ($valid && $exists && $size && $type) { return 1; }
 	else { return 0; }
 }

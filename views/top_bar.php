@@ -10,7 +10,7 @@ $profile_picture = getProfilePicture($user_id, $db);
 	</div>
 	<div class="header header1">
 		<div id="profile_logout">
-			<a class="profile" href="profile.php?id=<?php echo htmlentities($user_id, ENT_QUOTES, 'utf-8'); ?>"><input type="image" src="<?php echo htmlentities($profile_picture, ENT_QUOTES, 'utf-8'); ?>" alt="profile" width="50" height="50"></a>
+			<a class="prof" href="profile.php?id=<?php echo htmlentities($user_id, ENT_QUOTES, 'utf-8'); ?>"><input class="profile" type="image" src="<?php echo htmlentities($profile_picture, ENT_QUOTES, 'utf-8'); ?>" alt="profile" width="50" height="50"></a>
 			<a class="logout" href="../logout.php"><input type="image" src="views/images/logout.png" alt="logout" width="50" height="50"></a>
 		</div>
 		<div id="search_box">

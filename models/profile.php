@@ -171,3 +171,17 @@ function updateExpSkillsHobbies($data, $section, $index, $db) {
 	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
 	return $update->execute();
 }
+
+// ------------------------------------------------------------------
+// Update user's profile picture
+// @param user_id the user's id to get the picture for
+// @param db a valid database connection
+// @param picture the filepath of the user's profile picture
+// ------------------------------------------------------------------
+function updateProfilePicture($user_id, $picture, $db) {
+	$update = $db->prepare('UPDATE users SET picture=:picture WHERE user_id=:user_id');
+	$update->bindParam(':picture', $picture);
+	$update->bindParam(':user_id', $user_id);
+	
+	return $update->execute();
+}
