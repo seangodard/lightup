@@ -15,29 +15,23 @@ $(document).ready(function() {
 		$.post('profile_add_drop_box.php', {addSection:section}, function(response) {
 			if (section === 'experiences') {
 				var new_item = '<div id="exp_'+response.id+'" class="info">' +
-									'<input type="text" name="exp_'+response.id+'" value="'+response.experiences+'"> '+
-									'<div class="button2 drop delete_button delExpSkillHobby" value="'+response.id+'">'+
-										'-' +
-									'</div>' +
-								'</div>'
+									'<input type="image" id="exp_'+response.id+'" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">' +
+									'<input class="rowInput" type="text" name="exp_'+response.id+'" value="'+response.experiences+'"> '+
+								'</div>';
 				$('#experiences').children('#exp_add').before(new_item);
 			}
 			else if (section === 'skills') {
 				var new_item = '<div id="skill_'+response.id+'" class="info">' +
-									'<input type="text" name="skill_'+response.id+'" value="'+response.skills+'"> '+
-									'<div class="button2 drop delete_button delExpSkillHobby" value="'+response.id+'">'+
-										'-' +
-									'</div>' +
-								'</div>'
+									'<input type="image" id="skill_'+response.id+'" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">' +
+									'<input class="rowInput" type="text" name="skill_'+response.id+'" value="'+response.skills+'"> '+
+								'</div>';
 				$('#skills').children('#skill_add').before(new_item);
 			}
 			else if (section === 'hobbies') {
 				var new_item = '<div id="hobby_'+response.id+'" class="info">' +
-									'<input type="text" name="hobby_'+response.id+'" value="'+response.hobbies+'"> '+
-									'<div class="button2 drop delete_button delExpSkillHobby" value="'+response.id+'">'+
-										'-' +
-									'</div>' +
-								'</div>'
+									'<input type="image" id="hobby_'+response.id+'" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">' +
+									'<input class="rowInput" type="text" name="hobby_'+response.id+'" value="'+response.hobbies+'"> '+
+								'</div>';
 				$('#hobbies').children('#hobby_add').before(new_item);
 			}
 		}, 'json');

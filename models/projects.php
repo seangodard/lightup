@@ -463,3 +463,22 @@ function addProject($project_name, $description, $picture, $user_id, $db) {
 
 	return $insert->execute();
 }
+
+// ------------------------------------------------------------------
+//  Update a project's picture
+// 	@param project_id the project id the user would like to retrieve information about
+// 	@param picture the filepath for the new picture
+// 	@param db a valid database connection
+// 	@return whether or not the update was successful
+// ------------------------------------------------------------------
+function updateProjectPicture($project_id, $picture, $user_id, $db) {
+	if (isMember($user_id, $project_id, $db)) {
+		$update = $db->prepare('UPDATE projects SET picture=:picture WHERE project_id=:project_id');
+		$update->bindParam(':picture', $picture);
+		$update->bindParam('project_id', $project_id);
+		return $update->execute();
+	}
+	else {
+		return false;
+	}
+}
