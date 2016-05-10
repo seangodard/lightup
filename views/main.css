@@ -93,6 +93,7 @@ p {
 #search_box {
 	float: right;
 	padding: 10px 10px 10px 0px;
+	flex-grow: 1;
 }
 
 #search_box input {
@@ -337,10 +338,8 @@ textarea {
 
 .add {
 	clear: left;
-	background: #009E2D;
-	color: #F7F7F7;
-	text-align: center;
-	width: 100%;
+    background: #F7F7F7;
+    text-align: center;
 }
 
 .sidebar_entry:focus, .sidebar_entry:hover {
