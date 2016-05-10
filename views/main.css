@@ -376,7 +376,7 @@ textarea {
 	text-align: center;
 }
 
-.profile_image {
+.profile_image, .project_image {
 	border-radius: 50%;
 }
 
