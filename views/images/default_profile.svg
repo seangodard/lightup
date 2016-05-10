@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="search.svg"
+   sodipodi:docname="default_profile.svg"
    style="enable-background:new">
   <defs
      id="defs4">
@@ -98,7 +98,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="-329.38916"
+     inkscape:cx="-511.21662"
      inkscape:cy="205.52015"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -131,26 +131,21 @@
      transform="translate(-163.57188,-251.6469)"
      style="filter:url(#filter4151);opacity:1">
     <circle
-       style="opacity:1;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:60;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path4137"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:60;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4151);enable-background:new"
+       id="path4137-4"
        cx="372.8576"
        cy="460.93262"
-       r="209.28572" />
-    <g
-       id="g4205"
-       transform="translate(38.319319,23.788534)"
-       style="">
-      <circle
-         r="60.609154"
-         cy="421.72086"
-         cx="317.11505"
-         id="path4177"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4203"
-         d="m 359.54147,464.14726 68.69037,68.69037"
-         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
+       r="209.28569" />
+    <path
+       style="opacity:1;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:60;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 209.28516 0 A 209.28575 209.28575 0 0 0 0 209.28516 A 209.28575 209.28575 0 0 0 85.568359 377.80078 A 123.74368 123.74368 0 0 1 85.542969 377.07422 A 123.74368 123.74368 0 0 1 209.28516 253.33008 A 123.74368 123.74368 0 0 1 333.0293 377.07422 A 123.74368 123.74368 0 0 1 332.99414 377.79102 A 209.28575 209.28575 0 0 0 418.57227 209.28516 A 209.28575 209.28575 0 0 0 209.28516 0 z "
+       transform="translate(163.57188,251.6469)"
+       id="path4137" />
+    <circle
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4177"
+       cx="372.8576"
+       cy="418.93262"
+       r="60.609154" />
   </g>
 </svg>

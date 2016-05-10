@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="add.svg">
+   sodipodi:docname="minus.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="-427.85705"
+     inkscape:cx="-436.6688"
      inkscape:cy="126.05867"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -64,11 +64,6 @@
        cx="380.71475"
        cy="465.93259"
        r="209.28572" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 380.71475,605.21829 0,-278.5714"
-       id="path4172-2"
-       inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path4151"
