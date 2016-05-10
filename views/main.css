@@ -215,6 +215,12 @@ input[type='submit'] {
     background-position: right center;
 }
 
+.center {
+    position: relative;
+	transform: translateX(-50%);
+	margin-left: 50%;
+}
+
 .has_error .feedback_message {
 	color: #B70000;
 }

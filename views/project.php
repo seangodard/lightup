@@ -25,9 +25,7 @@
 				<a href="project.php?id=<?php echo $project_id?>"><div class="button current_page">Project Page</div></a>
 			</div>
 			<div id="main_body" class="flex">
-				<div id="project_image">
-					<img src="<?php echo htmlentities(getProjectPicture($project_id, $db), ENT_QUOTES, 'utf-8'); ?>" alt="$project_id" width="75" height="75">
-				</div>
+				<img id="project_image" class="center" src="<?php echo htmlentities(getProjectPicture($project_id, $db), ENT_QUOTES, 'utf-8'); ?>" alt="$project_id" width="100" height="100">
 				<input type="hidden" id="project_id" value="<?php echo $project_id?>">
 <?php if(isMember(getLoggedInUserID(), $project_id, $db)): ?>
 				<div id="tool_bar" class="flex_fit">

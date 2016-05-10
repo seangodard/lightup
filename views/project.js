@@ -20,6 +20,9 @@ function setEditForm() {
 	// Show the form with the old values filled in
 	$('#main_body').append(
 			'<div id="edit_project" class="flex flex_grow">'
+				+'<div id="upload_project_picture" class="flex_fit">'
+					+'<input type="file" name="new_project_picture" id="new_project_picture" class="file_upload">'
+				+'</div>'
 				+'<div class="formgroup flex_fit">'
 					+'<input type="text" id="project_entry_title" class="title" name="project_entry_title" value="'+old_title+'">'
 				+'</div>'
