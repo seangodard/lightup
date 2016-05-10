@@ -14,7 +14,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 	</head>
 	<body>
 <?php require_once('top_bar.php'); ?>
-		<div id="center_main_body">
+		<div id="center_main_body" class="single_column_page">
 			<form id="large_search_box" action="search.php" method="get">
 				<input type="search" placeholder="Search" name="search">
 			</form>

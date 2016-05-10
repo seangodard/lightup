@@ -16,6 +16,10 @@
 	background: #F7F7F7;
 }
 
+body, html {
+	height: 100%;
+}
+
 body {
 	background: #1F1F1F;
 }
@@ -90,6 +94,10 @@ p {
 	box-shadow: #000000 1px 1px 6px;
 }
 
+.single_column_page {
+	width: 100%;
+}
+
 #search_box {
 	visibility: hidden;
 }
@@ -156,7 +164,6 @@ p {
 }
 
 .create_project {
-	width: 90%;
 	padding: 3%;
 }
 
@@ -172,10 +179,7 @@ p {
 #center_main_body {
 	position: relative;
 	top: 60px;
-	width: 75%;
-	margin: 0px;
 	background-color: #F7F7F7;
-    margin-left: 12.5%;
     height: 100%;
 }
 
@@ -207,7 +211,7 @@ p {
 	color: #FFFFFF;
 }
 
-.side_large_button:hover, input[type='submit']:hover {
+.side_large_button:hover, input[type='submit']:hover, #add_project .side_bar_entry {
 	background: #169E3D;
 }
 
@@ -417,6 +421,10 @@ textarea {
 	box-shadow: #000000 2px 0px 3px;
 }
 
+#add_project .sidebar_entry {
+	background: #009E2D;
+}
+
 #content {
 	position: relative;
 	top: 60px;
@@ -532,5 +540,10 @@ textarea {
 
 	#tool_bar {
 		height: 0px;
+	}
+
+	.single_column_page {
+		width: 75%;
+		margin-left: 12.5%;
 	}
 }
