@@ -34,20 +34,20 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 
 							<div id="contact_info" class="left_justified area">
 								<h3>Contact Info</h3>
-								<div class="medium_justified">
-									City: <input type="text" name="city" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'city', $db), ENT_QUOTES, 'utf-8'); ?>">
+								<div class="medium_justified contact_info">
+									<p class="label">City: </p><input class="information" type="text" name="city" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'city', $db), ENT_QUOTES, 'utf-8'); ?>">
 								</div>
-								<div class="medium_justified">
-										State: <input type="text" name="state" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'state', $db), ENT_QUOTES, 'utf-8'); ?>">
+								<div class="medium_justified contact_info">
+									<p class="label">State: </p><input class="information" type="text" name="state" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'state', $db), ENT_QUOTES, 'utf-8'); ?>">
 								</div>
-								<div class="medium_justified">
-										Country: <input type="text" name="country" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'country', $db), ENT_QUOTES, 'utf-8'); ?>">
+								<div class="medium_justified contact_info">
+									<p class="label">Country: </p><input class="information" type="text" name="country" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'country', $db), ENT_QUOTES, 'utf-8'); ?>">
 								</div>
-								<div class="medium_justified">
-										Phone: <input type="text" name="phone" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'phone', $db), ENT_QUOTES, 'utf-8'); ?>">
+								<div class="medium_justified contact_info">
+									<p class="label">Phone: </p><input class="information" type="text" name="phone" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'phone', $db), ENT_QUOTES, 'utf-8'); ?>">
 								</div>
-								<div class="medium_justified">
-										Email: <input type="text" name="email" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'email', $db), ENT_QUOTES, 'utf-8'); ?>">
+								<div class="medium_justified contact_info">
+									<p class="label">Email: </p><input class="information" type="text" name="email" value="<?php echo htmlentities(getContactAndBlurb(getLoggedInUserID(), 'email', $db), ENT_QUOTES, 'utf-8'); ?>">
 								</div>
 							</div> <!-- Done with contact-->
 						</div> <!-- finish at contact me-->
@@ -64,7 +64,6 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 <?php endforeach; ?>
 								<input type="image" id="exp_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
 							</div> <!-- Done with experiences -->
-							<br>
 							<div id="skills" class="left_justified area">
 								<h3>Skills</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db)) as $row): ?>
@@ -76,7 +75,6 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 <?php endforeach; ?>
 								<input type="image" id="skill_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
 							</div> <!-- Done with skills -->
-							<br>
 							<div id="hobbies" class="left_justified area">
 								<h3>Hobbies</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db)) as $row): ?>
