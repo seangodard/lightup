@@ -50,7 +50,6 @@ h1, h2, h3, h4 {
 
 p { 
 	text-align: center;
-	padding: 0% 10% 0% 10%;
 }
 
 #main_body {
@@ -86,13 +85,14 @@ p {
 
 .information {
 	float: right;
-	width: 70%;
-	margin-right: 5%;
+    width: 70%;
+    margin-right: 10%;
+    margin-bottom: 1px;
 }
 
 .label {
 	float: left;
-	padding: 5% 0%;
+	padding: 10px 0px;
 }
 
 .prof, .logout {
@@ -356,16 +356,15 @@ textarea {
 }
 
 .inputRow {
-	overflow: auto;
-	margin: 2px 0px;
-	/* position: absolute; */
+    overflow: auto;
+    margin-bottom: 5px;
+    display: flex;
 }
 
 .inputRowButton {
 	overflow: auto;
-	/* position: absolute; */
-	height: 100%;
-	width: 10%;
+	height: 30px;
+	width: 30px;
 	float: left;
 	background: #F7F7F7;
 	border-radius: 2px;
@@ -378,13 +377,16 @@ textarea {
 
 .profile_image, .project_image {
 	border-radius: 50%;
+	box-shadow: #000000 1px 1px 6px;
 }
 
 .add {
 	clear: left;
     background: #F7F7F7;
     text-align: center;
-    padding: 7px 8px 7px 0px;
+    padding: 4px;
+    height: 30px;
+    width: 30px;
 }
 
 .sidebar_entry:focus, .sidebar_entry:hover {
@@ -449,12 +451,6 @@ textarea {
 textarea {
 	height: 100px;
 }
-
-/*
-#description {
-	width: 90%;
-	margin-left: 5%;
-}*/
 
 /* Set scrollbar style */
 /* Source: https://css-tricks.com/examples/WebKitScrollbars/ */
