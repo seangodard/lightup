@@ -13,16 +13,8 @@ if (isset( $_POST['project_id']) && isset($_POST['user_id'])) {
 
 	// Verify that the requesting user is a member of the project
 	if (isMember(getLoggedInUserID(), $_POST['project_id'], $db)) {
-
-		// TODO : here : Mon 09 May 2016 12:30:44 PM EDT 
 		// add the given user_id to the project as a member only if they are a part of the members queue
-
-		// Remove the user from the projects members queue
-
-
-
-		$result = true;
-
+		$result = addProjectMember(getLoggedInUserID(), $_POST['user_id'], $_POST['project_id'], $db);
 		echo json_encode($result);
 		exit();
 	}
