@@ -12,6 +12,7 @@ require_once('models/projects.php');
 
 $db = databaseConnection();
 
+// TODO : Update to get the file uploaded -> name: new_project_picture : Mon 09 May 2016 11:32:15 PM EDT 
 if (isset($_POST['project_id']) && isset($_POST['project_title']) && isset($_POST['project_body'])) {
 	// Verify that the project title is less than 30 characters
 	if (strlen( $_POST['project_title']) <= 30) {
@@ -20,7 +21,9 @@ if (isset($_POST['project_id']) && isset($_POST['project_title']) && isset($_POS
 	}
 
 	$project_info = getProjectPageInfo($_POST['project_id'], $db); 
-	echo json_encode($project_info);
+
+	header('Location: project.php?id='.$_POST['project_id']);
+	exit();
 }
 else {
 	header('Location: /');
