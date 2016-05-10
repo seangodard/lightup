@@ -40,7 +40,7 @@ if (isset($_POST['project_name']) && isset($_POST['description'])) {
 			}
 		}
 		else {
-			$file = 'default_project.png';
+			$file = 'default_project.svg';
 			$target_file = $target_dir . $file;
 		}
 		$added = addProject($_POST['project_name'], $_POST['description'], $target_file, $user_id, $db);

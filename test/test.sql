@@ -16,8 +16,8 @@ INSERT INTO users(username, picture, hashed_pass) VALUES ("domino", "views/pictu
 
 /* Table: projects */
 INSERT INTO projects(project_name, description, picture) VALUES ("LightUp", "Web Programming Final Project.", "views/pictures/projects/lightup.svg");
-INSERT INTO projects(project_name, description, picture) VALUES ("Sky Group, LTD.", "Skyler is awesome club.", "views/pictures/projects/default_project.png");
-INSERT INTO projects(project_name, description, picture) VALUES ("Katana Knitting Needles", "Web Programming Final Project", "views/pictures/projects/default_project.png");
+INSERT INTO projects(project_name, description, picture) VALUES ("Sky Group, LTD.", "Skyler is awesome club.", "views/pictures/projects/default_project.svg");
+INSERT INTO projects(project_name, description, picture) VALUES ("Katana Knitting Needles", "Web Programming Final Project", "views/pictures/projects/default_project.svg");
 
 /* Table: profiles */
 INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
