@@ -92,7 +92,7 @@ input[type='submit'] {
 }
 
 .has_error .feedback_message {
-	color: #B70000;
+	color: #FFFFFF;
 }
 
 /* Set scrollbar style */
