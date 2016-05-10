@@ -1,5 +1,7 @@
 <?php
 
+$is_search_page = true;
+
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 ?><!DOCTYPE html>
@@ -13,6 +15,9 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 	<body>
 <?php require_once('top_bar.php'); ?>
 		<div id="center_main_body">
+			<form id="large_search_box" action="search.php" method="get">
+				<input type="search" placeholder="Search" name="search">
+			</form>
 			<div class="result_title">
 				<h2>Results: <?php echo htmlentities($search, ENT_QUOTES, 'utf-8'); ?></h2>
 			</div>

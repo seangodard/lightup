@@ -15,10 +15,15 @@ $profile_picture = getProfilePicture($user_id, $db);
 			</a>
 			<a class="logout" href="logout.php"><img src="views/images/logout.svg" alt="logout"></a>
 		</div>
-		<div id="search_box">
+<?php if (!isset($is_search_page)): ?>
+		<div>
 			<form action="search.php" method="get">
-				<input type="search" placeholder="Search" name="search">
+				<input id="search_box" type="search" placeholder="Search" name="search">
 			</form>
+			<a id="button_search" href="search.php">
+				<img src="views/images/search.svg" alt="search">
+			</a>
 		</div>
+<?php endif; ?>
 	</div>
 </div>

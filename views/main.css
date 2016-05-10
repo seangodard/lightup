@@ -82,7 +82,7 @@ p {
 	background: none;
 }
 
-.logout img, .prof img {
+.logout img, .prof img, #button_search img {
 	height: 50px;
 	width: 50px;
 	margin-top: 5px;
@@ -91,9 +91,33 @@ p {
 }
 
 #search_box {
-	float: right;
-	padding: 10px 10px 10px 0px;
-	flex-grow: 1;
+	visibility: hidden;
+}
+
+#large_search_box {
+	padding-top: 7%;
+	text-align: center;
+}
+
+#large_search_box * {
+    box-shadow: inset #000 2px 2px 5px;
+	border-radius: 10px;
+	width: 75%
+}
+
+#search_box {
+	position: absolute;
+	right: 0px;
+	background: #252525;
+    box-shadow: inset #000 2px 2px 5px;
+    color: #FFFFFF;
+	margin: 10px 10px 10px 0px;
+	height: 40px;
+}
+
+#button_search {
+	position: absolute;
+	right: 10px;
 }
 
 #search_box input {
@@ -446,6 +470,14 @@ textarea {
 		height: 100%
 	}
 
+	#search_box {
+		visibility: visible;
+	}
+
+	#button_search {
+		visibility: hidden;
+	}
+
 	#sidebar {
 		width: 25%;
 		position: absolute;
@@ -454,6 +486,7 @@ textarea {
 		overflow-y: scroll;
 		box-shadow: inset -5px 0px 10px;
 	}
+
 	#main_body {
 		padding: 3%;
 		position: absolute;
