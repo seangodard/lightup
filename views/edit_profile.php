@@ -57,10 +57,9 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 								<h3>Experiences</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "experiences", $db)) as $row): ?>
 								<div id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" class="info inputRow">
-									<div class="drop delete_button inputRowButton" value="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
-										-
-									</div>
+									<input type="image" id="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">
 									<input class="rowInput" type="text" name="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>">
+
 								</div>
 <?php endforeach; ?>
 								<input type="image" id="exp_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
@@ -69,29 +68,26 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 							<div id="skills" class="left_justified area">
 								<h3>Skills</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "skills", $db)) as $row): ?>
-								<div id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" class="info">
-									<div class="drop delete_button inputRowButton" value="<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>">
-										-
-									</div>
+								<div id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" class="info inputRow">
+									<input type="image" id="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">
 									<input class="rowInput" type="text" name="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>">
+
 								</div>
 <?php endforeach; ?>
 								<input type="image" id="skill_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
-							</div> <!-- Done with skills-->
+							</div> <!-- Done with skills -->
 							<br>
 							<div id="hobbies" class="left_justified area">
 								<h3>Hobbies</h3>
 <?php foreach ((selectExpSkillsHobbies(getLoggedInUserID(), "hobbies", $db)) as $row): ?>
-								<div id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" class="info">
-									<div class="drop delete_button inputRowButton" value="<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>">
-										-
-									</div>
+								<div id="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" class="info inputRow">
+									<input type="image" id="skill_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" class="drop inputRowButton" src="views/images/minus.svg" alt="drop" width="40" height="40">
 									<input class="rowInput" type="text" name="hobby_<?php echo htmlentities($row['hobby_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>">
-									
+
 								</div>
 <?php endforeach; ?>
 								<input type="image" id="hobby_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
-							</div> <!-- Done with hobbies-->
+							</div> <!-- Done with skills -->
 						</div> <!-- Done with columns -->
 					</div>
 					<input type="submit" class="save" value="Save">

@@ -4,15 +4,15 @@ USE lightup;
 /* username = sky pass = coolio */
 INSERT INTO users(username, picture, hashed_pass) VALUES ("sky", "views/pictures/profiles/sky.png", "$2y$10$4hIG5/dkqLkm/y5ghYw9OenK/8eaIfDCOXgiUIkEZacOVfKC0nDbq");
 /* username = sean pass = watson */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("sean", "views/pictures/profiles/default_profile.jpg", "$2y$10$xXXIs1ryJyhzh8z7BXvfveY0F7hqnRl/IcwSzzpYD3qeWtHdKPI72");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("sean", "views/pictures/profiles/default_profile.svg", "$2y$10$xXXIs1ryJyhzh8z7BXvfveY0F7hqnRl/IcwSzzpYD3qeWtHdKPI72");
 /* username = alice pass = alpha */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("alice", "views/pictures/profiles/default_profile.jpg", "$2y$10$ewk9.kUTBR/ZvTwWWS4LfeyjHhpvlWWHhsDWMMCVyhb6/zcPO/RZ.");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("alice", "views/pictures/profiles/default_profile.svg", "$2y$10$ewk9.kUTBR/ZvTwWWS4LfeyjHhpvlWWHhsDWMMCVyhb6/zcPO/RZ.");
 /* username = bob pass = bravo */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("bob", "views/pictures/profiles/default_profile.jpg", "$2y$10$vVZgMSk/EMIzDUwKDt8.1es8ib/MQNhHklvK0IbdRS7aPeFOj7pT2");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("bob", "views/pictures/profiles/default_profile.svg", "$2y$10$vVZgMSk/EMIzDUwKDt8.1es8ib/MQNhHklvK0IbdRS7aPeFOj7pT2");
 /* username = craig pass = charlie */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("craig", "views/pictures/profiles/default_profile.jpg", "$2y$10$5vrxTPRTikAYj36KwEvO2uaD.8SnQ9/BjtMy05I0yAlihCm1PyIzm");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("craig", "views/pictures/profiles/default_profile.svg", "$2y$10$5vrxTPRTikAYj36KwEvO2uaD.8SnQ9/BjtMy05I0yAlihCm1PyIzm");
 /* username = domino pass = delta */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("domino", "views/pictures/profiles/default_profile.jpg", "$2y$10$PIfFGTaqzeHNJcAY9X2N/.HfcPphfKJP9FTDtSFpDcdKmRBlRZO12");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("domino", "views/pictures/profiles/default_profile.svg", "$2y$10$PIfFGTaqzeHNJcAY9X2N/.HfcPphfKJP9FTDtSFpDcdKmRBlRZO12");
 
 /* Table: projects */
 INSERT INTO projects(project_name, description, picture) VALUES ("LightUp", "Web Programming Final Project.", "views/pictures/projects/lightup.svg");
