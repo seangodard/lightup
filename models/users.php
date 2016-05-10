@@ -1,6 +1,7 @@
 <?php
 
 require_once('models/db_connection.php');
+require_once('models/profile.php');
 
 /**
  * A collection of functions for manipulating and retreiving user information.
@@ -30,7 +31,11 @@ function registerUser($username, $password, $db) {
 	$add_user->execute();
 
 	// Verify that the row was inserted to the database
-	if ($add_user->rowCount() > 0) { return true; } 
+	if ($add_user->rowCount() > 0) { 
+		$user_id = getUserId($username, $db);
+		populateProfile($user_id, $db);
+		return true;
+	} 
 	else { return false; }
 }
 

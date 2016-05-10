@@ -185,3 +185,81 @@ function updateProfilePicture($user_id, $picture, $db) {
 	
 	return $update->execute();
 }
+
+// ------------------------------------------------------------------
+// Create a user's profile filled with a blank meant as a placeholder
+// @param user_id the user's id
+// @param db a valid database connection
+// ------------------------------------------------------------------
+function createProfile($user_id, $db) {
+	$blank = '';
+	$insert = $db->prepare('INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) VALUES (:user_id,:blurb,:city,:state,:country,:phone,:email)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':blurb', $blank);
+	$insert->bindParam(':city', $blank);
+	$insert->bindParam(':state', $blank);
+	$insert->bindParam(':country', $blank);
+	$insert->bindParam(':phone', $blank);
+	$insert->bindParam(':email', $blank);
+
+	return $insert->execute();
+}
+
+// ------------------------------------------------------------------
+// Create a user's experience filled with a blank meant as a placeholder
+// @param user_id the user's id
+// @param db a valid database connection
+// ------------------------------------------------------------------
+function createExp($user_id, $db) {
+	$blank = '';
+	$insert = $db->prepare('INSERT INTO experiences(user_id, experience) VALUES(:user_id,:exp)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':exp', $blank);
+
+	return $insert->execute();
+}
+
+// ------------------------------------------------------------------
+// Create a user's skill filled with a blank meant as a placeholder
+// @param user_id the user's id
+// @param db a valid database connection
+// ------------------------------------------------------------------
+function createSkill($user_id, $db) {
+	$blank = '';
+	$insert = $db->prepare('INSERT INTO skills(user_id, skill) VALUES(:user_id,:skill)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':skill', $blank);
+	
+	return $insert->execute();
+}
+
+// ------------------------------------------------------------------
+// Create a user's hobby filled with a blank meant as a placeholder
+// @param user_id the user's id
+// @param db a valid database connection
+// ------------------------------------------------------------------
+function createHobby($user_id, $db) {
+	$blank = '';
+	$insert = $db->prepare('INSERT INTO hobbies(user_id, hobby) VALUES(:user_id,:hobby)');
+	$insert->bindParam(':user_id', $user_id);
+	$insert->bindParam(':hobby', $blank);
+	
+	return $insert->execute();
+}
+
+// ------------------------------------------------------------------
+// Populate the user's profile upon login
+// @param user_id the user's id
+// @param db a valid database connection
+// ------------------------------------------------------------------
+function populateProfile($user_id, $db) {
+	$profile = createProfile($user_id, $db);
+	$exp = createExp($user_id, $db);
+	$skill = createSkill($user_id, $db);
+	$hobby = createHobby($user_id, $db);
+
+	if ($profile && $exp && $skill && $hobby) {
+		return true;
+	}
+	else { return false; }
+}
