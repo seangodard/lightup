@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="logout.svg"
+   sodipodi:docname="logout (copy).svg"
    style="enable-background:new">
   <defs
      id="defs4">
@@ -98,7 +98,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="-152.07074"
+     inkscape:cx="3.9611737"
      inkscape:cy="205.52015"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -129,29 +129,27 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-163.57188,-251.6469)"
-     style="filter:url(#filter4151)">
+     style="filter:url(#filter4151);opacity:0.94">
     <circle
        style="opacity:1;fill:#1e1e1e;fill-opacity:1;stroke:none;stroke-width:60;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4137"
        cx="372.8576"
        cy="460.93262"
        r="209.28572" />
-    <rect
-       style="opacity:1;fill:#1e1e1e;fill-opacity:1;stroke:#ffffff;stroke-width:20.94636154;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4137"
-       width="139.31978"
-       height="229.76791"
-       x="295.11649"
-       y="346.04865" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:8.2401371;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)"
-       d="m 477.69884,460.9326 13.30071,0"
-       id="path4162"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 364.15135,460.9326 117.1777,0 0,0"
-       id="path6464"
-       inkscape:connector-curvature="0" />
+    <g
+       id="g4205"
+       transform="translate(38.319319,23.788534)">
+      <circle
+         r="60.609154"
+         cy="421.72086"
+         cx="317.11505"
+         id="path4177"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4203"
+         d="m 359.54147,464.14726 68.69037,68.69037"
+         style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:24.99999619;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
   </g>
 </svg>

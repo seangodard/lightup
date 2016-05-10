@@ -4,6 +4,7 @@ require_once('constants.php');
 require_once('models/users.php');
 require_once('models/projects.php');
 require_once('sessions.php');
+require_once('models/profile.php');
 require_once('models/db_connection.php');
 
 // ------------------------------------------------------------------

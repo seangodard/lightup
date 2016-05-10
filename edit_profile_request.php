@@ -5,6 +5,7 @@ require_once('login_verification.php');
 require_once('constants.php');
 require_once('sessions.php');
 require_once('models/profile.php');
+require_once('models/images.php');
 
 $db = databaseConnection();
 
@@ -25,6 +26,32 @@ foreach ($_POST as $key => $value) {
 	else {
 		updateProfile($value, $key, $db);
 	}
+}
+
+$user_id = getLoggedInUserID();
+$target_dir = "views/pictures/profiles/";
+
+// TODO: DEBUG: prevent users from uploading pdfs
+if (userOrDefaultImage($_FILES['new_profile_picture']['tmp_name'], $db) == 1) {
+	$file = $_FILES['new_profile_picture']['name'];
+	$target_file = $target_dir . basename($file);
+
+	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+	$file_size = $_FILES['new_profile_picture']['size'];
+	$temp = $_FILES['new_profile_picture']['tmp_name'];
+
+	$valid = validImage($temp, $db); // valid image = 1
+	$exists = imageDoesNotExists($target_file, $db); // valid file path = 1
+	$size = validFileSize($file_size, $db); // valid size = 1
+	$type = validFileType($imageFileType, $db); // valid file type = 1
+	$uploadOk = success($valid, $exists, $size, $type, $db); // all errors passed = 1
+	if ($uploadOk) {
+		$upload = uploadSuccess($uploadOk, $temp, $target_file, $db);
+	}
+	else {
+		$target_file = getProfilePicture($user_id, $db);
+	}
+	updateProfilePicture($user_id, $target_file, $db);
 }
 
 header('Location: profile.php');

@@ -19,7 +19,7 @@ function selectProjects($user_id, $db) {
 
 	// Prepare the query to get the projects
 	$projects = $db->prepare('SELECT project_id,project_name 
-								FROM users NATURAL JOIN projects_member NATURAL JOIN projects
+								FROM projects_member NATURAL JOIN projects
 								WHERE user_id=:user_id');
 
 	// Bind the parameters to retrieve projects
@@ -28,6 +28,21 @@ function selectProjects($user_id, $db) {
 
 	// Return list of project names
 	return $projects->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// ------------------------------------------------------------------
+// A function to get the user's picture filepath for the profile
+// @param user_id the user's id to get the picture for
+// @param db a valid database connection
+// @return the filepath of the user's profile picture
+// ------------------------------------------------------------------
+function getProfilePicture($user_id, $db) {
+	$get_picture = $db->prepare('SELECT picture FROM users WHERE user_id = :user_id');
+	$get_picture->bindParam(':user_id', $user_id);
+	$get_picture->execute();
+	$get_picture = $get_picture->fetch();
+
+	return $get_picture['picture'];
 }
 
 // ------------------------------------------------------------------
@@ -154,5 +169,19 @@ function updateExpSkillsHobbies($data, $section, $index, $db) {
 		return false;
 	$update->bindParam(':data', $data, PDO::PARAM_STR);
 	$update->bindParam(':user_id', getLoggedInUserID(), PDO::PARAM_STR);
+	return $update->execute();
+}
+
+// ------------------------------------------------------------------
+// Update user's profile picture
+// @param user_id the user's id to get the picture for
+// @param db a valid database connection
+// @param picture the filepath of the user's profile picture
+// ------------------------------------------------------------------
+function updateProfilePicture($user_id, $picture, $db) {
+	$update = $db->prepare('UPDATE users SET picture=:picture WHERE user_id=:user_id');
+	$update->bindParam(':picture', $picture);
+	$update->bindParam(':user_id', $user_id);
+	
 	return $update->execute();
 }

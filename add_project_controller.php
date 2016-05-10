@@ -35,13 +35,14 @@ if (isset($_POST['project_name']) && isset($_POST['description'])) {
 			$type = validFileType($imageFileType, $db); // valid file type = 1
 			$uploadOk = success($valid, $exists, $size, $type, $db); // all errors passed = 1
 			
-			$upload = uploadSuccess($uploadOk, $temp, $target_file, $db);
+			if ($uploadOk) {
+				$upload = uploadSuccess($uploadOk, $temp, $target_file, $db);
+			}
+			else {
+				$file = 'default_project.png';
+				$target_file = $target_dir . $file;
+			}
 		}
-		else {
-			$file = 'default_project.png';
-			$target_file = $target_dir . $file;
-		}
-
 		$added = addProject($_POST['project_name'], $_POST['description'], $target_file, $user_id, $db);
 		if ($added == 1) {
 			$project_id = getProjectID($_POST['project_name'], $db);

@@ -76,16 +76,18 @@ p {
 	padding-left: 4%;
 }
 
-.profile, .logout {
+.prof, .logout {
 	float: left;
 	padding-left: 1%;
 	background: none;
 }
 
-.logout img {
+.logout img, .prof img {
 	height: 50px;
 	width: 50px;
-	padding-top: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	box-shadow: #000000 1px 1px 6px;
 }
 
 #search_box {
@@ -105,6 +107,7 @@ p {
 
 .area {
 	padding-bottom: 2%;
+	overflow: auto;
 }
 
 .header1 {
@@ -280,12 +283,58 @@ textarea {
 	background: #009E2D;
 }
 
+.delete_button {
+	background: #B70000;
+}
+
 .add_button:hover {
 	background: #1F1F1F;
 }
 
+.delete_button:hover {
+	background: #D94B4B;
+}
+
 .button1, .button2 {
 	float: left;
+}
+
+.rowInput {
+	width: 90%;
+	float: left;
+	margin: 0px;
+}
+
+.inputRow {
+	overflow: auto;
+	/* position: absolute; */
+}
+
+.inputRowButton {
+	overflow: auto;
+	/* position: absolute; */
+	height: 100%;
+	width: 10%;
+	float: left;
+	color: #F7F7F7;
+	background: #B90002;
+	border-radius: 2px;
+}
+
+.drop {
+	text-align: center;
+}
+
+.profile_image {
+	border-radius: 50%;
+}
+
+.add {
+	clear: left;
+	background: #009E2D;
+	color: #F7F7F7;
+	text-align: center;
+	width: 100%;
 }
 
 .sidebar_entry:focus, .sidebar_entry:hover {
@@ -309,10 +358,6 @@ textarea {
 	width: 50px;
 	height: 50px;
 	margin: 0px;
-}
-
-#add_entry:hover {
-    background: #565656;
 }
 
 #main_body section {

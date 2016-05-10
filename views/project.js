@@ -74,7 +74,7 @@ function updateProject() {
 					+'<div id="heading" class="flex_fit">'
 						+'<h2 id="project_title">'+response.project_name+'</h2>'
 					+'</div>'
-					+'<div id="descriptio" class="flex flex_grow">'
+					+'<div id="description" class="flex flex_grow">'
 						+'<div id="project_body">'+response.description+'</div>'
 					+'</div>'
 				+'</div>');
