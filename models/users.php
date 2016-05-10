@@ -20,10 +20,11 @@ function registerUser($username, $password, $db) {
 	// Salt and hash the users password with a slow cryptographic hashing function
 	$hashed_pass = password_hash($password, PASSWORD_DEFAULT);
 
+	$default_profile_picture = 'views/pictures/profiles/default_profile.jpg';
 	// Bind the parameters to add the user
 	$add_user = $db->prepare('INSERT INTO users(username, picture, hashed_pass) VALUES(:username, :picture, :hashed_pass)');
 	$add_user->bindParam(':username', $username);
-	$add_user->bindParam(':picture', 'views/pictures/profiles/default_profile.jpg');
+	$add_user->bindParam(':picture', $default_profile_picture);
 	$add_user->bindParam(':hashed_pass', $hashed_pass);
 	$add_user->execute();
 
