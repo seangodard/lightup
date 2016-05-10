@@ -79,9 +79,13 @@ p {
 .prof, .logout {
 	float: left;
 	padding-left: 1%;
+	background: none;
 }
 
-.profile {
+.logout img, .prof img {
+	height: 50px;
+	width: 50px;
+	margin-top: 5px;
 	border-radius: 50%;
 	box-shadow: #000000 1px 1px 6px;
 }
@@ -159,6 +163,10 @@ p {
 	clear: left;
 }
 
+#add_project .side_bar_entry {
+    background: #009E2D;
+}
+
 .side_large_button {
 	text-align: center;
 	padding: 8px;
@@ -174,7 +182,7 @@ p {
 	color: #FFFFFF;
 }
 
-.side_large_button:hover {
+.side_large_button:hover, input[type='submit']:hover {
 	background: #169E3D;
 }
 
@@ -334,7 +342,7 @@ textarea {
 }
 
 #tool_bar {
-	height: 40px;
+	height: 50px;
 }
 
 .title {
@@ -347,13 +355,9 @@ textarea {
 	float: right;
 	background: none;
 	outline: none;
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	margin: 0px;
-}
-
-#add_entry:hover {
-    background: #565656;
 }
 
 #main_body section {

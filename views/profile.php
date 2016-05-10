@@ -150,5 +150,4 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 	</body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="views/lib.js"></script>
-	<script src="views/profile.js"></script>
 </html>
