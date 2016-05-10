@@ -19,17 +19,17 @@ function setEditForm() {
 
 	// Show the form with the old values filled in
 	$('#main_body').append(
-			'<div id="edit_project" class="flex flex_grow">'
+			'<form id="edit_project" class="flex flex_grow" method="post" action="update_project_info.php" enctype="multipart/form-data">'
 				+'<div id="upload_project_picture" class="flex_fit">'
 					+'<input type="file" name="new_project_picture" id="new_project_picture" class="file_upload">'
 				+'</div>'
 				+'<div class="formgroup flex_fit">'
-					+'<input type="text" id="project_entry_title" class="title" name="project_entry_title" value="'+old_title+'">'
+					+'<input type="text" id="project_entry_title" class="title" name="project_title" value="'+old_title+'">'
 				+'</div>'
-				+'<textarea id="project_entry_body" class="flex_grow">'+old_body+'</textarea>'
+				+'<textarea id="project_entry_body" name="project_body" class="flex_grow">'+old_body+'</textarea>'
+				+'<input type="hidden" name="project_id" value="'+$('#project_id').val()+'">'
 				+'<input type="submit" id="update_project" class="flex_fit" value="Done">'
-			+'</div>');
-
+			+'</form>');
 	// Enable the update action
 	$('#update_project').on('click', updateProject);
 
@@ -41,6 +41,8 @@ function setEditForm() {
 // Send the data along to update the the projects info
 //----------------------------------------------------------------------
 function updateProject() {
+	var valid = true;
+
 	// Get the required fields
 	var new_title = $('#project_entry_title').val();
 	var new_body = $('#project_entry_body').val();
@@ -54,42 +56,20 @@ function updateProject() {
 	if (!new_title.length > 0) {
 		$('#project_entry_title').parent().append('<div class="feedback_message">Please provide a project title!</div>');
 		$('#project_entry_title').parent().addClass('has_error');
-		return;
+		valid = false;
 	}
 	
 	// Make sure that the title length is not exceeded
 	if (new_title.length > 30) {
 		$('#project_entry_title').parent().append('<div class="feedback_message">Project title cannot exceed 30 characters!</div>');
 		$('#project_entry_title').parent().addClass('has_error');
-		return;
+		valid = false;
 	}
 
-	// Send the request to update the entry for the user
-	$.post('update_project_info.php', {project_id : project_id, project_title : new_title, project_body : new_body},
-		function(response) {
-			// Fill in the body with the current project info/updated info
-			// Remove old form
-			$('#edit_project').remove();
-			
-			// Show the form with the old values filled in
-			$('#main_body').append(
-				'<div id="project_info">'
-					+'<div id="heading" class="flex_fit">'
-						+'<h2 id="project_title">'+response.project_name+'</h2>'
-					+'</div>'
-					+'<div id="description" class="flex flex_grow">'
-						+'<div id="project_body">'+response.description+'</div>'
-					+'</div>'
-				+'</div>');
-
-			// Put the project members back in the sidebar
-			fillWithMembers();
-
-			// Put the edit button back
-			var edit_button = $('<input type="image" id="edit" src="/views/images/edit.svg" alt="edit">');
-			$(edit_button).on('click', setEditForm);
-			$('#tool_bar').append(edit_button);
-	}, 'json');
+	// Don't send if forms aren't valid
+	if (!valid) {
+		event.preventDefault();
+	}
 }
 
 //----------------------------------------------------------------------
@@ -141,28 +121,6 @@ function addMember() {
 			// Remove the button for the user from the sidebar on success 
 			pressed_button.remove();
 		}
-	}, 'json');
-}
-
-//----------------------------------------------------------------------
-// Set the sidebar to contain users that are members of the project
-//----------------------------------------------------------------------
-function fillWithMembers() {
-	var project_id = $('#project_id').val();
-
-	// Send the request to get the users that are in the members queue
-	$.post('get_members.php', {project_id : project_id}, function(response) {
-		// Remove the content from the sidebar and put new title
-		$('#sidebar_content').children().remove();
-		$('#sidebar_content').append('<div class="sidebar_title">Project Members</div>');
-		
-		// Add the buttons for each of the members in the queue
-		$.each(response, function() {
-			$('#sidebar_content').append(
-				'<a href="profile.php?id='+this.user_id+'">'
-					+'<button class="sidebar_entry">'+this.username+'</button>'
-				+'</a>');
-		});
 	}, 'json');
 }
 
