@@ -15,10 +15,22 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+USE lightup;
+
+-- ------------------------------------------------------
+/* User accounts and passwords */
+-- ------------------------------------------------------
+/* username = sky pass = coolio */
+/* username = sean pass = watson */
+/* username = alice pass = alpha */
+/* username = bob pass = bravo */
+/* username = craig pass = charlie */
+/* username = domino pass = delta */
+-- ------------------------------------------------------
+
 --
 -- Table structure for table `experiences`
 --
-USE lightup;
 
 DROP TABLE IF EXISTS `experiences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
