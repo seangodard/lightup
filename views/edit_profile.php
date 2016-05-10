@@ -63,9 +63,7 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 									<input class="rowInput" type="text" name="exp_<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['experience'], ENT_QUOTES, 'utf-8'); ?>">
 								</div>
 <?php endforeach; ?>
-								<div id="exp_add" class="add add_button" value="<?php echo htmlentities($row['exp_id'], ENT_QUOTES, 'utf-8'); ?>">
-										+
-								</div>
+								<input type="image" id="exp_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
 							</div> <!-- Done with experiences -->
 							<br>
 							<div id="skills" class="left_justified area">
@@ -78,9 +76,7 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 									<input class="rowInput" type="text" name="skill_<?php echo htmlentities($row['skill_id'], ENT_QUOTES, 'utf-8'); ?>" value="<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>">
 								</div>
 <?php endforeach; ?>
-								<div id="skill_add" class="add add_button" value="<?php echo htmlentities($row['skill'], ENT_QUOTES, 'utf-8'); ?>">
-										+
-								</div>
+								<input type="image" id="skill_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
 							</div> <!-- Done with skills-->
 							<br>
 							<div id="hobbies" class="left_justified area">
@@ -94,9 +90,7 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 									
 								</div>
 <?php endforeach; ?>
-								<div id="hobby_add" class="add add_button" value="<?php echo htmlentities($row['hobby'], ENT_QUOTES, 'utf-8'); ?>">
-										+
-								</div>
+								<input type="image" id="hobby_add" class="add" src="views/images/add.svg" alt="add" width="40" height="40">
 							</div> <!-- Done with hobbies-->
 						</div> <!-- Done with columns -->
 					</div>

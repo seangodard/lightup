@@ -21,6 +21,7 @@ function registerUser($username, $password, $db) {
 	$hashed_pass = password_hash($password, PASSWORD_DEFAULT);
 
 	$default_profile_picture = 'views/pictures/profiles/default_profile.jpg';
+	
 	// Bind the parameters to add the user
 	$add_user = $db->prepare('INSERT INTO users(username, picture, hashed_pass) VALUES(:username, :picture, :hashed_pass)');
 	$add_user->bindParam(':username', $username);
