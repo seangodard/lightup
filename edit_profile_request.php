@@ -32,7 +32,7 @@ $user_id = getLoggedInUserID();
 $target_dir = "views/pictures/profiles/";
 
 if (userOrDefaultImage($_FILES['new_profile_picture']['tmp_name'], $db) == 1) {
-	$file = $_FILES['new_profile_picture']['name'];
+	$file = 'profile' . $user_id . $_FILES['new_profile_picture']['name'];
 	$target_file = $target_dir . basename($file);
 
 	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);

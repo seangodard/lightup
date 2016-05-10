@@ -22,7 +22,7 @@ if (isset($_POST['project_name']) && isset($_POST['description'])) {
 		$target_dir = "views/pictures/projects/";
 
 		if (userOrDefaultImage($_FILES['fileToUpload']['tmp_name'], $db) == 1) {
-			$file = $_FILES['fileToUpload']['name'];
+			$file = 'project' . $user_id . $_FILES['fileToUpload']['name'];
 			$target_file = $target_dir . basename($file);
 
 			$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);

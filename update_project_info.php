@@ -29,7 +29,7 @@ if (isset($_POST['project_id']) && isset($_POST['project_title']) && isset($_POS
 	$target_dir = "views/pictures/projects/";
 
 	if (userOrDefaultImage($_FILES['new_project_picture']['tmp_name'], $db) == 1) {
-		$file = $_FILES['new_project_picture']['name'];
+		$file = 'project' . $user_id . $_FILES['new_project_picture']['name'];
 		$target_file = $target_dir . basename($file);
 
 		$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
