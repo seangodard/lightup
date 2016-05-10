@@ -4,7 +4,7 @@ USE lightup;
 /* username = sky pass = coolio */
 INSERT INTO users(username, picture, hashed_pass) VALUES ("sky", "views/pictures/profiles/sky.png", "$2y$10$4hIG5/dkqLkm/y5ghYw9OenK/8eaIfDCOXgiUIkEZacOVfKC0nDbq");
 /* username = sean pass = watson */
-INSERT INTO users(username, picture, hashed_pass) VALUES ("sean", "views/pictures/profiles/default_profile.svg", "$2y$10$xXXIs1ryJyhzh8z7BXvfveY0F7hqnRl/IcwSzzpYD3qeWtHdKPI72");
+INSERT INTO users(username, picture, hashed_pass) VALUES ("sean", "views/pictures/profiles/lion.jpg", "$2y$10$xXXIs1ryJyhzh8z7BXvfveY0F7hqnRl/IcwSzzpYD3qeWtHdKPI72");
 /* username = alice pass = alpha */
 INSERT INTO users(username, picture, hashed_pass) VALUES ("alice", "views/pictures/profiles/default_profile.svg", "$2y$10$ewk9.kUTBR/ZvTwWWS4LfeyjHhpvlWWHhsDWMMCVyhb6/zcPO/RZ.");
 /* username = bob pass = bravo */
@@ -24,6 +24,14 @@ INSERT INTO profiles(user_id, blurb, city, state, country, phone, email)
 	VALUES (1, "Awesome Person", "New York City", "NY", "USA", "0123456789", "awesome@sky.com");
 INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
 	VALUES (2, "Just another upstanding citizen from Bombay.", "Bombay", "NY", "USA", "3845093782", "arrow@sean.com");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (3, "", "", "", "", "", "");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (4, "", "", "", "", "", "");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (5, "", "", "", "", "", "");
+INSERT INTO profiles(user_id, blurb, city, state, country, phone, email) 
+	VALUES (6, "", "", "", "", "", "");
 
 /* Table: experiences */
 INSERT INTO experiences(user_id, experience) VALUES(1, "Over 9000!!!");
@@ -33,6 +41,9 @@ INSERT INTO experiences(user_id, experience) VALUES(1, "Co-manager");
 INSERT INTO experiences(user_id, experience) VALUES(2, "Mentor");
 INSERT INTO experiences(user_id, experience) VALUES(2, "Research Intern");
 INSERT INTO experiences(user_id, experience) VALUES(3, "Hacktivist");
+INSERT INTO experiences(user_id, experience) VALUES(4, "");
+INSERT INTO experiences(user_id, experience) VALUES(5, "");
+INSERT INTO experiences(user_id, experience) VALUES(6, "");
 
 /* Table: skills */
 INSERT INTO skills(user_id, skill) VALUES(1, "Awesomeness");
@@ -42,13 +53,18 @@ INSERT INTO skills(user_id, skill) VALUES(1, "Running man");
 INSERT INTO skills(user_id, skill) VALUES(2, "*&!^%*^&%(&^");
 INSERT INTO skills(user_id, skill) VALUES(2, "C");
 INSERT INTO skills(user_id, skill) VALUES(3, "Super programming skillz");
-INSERT INTO skills(user_id, skill) VALUES(3, "Proficient in C");
+INSERT INTO skills(user_id, skill) VALUES(4, "");
+INSERT INTO skills(user_id, skill) VALUES(5, "");
+INSERT INTO skills(user_id, skill) VALUES(6, "");
 
 /* Table: hobbies */
 INSERT INTO hobbies(user_id, hobby) VALUES(1, "Being Awesome");
 INSERT INTO hobbies(user_id, hobby) VALUES(2, "Art");
 INSERT INTO hobbies(user_id, hobby) VALUES(2, "Customization");
 INSERT INTO hobbies(user_id, hobby) VALUES(3, "Hacking");
+INSERT INTO hobbies(user_id, hobby) VALUES(4, "");
+INSERT INTO hobbies(user_id, hobby) VALUES(5, "");
+INSERT INTO hobbies(user_id, hobby) VALUES(6, "");
 
 /* Table: projects_member */
 INSERT INTO projects_member(user_id,project_id) VALUES (1, 1);

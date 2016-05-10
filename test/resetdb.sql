@@ -27,7 +27,7 @@ CREATE TABLE users (
 CREATE TABLE projects (
 	project_id INT AUTO_INCREMENT PRIMARY KEY,
 	project_name VARCHAR(40) NOT NULL UNIQUE,
-	description VARCHAR(1000),
+	description TEXT,
 	picture VARCHAR(500),
 	creation_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
