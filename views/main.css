@@ -76,6 +76,21 @@ p {
 	padding-left: 4%;
 }
 
+.contact_info {
+	overflow: auto;
+}
+
+.information {
+	float: right;
+	width: 70%;
+	margin-right: 5%;
+}
+
+.label {
+	float: left;
+	padding: 5% 0%;
+}
+
 .prof, .logout {
 	float: left;
 	padding-left: 1%;
@@ -338,6 +353,7 @@ textarea {
 
 .inputRow {
 	overflow: auto;
+	margin: 2px 0px;
 	/* position: absolute; */
 }
 
