@@ -31,7 +31,6 @@ foreach ($_POST as $key => $value) {
 $user_id = getLoggedInUserID();
 $target_dir = "views/pictures/profiles/";
 
-// TODO: DEBUG: prevent users from uploading pdfs
 if (userOrDefaultImage($_FILES['new_profile_picture']['tmp_name'], $db) == 1) {
 	$file = $_FILES['new_profile_picture']['name'];
 	$target_file = $target_dir . basename($file);
@@ -40,10 +39,10 @@ if (userOrDefaultImage($_FILES['new_profile_picture']['tmp_name'], $db) == 1) {
 	$file_size = $_FILES['new_profile_picture']['size'];
 	$temp = $_FILES['new_profile_picture']['tmp_name'];
 
-	$valid = validImage($temp, $db); // valid image = 1
-	$exists = imageDoesNotExists($target_file, $db); // valid file path = 1
-	$size = validFileSize($file_size, $db); // valid size = 1
-	$type = validFileType($imageFileType, $db); // valid file type = 1
+	$valid = validImage($temp); // valid image = 1
+	$exists = imageDoesNotExists($target_file); // valid file path = 1
+	$size = validFileSize($file_size); // valid size = 1
+	$type = validFileType($imageFileType); // valid file type = 1
 	$uploadOk = success($valid, $exists, $size, $type, $db); // all errors passed = 1
 	if ($uploadOk) {
 		$upload = uploadSuccess($uploadOk, $temp, $target_file, $db);
