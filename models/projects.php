@@ -28,8 +28,6 @@ function getProjectId($project, $db) {
 // A function to get the project name based on the project id.
 // @param project_id the project id to get the name for
 // @param db a valid database connection
-// @return the project name for the project or null if no id exists for that project
-// ------------------------------------------------------------------
 function getProjectName($project_id, $db) {
 	$get_name = $db->prepare('SELECT project_name FROM projects WHERE project_id = :project_id');
 	$get_name->bindParam(':project_id', $project_id);
@@ -405,7 +403,6 @@ function addProjectMember($requesting_user_id, $user_id, $project_id, $db) {
 	return false;
 }
 
-// TODO : Debug : Sat 07 May 2016 11:29:48 AM EDT 
 // --------------------------------------------------------------
 // Determine if the given project_id exits in the database.
 // @param project_id the project_id to check existance of
@@ -422,7 +419,6 @@ function projectIDExists($project_id, $db) {
 	else { return false; }
 }
 
-// TODO : Debug : Sat 07 May 2016 11:29:48 AM EDT 
 // --------------------------------------------------------------
 // Get the description of the project.
 // @param project_id the project_id to get the description for

@@ -49,10 +49,6 @@ if (isset($_POST['project_name']) && isset($_POST['description'])) {
 			exit();
 		}
 	}
-	// TODO : Pass back an error on the field that the title should be less than 30 chars : Fri 06 May 2016 03:04:51 PM EDT 
-	else {
-
-	}
 }
 else {
 	header('Location: /');

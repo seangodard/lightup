@@ -2,8 +2,6 @@
 // A javascript file for handling journal entry retrieval and adding of
 // 	entries
 //----------------------------------------------------------------------
-// TODO : When to notify the user?
-// TODO : Fix the bug where you get double posts if you click between very fast : Fri 06 May 2016 02:36:55 PM EDT 
 
 // ------------------------------------------------------------
 // Set a button in the sidebar to trigger entry retrieval based
@@ -151,10 +149,6 @@ function updateEntry() {
 			// Remove the old post with this entry id 
 			$('#sidebar_content').children('.sidebar_entry').children('.entry_id[value="'+entry_id+'"]').parent().remove();
 		}
-		// TODO : Notify the user that nothing in the database has changed: Thu 28 Apr 2016 03:18:41 PM EDT 
-		else {
-
-		}
 		// Open the possibly new edited version within the window
 		var user_id = $('#logged_in_user_id').val();
 		entryRetrieval(entry_id, user_id);
@@ -196,10 +190,6 @@ function addEntry() {
 					// Clear the fields
 					var entry_title = $('#entry_title').val('');
 					var entry_body = $('#entry_body').val('');
-				}
-				// TODO : Notify the user that their request failed : Thu 28 Apr 2016 03:18:41 PM EDT 
-				else {
-
 				}
 	}, 'json');	
 }
@@ -260,9 +250,6 @@ function putEditButton() {
 		$('#tool_bar').append(edit_button);
 	}
 }
-
-// TODO : Add a way for scrolling to load ~15 messages older than the last one and append to the list : Thu 28 Apr 2016 03:50:52 PM EDT 
-// TODO : Only start with 15 loaded : Thu 28 Apr 2016 03:50:52 PM EDT 
 
 //----------------------------------------------------------------------
 // Set up the buttons for when the document finishes loading

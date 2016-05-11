@@ -24,7 +24,6 @@ if (isset($_POST['project_id']) && isset($_POST['title']) && isset($_POST['body'
 		echo json_encode($result);
 		exit();
 	}
-	// TODO : Pass back an error on the field that the title should be less than 30 chars : Fri 06 May 2016 03:04:51 PM EDT 
 	else {
 
 	}

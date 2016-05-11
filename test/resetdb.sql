@@ -10,9 +10,7 @@ DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
 
-/* TODO : Add indexes? : Sat 16 Apr 2016 04:33:15 PM EDT */
 
-/* TODO : Fix username length check not working : Mon 25 Apr 2016 05:53:35 PM EDT */
 /* Note: this will automatically create an index on the username since it is unique */
 CREATE TABLE users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,8 +20,6 @@ CREATE TABLE users (
 );
 
 /*  project(project_id, name, description, picture, creation_timestamp)*/
-/* TODO: picture is the reference path to the directory containing the image [4/11/16] */
-/* TODO : Why is this timestamp on update? Don't we want this never to change here? : Sat 16 Apr 2016 04:29:25 PM EDT */
 CREATE TABLE projects (
 	project_id INT AUTO_INCREMENT PRIMARY KEY,
 	project_name VARCHAR(40) NOT NULL UNIQUE,
@@ -79,7 +75,6 @@ CREATE TABLE projects_member (
 );
 
 /* project_journal(entry_id, user_id, project_id, title, body, entry_time)*/
-/* TODO : Add check that the user is a member of the project before adding : Wed 20 Apr 2016 12:20:03 PM EDT */
 CREATE TABLE project_journal (
 	entry_id INT AUTO_INCREMENT NOT NULL,
 	posting_user_id INT NOT NULL,

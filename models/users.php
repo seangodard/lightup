@@ -87,7 +87,6 @@ function userIDExists($user_id, $db) {
 	$check_user = $db->prepare('SELECT user_id FROM users WHERE user_id= :user_id');
 	$check_user->bindParam(':user_id', $user_id);
 	$check_user->execute();
-	// TODO : using fetch versus fetch all here? : Sat 16 Apr 2016 11:23:38 AM EDT 
 	$check_user = $check_user->fetchAll();
 
 	if (count($check_user) > 0) { return true; }

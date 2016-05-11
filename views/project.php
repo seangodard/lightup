@@ -1,6 +1,5 @@
 <?php 
 
-	// TODO : Where to escape these values : Sat 07 May 2016 01:10:24 PM EDT 
 	// Get information on the project
 	$project_id = $_GET['id'];
 	$project_name = htmlentities(getProjectName($project_id, $db), ENT_QUOTES, 'utf-8');

@@ -6,7 +6,6 @@ session_start();
 require_once('models/users.php');
 require_once('sessions.php');
 
-// TODO : Make an optional button to keep the user logged in with cookies : Fri 08 Apr 2016 08:19:57 PM EDT 
 // ------------------------------------------------------------------
 // Attempt to login the user with the given username and password
 // If there is an error then set the appropriate session data
