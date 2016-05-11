@@ -126,7 +126,9 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 		<div id="sidebar">
 			<div id="sidebar_content">
 				<div class="sidebar_title">
-					My Projects
+<?php if ($profile_id == getLoggedInUserID()) { echo "My Projects"; }
+	  else { echo htmlentities($username, ENT_QUOTES, 'utf-8')."'s Projects"; }
+?>
 				</div>
 <?php foreach ((selectProjects($profile_id, $db)) as $row): ?>
 				<div id="project_<?php echo htmlentities($row['project_id'], ENT_QUOTES, 'utf-8'); ?>">
@@ -137,6 +139,7 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 					</a>
 				</div>
 <?php endforeach; ?>
+<?php if ($profile_id == getLoggedInUserID()): ?>
 				<div id="add_project">
 					<a href="create_project_controller.php">
 						<button class="sidebar_entry" name="new_project" type="submit" value="new_project">
@@ -144,6 +147,7 @@ function notBlankContactAndBlurb($user_id, $section, $db) {
 						</button>
 					</a>
 				</div>
+<?php endif; ?>
 			</div>
 		</div>
 
