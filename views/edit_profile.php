@@ -24,6 +24,7 @@ $user_profile_picture = getProfilePicture($profile_id, $db);
 							<div id="profile_pic">
 								<img src="<?php echo htmlentities($user_profile_picture, ENT_QUOTES, 'utf-8'); ?>" alt="profile" width="100" height="100" class="profile_image">
 								<div id="upload_profile_picture">
+									<p>File size should not exceed 500 kB.</p>
 									<input type="file" name="new_profile_picture" id="new_profile_picture" class="file_upload">
 								</div>
 							</div>

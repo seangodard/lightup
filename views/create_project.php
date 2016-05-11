@@ -20,7 +20,8 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 				<div id="description">
 					<textarea name="description" class="flex_grow" placeholder="Description"></textarea>
 				</div>
-				<div id="picture">
+				<div id="upload_project_picture">
+					<p>File size should not exceed 500 kB.</p>
 					<input type="file" name="fileToUpload" id="fileToUpload" class="file_upload">
 				</div> 
 				 <input type="submit" class="save" value="Create!">
