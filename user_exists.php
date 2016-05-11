@@ -11,3 +11,7 @@ if (isset($_POST['check_username'])) {
 
 	echo json_encode(userExists($_POST['check_username'], $db));
 }
+else {
+	header('Location: /');
+	exit();
+}

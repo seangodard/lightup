@@ -3,7 +3,6 @@
 // Start the session
 session_start();
 
-require_once('constants.php');
 require_once('models/users.php');
 require_once('models/projects.php');
 require_once('models/profile.php');

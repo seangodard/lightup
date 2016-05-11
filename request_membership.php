@@ -3,7 +3,6 @@
 // Start the session
 session_start();
 
-require_once('constants.php');
 require_once('sessions.php');
 require_once('models/projects.php');
 require_once('models/users.php');
@@ -14,4 +13,8 @@ if (isset( $_POST['project_id'])) {
 
 	$result = addToMembersQueue(getLoggedInUserID(), $_POST['project_id'], $db);	
 	echo json_encode($result);
+}
+else {
+	header('Location: index.php');
+	exit();
 }
