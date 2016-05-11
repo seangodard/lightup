@@ -51,6 +51,13 @@ h1, h2, h3, h4 {
 p { 
 	text-align: center;
 }
+#upload_profile_picture p, #upload_project_picture p {
+	position: absolute;
+}
+
+#about_me {
+	padding-top: 45px;
+}
 
 #main_body {
 	padding: 3%;
@@ -108,10 +115,10 @@ p {
 	border-radius: 50%;
 	box-shadow: #000000 1px 1px 6px;
 }
-
+/*
 .single_column_page {
 	width: 100%;
-}
+}*/
 
 #search_box {
 	visibility: hidden;
@@ -189,13 +196,17 @@ p {
 
 .file_upload {
 	background: none;
+	padding: 0px;
+	margin-top: 30px;
 }
 
 #center_main_body {
 	position: relative;
 	top: 60px;
 	background-color: #F7F7F7;
-    height: 100%;
+	height: 100%;
+    width: 80%;
+    margin: auto;
 }
 
 .result_title, .project_title {

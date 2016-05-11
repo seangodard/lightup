@@ -21,6 +21,7 @@ function setEditForm() {
 	$('#main_body').append(
 			'<form id="edit_project" class="flex flex_grow" method="post" action="update_project_info.php" enctype="multipart/form-data">'
 				+'<div id="upload_project_picture" class="flex_fit">'
+					+ '<p>File size should not exceed 500 kB.</p>'
 					+'<input type="file" name="new_project_picture" id="new_project_picture" class="file_upload">'
 				+'</div>'
 				+'<div class="formgroup flex_fit">'
