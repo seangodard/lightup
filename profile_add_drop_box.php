@@ -1,13 +1,11 @@
 <?php 
 
 require_once('login_verification.php');
-require_once('constants.php');
 require_once('sessions.php');
 require_once('models/profile.php');
 
 $db = databaseConnection();
 
-// TODO: DEBUG RESPONSE
 // Checking if receiving an AJAX request for deleting
 if (isset($_POST['dropSection'])) {
 	$sections = explode('_', $_POST['dropSection'], 2);
@@ -51,4 +49,10 @@ if (isset($_POST['addSection'])) {
 		echo json_encode(array( "id" => $db->lastInsertId(), "user_id" => getLoggedInUserID(), $section => $blank));
 	exit();
 	}
+}
+
+
+if (!isset($_POST['addSection']) && !isset($_POST['dropSection'])) {
+	header('Location: /');
+	exit();
 }

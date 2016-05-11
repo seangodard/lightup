@@ -3,7 +3,6 @@
 // Start the session
 session_start();
 
-require_once('constants.php');
 require_once('sessions.php');
 require_once('models/projects.php');
 require_once('models/users.php');
@@ -18,4 +17,8 @@ if (isset( $_POST['project_id']) && isset($_POST['user_id'])) {
 		echo json_encode($result);
 		exit();
 	}
+}
+else {
+	header('Location: /');
+	exit();
 }
